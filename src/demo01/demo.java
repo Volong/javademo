@@ -1,5 +1,6 @@
 package demo01;
 
+import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,6 +22,7 @@ import org.apache.commons.lang3.math.NumberUtils;
 import org.apdplat.word.WordSegmenter;
 import org.apdplat.word.segmentation.SegmentationAlgorithm;
 import org.apdplat.word.segmentation.Word;
+import org.apdplat.word.vector.T;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -31,9 +33,9 @@ import com.alibaba.fastjson.JSONObject;
 
 import json.JsonUtils;
 
-public class demo {
+public class demo<T> {
 
-	public static void main(String[] args) {
+	public void test() {
 		Long startTime = System.currentTimeMillis();
 
 		Long a = 0l,b = 0l;
@@ -238,8 +240,8 @@ public class demo {
 	
 	@Test
 	public void test13() {
-		String s = "adsfas{%s}%s";
-		s = String.format(s, 123, "wwwww");
+		String s = "adsfaa%d%s%s";
+		s = String.format(s, 123, "wwwww",111);
 		System.out.println(s);
 	}
 	
@@ -311,9 +313,9 @@ public class demo {
 	@Test
 	public void test21() {
         long start = System.currentTimeMillis();
-        String sentence = "测试而已。\n给我测试测试测试";
+        String sentence = "内膜好薄啊";
         int i=1;
-        List<Word> words = WordSegmenter.seg(sentence, SegmentationAlgorithm.MaxNgramScore);
+        List<Word> words = WordSegmenter.seg(sentence, SegmentationAlgorithm.BidirectionalMaximumMatching);
         
         System.out.println((i++)+"、切分句子: "+sentence);
         System.out.println("    切分结果："+words);
@@ -324,7 +326,11 @@ public class demo {
 	
 	@Test
 	public void test22() {
-		System.out.println(Integer.MIN_VALUE);
+
+		for(int i = 1; i < 4;) {
+			System.out.println(i);
+			i = i << 1;
+		}
 	}
 	
 	@Test
@@ -335,4 +341,88 @@ public class demo {
 			System.out.println("text:" + text.charAt(6));
         }
 	}
+	
+	@Test
+	public void test24() {
+		Field[] fields = User.class.getDeclaredFields();
+		String name = fields[0].getName();
+		Class<?> name3 = fields[0].getType();
+		String name2 = fields[1].getName();
+		Class<?> name4 = fields[1].getType();
+		
+		if (name3 == String.class)
+			System.out.println(name + ":" + name3);
+		if (name4 == int.class)
+			System.out.println(name2 + ":" + name4);
+		
+	}
+	
+	@Test
+	public void test25() {
+		String fieldName = "我的了\n\r个去的\n\r";
+		String replaceAll = fieldName.replaceAll("\r|\n", "11");
+		System.out.println(replaceAll);
+	}
+	
+	@Test
+	public void test26() {
+		String entity = "demo01.User";
+		try {
+			Class<?> forName = Class.forName(entity);
+			Field declaredField = forName.getDeclaredField("name");
+			String name = declaredField.getName();
+			System.out.println(name);
+			try {
+			} catch (SecurityException e) {
+				e.printStackTrace();
+			}
+		} catch (ClassNotFoundException | NoSuchFieldException | SecurityException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void test27() {
+		Map<String, String> map = new HashMap<>();
+		map.put(null, null);
+		map.put(null, "bbb");
+		System.out.println(map.toString());
+	}
+	
+	@Test
+	public void test28() {
+		User u = new User();
+		u.setName("111");
+		try {
+			Field field = u.getClass().getDeclaredField("name");
+			field.setAccessible(true);
+			Object object = field.get(u);
+			System.out.println(object);
+		} catch (NoSuchFieldException | SecurityException | IllegalArgumentException | IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+    public static void main(String[] args) {
+		demo d = new demo<>();
+		d.tVoid();
+    }
+
+    private void tVoid() {
+    	List<T> tL = new ArrayList<>();
+		
+		change(tL);
+		System.out.println(JsonUtils.toString(tL));
+    }
+	@SuppressWarnings("unchecked")
+	private void change(List<T> tL) {
+		List<String> strL = new ArrayList<>();
+		strL.add("aaa");
+		strL.add("bbb");
+		strL.add("ccc");
+		tL = (List<T>) strL;
+		System.out.println("tl:" + JsonUtils.toString(tL));
+	}
+
 }
