@@ -1,15 +1,24 @@
 package demo01;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.Properties;
 import java.util.Map.Entry;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
@@ -17,12 +26,13 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.commons.lang3.math.NumberUtils;
+import org.apache.solr.client.solrj.util.ClientUtils;
 import org.apdplat.word.WordSegmenter;
 import org.apdplat.word.segmentation.SegmentationAlgorithm;
 import org.apdplat.word.segmentation.Word;
-import org.apdplat.word.vector.T;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -30,37 +40,13 @@ import org.jsoup.select.Elements;
 import org.junit.Test;
 
 import com.alibaba.fastjson.JSONObject;
+import com.sun.media.sound.PortMixerProvider;
 
 import json.JsonUtils;
+import utils.DateUtils;
 
-public class demo<T> {
+public class Demo {
 
-	public void test() {
-		Long startTime = System.currentTimeMillis();
-
-		Long a = 0l,b = 0l;
-		for (Long val = 0l; val < 1000000000; val += 5)
-		{
-			a = val * 8;
-			b = val / 2;
-		}
-		System.out.println("a:" + a + "--------" + "b:" + b);
-		
-		Long midTime = System.currentTimeMillis();
-		System.out.println("运行时间: " + (midTime - startTime));
-		
-		a = 0l;b = 0l;
-		for (Long val = 0l; val < 1000000000; val += 5)
-		{
-			a = val << 3;
-			b = val >> 1;
-		}
-		System.out.println("a:" + a + "--------" + "b:" + b);
-		Long endTime = System.currentTimeMillis();
-
-		System.out.println("运行时间:" + (endTime - midTime));
-
-	}
 	
 	@Test
 	public void test01() {
@@ -172,21 +158,6 @@ public class demo<T> {
 	
 	String str = new String("good");
 	char[] ch = {'a', 'b', 'c'};
-	
-	@Test
-	public void test09() {
-		
-		demo d = new demo();
-		d.change(d.str, d.ch);
-		System.out.print(d.str + "-");
-		System.out.print(d.ch);
-		
-	}
-	
-	public void change(String str, char ch[]) {
-		str = "test ok";
-		ch[0] = 'g';
-	}
 	
 	/**
 	 * Byte,Short,Integer,Long 有固定范围: -128 到 127.
@@ -313,7 +284,7 @@ public class demo<T> {
 	@Test
 	public void test21() {
         long start = System.currentTimeMillis();
-        String sentence = "内膜好薄啊";
+        String sentence = "B超";
         int i=1;
         List<Word> words = WordSegmenter.seg(sentence, SegmentationAlgorithm.BidirectionalMaximumMatching);
         
@@ -321,7 +292,6 @@ public class demo<T> {
         System.out.println("    切分结果："+words);
         long cost = System.currentTimeMillis() - start;
         System.out.println("耗时: "+cost+" 毫秒");
-    
 	}
 	
 	@Test
@@ -359,8 +329,8 @@ public class demo<T> {
 	
 	@Test
 	public void test25() {
-		String fieldName = "我的了\n\r个去的\n\r";
-		String replaceAll = fieldName.replaceAll("\r|\n", "11");
+		String fieldName = "[align=left]\r\n[/align][align=left][color=#00B050][font=宋体][size=10.5pt][b]宝宝的小肠胃特别脆弱，之前宝宝小的时候大便经常是不成形的，当然腹泻原因很多，宝宝一般只是轻微的腹泻，一岁后宝宝各种辅食添加，慢慢过度要以吃饭为主后，正常宝宝便便是条状的，而宝宝出现稀便腹泻的情况就显示肠胃出现了状况，这个冬天我们从内外保暖上给宝宝预防腹泻，从内来说，就是饮食上，一定不能吃生冷的食物，一般水果比较凉，我们都要放在室内一会儿，稍微温一些再给宝宝吃，多给宝宝喝温开水，平时吃饭绝不给宝宝从冰箱中直接取出的食物，都是加热后的，尤其奶粉也用适宜温度冲好立即给宝宝喝。外部保暖呢，就是我们的房间有暖气但是保证温度也不要太高，平时给宝宝穿好保暖的内衣裤，外加一个小马甲，护住宝宝的前后心的位置，平时都要穿好小袜子和鞋子。[/b][/size][/font][/color][/align]";
+		String replaceAll = fieldName.replaceAll("\r|\n", "xxxooo");
 		System.out.println(replaceAll);
 	}
 	
@@ -403,26 +373,65 @@ public class demo<T> {
 			e.printStackTrace();
 		}
 	}
-	
-    public static void main(String[] args) {
-		demo d = new demo<>();
-		d.tVoid();
-    }
 
-    private void tVoid() {
-    	List<T> tL = new ArrayList<>();
-		
-		change(tL);
-		System.out.println(JsonUtils.toString(tL));
-    }
-	@SuppressWarnings("unchecked")
-	private void change(List<T> tL) {
-		List<String> strL = new ArrayList<>();
-		strL.add("aaa");
-		strL.add("bbb");
-		strL.add("ccc");
-		tL = (List<T>) strL;
-		System.out.println("tl:" + JsonUtils.toString(tL));
+	/** 原子自增 */
+	@Test
+	public void test29() {
+		AtomicInteger a = new AtomicInteger(1);
+		/*for (int i = 0; i < 3; i++) {
+			a.incrementAndGet();
+		}*/
+		int andAdd = a.getAndAdd(100);
+//		int addAndGet = a.addAndGet(100);
+		System.out.println(andAdd);
 	}
-
+	
+	/**
+	 * 将GMT格式转换为本地时间
+	 * 
+	 * @time 2017年1月5日 下午7:44:52
+	 * @author volong
+	 */
+	@Test
+	public void test30() {
+		 SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy", Locale.US);  
+		 String time="Fri Dec 30 16:47:10 GMT+08:00 2016";
+		 Date date;
+		try {
+			date = sdf.parse(time);
+			String formatDate = DateUtils.formatDate(date, "yyyy-MM-dd HH:mm:ss");
+			System.out.println(formatDate);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void test31() {
+		String str = "zzzzz~~~~";
+				
+		String escapeQueryChars = ClientUtils.escapeQueryChars(str);
+		System.out.println(escapeQueryChars);
+	}
+	
+	/**
+	 * 解决读取.properties乱码
+	 * 
+	 * @time 2017年1月15日 下午5:09:20
+	 * @author volong
+	 */
+	@Test
+	public void test32() {
+		try {
+			Properties p = new Properties();
+			InputStream resourceAsStream = Demo.class.getClassLoader().getResourceAsStream("xxx.properties");
+			InputStreamReader inputStreamReader;
+			inputStreamReader = new InputStreamReader(resourceAsStream, "UTF-8");
+			p.load(inputStreamReader);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
 }
