@@ -178,7 +178,7 @@ public class DateUtils {
 	/**
 	 * 根据给定日期字符串和日期格式创建日期
 	 */
-	public static Integer strToSec(String dateString, String pattern){
+	public static Integer strToSec(String dateString, String pattern) {
 		Date date = DateUtils.strToDate(dateString, pattern);
 		return DateUtils.dateToSecond(date);
 	}
@@ -246,5 +246,12 @@ public class DateUtils {
 		cal.setTimeInMillis(goTime * 1000L);
 		return days[cal.get(Calendar.DAY_OF_WEEK) - 1];
 	}
-	
+
+	public static String dateToStr(Date date, String pattern) {
+		if(date == null){
+			return null;
+		}
+		SimpleDateFormat format = new SimpleDateFormat(pattern);
+		return format.format(date);
+	}
 }
