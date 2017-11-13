@@ -1,4 +1,4 @@
-package utils;
+package util;
 
 import java.sql.Timestamp;
 import java.text.ParseException;
@@ -15,7 +15,7 @@ import org.apache.commons.lang3.StringUtils;
  * 常用的时间操作
  * nxl
  */
-public class DateUtils {
+public class DateUtil {
 	
 	/**
 	 * 获取当前时间（s）
@@ -179,8 +179,8 @@ public class DateUtils {
 	 * 根据给定日期字符串和日期格式创建日期
 	 */
 	public static Integer strToSec(String dateString, String pattern) {
-		Date date = DateUtils.strToDate(dateString, pattern);
-		return DateUtils.dateToSecond(date);
+		Date date = DateUtil.strToDate(dateString, pattern);
+		return DateUtil.dateToSecond(date);
 	}
 	
 	/**

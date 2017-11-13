@@ -59,7 +59,7 @@ import org.junit.Test;
 import com.alibaba.fastjson.JSONObject;
 
 import json.JsonUtils;
-import utils.DateUtils;
+import util.DateUtil;
 
 public class Demo {
 
@@ -424,7 +424,7 @@ public class Demo {
 		 Date date;
 		try {
 			date = sdf.parse(time);
-			String formatDate = DateUtils.formatDate(date, "yyyy-MM-dd HH:mm:ss");
+			String formatDate = DateUtil.formatDate(date, "yyyy-MM-dd HH:mm:ss");
 			System.out.println(formatDate);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
@@ -677,7 +677,7 @@ public class Demo {
 		
 		try {
 			Date parse = format.parse(datePattern);
-			String dateToStr = DateUtils.dateToStr(parse, "yyyy-MM-dd HH:mm:ss");
+			String dateToStr = DateUtil.dateToStr(parse, "yyyy-MM-dd HH:mm:ss");
 			System.out.println(dateToStr);
 		} catch (ParseException e) {
 			e.printStackTrace();

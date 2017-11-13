@@ -5,7 +5,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
-import utils.StringUs;
+import util.StringUs;
 
 public class GenMethod {
 

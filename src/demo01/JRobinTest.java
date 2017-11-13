@@ -12,7 +12,7 @@ import org.jrobin.core.RrdDef;
 import org.jrobin.graph.RrdGraph;
 import org.jrobin.graph.RrdGraphDef;
 
-import utils.DateUtils;
+import util.DateUtil;
 
 
 public class JRobinTest {
@@ -22,7 +22,7 @@ public class JRobinTest {
 	     try {
 	    	 RrdDef rrdDef = new RrdDef("d:\\testDisk.rrd");
 	    	 //获得2012年9月24日的时间戳
-	    	 Integer startTime = DateUtils.strToSec("2016-9-24", "yyyy-MM-dd");
+	    	 Integer startTime = DateUtil.strToSec("2016-9-24", "yyyy-MM-dd");
 	    	 rrdDef.setStartTime(startTime);
 	    	 //数据源：speed  数据源类型：counter 如果超过600s没有数据，显示UNKNOW 最小值Double.NaN,最大值。。
 	    	 rrdDef.addDatasource("disk", "GAUGE", 600, Double.NaN, Double.NaN);
