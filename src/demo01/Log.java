@@ -104,4 +104,112 @@ public class Log {
 		}
 		
 	}
+	
+	/**
+	 * 获取联想接口耗时信息
+	 * 
+	 * @time 2017年9月1日 上午11:22:16
+	 * @author volong
+	 */
+//	@Test
+	public static void main(String[] args) {
+
+	    System.out.println(4933 % 6);
+	}
+	
+	/**
+	 * 
+	 * 获取 BI 联想词接口耗时信息
+	 * @time 2017年9月1日 上午11:22:38
+	 * @author volong
+	 */
+	@Test
+	public void test04() {
+
+		BufferedReader reader = null;
+		try {
+			File f = new File("C:\\Users\\Volong\\Desktop\\127\\BI.log");
+			reader = new BufferedReader(new FileReader(f));
+			String str = "";
+			
+			String urlRegex = "api/ss/querySsTopKeyword，耗时=(\\d+)ms";
+			Pattern urlCompile = Pattern.compile(urlRegex);
+			
+			while ((str = reader.readLine()) != null) {
+				Matcher urlMatcher = urlCompile.matcher(str);
+				if (urlMatcher.find()) {
+					System.out.println(urlMatcher.group(1));
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (reader != null) {
+				try {
+					reader.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
+	}
+	
+	@Test
+	public void test05() {
+		
+		BufferedReader reader = null;
+		try {
+			File f = new File("C:\\Users\\Volong\\Downloads\\log\\2017-09-05_11-20-32-nodeSpeed-2017-09-04.log");
+			reader = new BufferedReader(new FileReader(f));
+			String str = "";
+			
+			String urlRegex = ".*autocomplete-success.*返回前端: (\\d+)ms";
+			Pattern urlCompile = Pattern.compile(urlRegex);
+			
+			while ((str = reader.readLine()) != null) {
+				Matcher urlMatcher = urlCompile.matcher(str);
+				if (urlMatcher.find()) {
+					System.out.println(urlMatcher.group(1));
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (reader != null) {
+				try {
+					reader.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+	
+	@Test
+	public void test06() {
+		BufferedReader reader = null;
+		try {
+			File f = new File("C:\\Users\\Volong\\Desktop\\2017-09-20_09-02-35-api.log");
+			reader = new BufferedReader(new FileReader(f));
+			String str = "";
+			
+			
+			while ((str = reader.readLine()) != null) {
+				if (str.contains("contentType")) {
+					System.out.println(str);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (reader != null) {
+				try {
+					reader.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
 }

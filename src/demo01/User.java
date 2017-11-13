@@ -23,11 +23,8 @@ public class User {
 	}
 	
 	public static void main(String[] args) {
-		
-		for (int i = 0; i < 3; i++) {
-			User user = UserFactory.getUser();
-			System.out.println(user);
-		}
+	    
+	    System.out.println(0x7F / 2);
 	}
 	
 }

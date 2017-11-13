@@ -55,10 +55,8 @@ import org.apdplat.word.segmentation.Word;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.junit.Test;
-import org.omg.CORBA.INV_FLAG;
 
 import com.alibaba.fastjson.JSONObject;
-import com.sun.jdi.IntegerValue;
 
 import json.JsonUtils;
 import utils.DateUtils;
@@ -722,7 +720,7 @@ public class Demo {
 	public void test49() {
 		BufferedReader reader = null;
 		try {
-			File f = new File("C:\\Users\\Volong\\Desktop\\127\\1.log");
+			File f = new File("C:\\Users\\Volong\\Desktop\\sql.txt");
 			
 			reader = new BufferedReader(new FileReader(f));
 			String str = "";
@@ -732,6 +730,7 @@ public class Demo {
 			int num = 0;
 			// 提交8442条数据到 collection2
 			Pattern compile = Pattern.compile("(.*)&q=(.*)&(.*)");
+			
 			while ((str = reader.readLine()) != null) {
 				
 				if (str.contains("查询参数为")) {
