@@ -34,7 +34,7 @@ public class SQL {
             for (String s : readTextFile) {
                 Matcher matcher = pattern.matcher(s);
                 if(matcher.matches()) {
-                    System.out.println(matcher.group(1) + "=" + m.get(matcher.group(1)));
+                    System.out.println(m.get(matcher.group(1)));
                 } else {
                     System.out.println(s);
                 }
