@@ -7,6 +7,13 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Trie 树的实现 <br>
+ * 参考：http://www.cnblogs.com/huangxincheng/archive/2012/11/25/2788268.html
+ * @time 2017年11月24日 下午4:34:29
+ * @author Volong
+ *
+ */
 public class TrieNode {
 
     private TrieNode[] childNode;
@@ -106,7 +113,7 @@ public class TrieNode {
     
     public static void main(String[] args) throws IOException {
         
-        File f = new File("C:\\Users\\Volong\\Desktop\\trie测试\\1.txt");
+        File f = new File("C:\\Users\\Volong\\Desktop\\1.txt");
         
         BufferedReader reader = new BufferedReader(new FileReader(f));
         

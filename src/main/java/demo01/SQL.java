@@ -6,8 +6,6 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.solr.common.util.Hash;
-
 import util.FileUtil;
 
 public class SQL {
