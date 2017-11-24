@@ -1,8 +1,9 @@
 package trie;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -12,10 +13,11 @@ public class TestDoubleArrayTrie {
 
     public static void main(String[] args) throws IOException {
 
-        BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\Volong\\Desktop\\small.dic"));
         String line;
+        InputStream resourceAsStream = TestDoubleArrayTrie.class.getClassLoader().getResourceAsStream("small.dic");
         List<String> words = new ArrayList<String>();
         Set<Character> charset = new HashSet<Character>();
+        BufferedReader reader = new BufferedReader(new InputStreamReader(resourceAsStream, "utf-8"));
         while ((line = reader.readLine()) != null) {
             words.add(line);
             // 制作一份码表debug
