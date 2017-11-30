@@ -49,13 +49,18 @@ public class TestDoubleArrayTrie {
             System.out.print(infoCharsetValue);
             System.out.print(infoCharsetCode);
         }
-
+        
+        System.out.println("-----------------");
+        
         DoubleArrayTrie dat = new DoubleArrayTrie();
         System.out.println("是否错误: " + dat.build(words));
-        System.out.println(dat);
-        List<Integer> integerList = dat.commonPrefixSearch("一举成名天下知");
+        System.out.println("progress:" + dat.getProgress());
+        List<Integer> integerList = dat.commonPrefixSearch("一举一一动");
         for (int index : integerList) {
             System.out.println(words.get(index));
         }
+        
+//        System.out.println("dump:");
+//        dat.dump();
     }
 }

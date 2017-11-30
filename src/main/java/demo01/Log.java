@@ -21,32 +21,27 @@ public class Log {
 
 		BufferedReader reader = null;
 		try {
-			File f = new File("C:\\Users\\Volong\\Desktop\\127\\2017-08-18_11-08-35-soweb.log");
+			File f = new File("C:\\Users\\Volong\\Desktop\\2017-11-27_18_54_52-api.log");
 			reader = new BufferedReader(new FileReader(f));
 			String str = "";
 			
-			String regex = "(.*)remote_addr\":\"(.{0,16})\",(.*)";
+			String regex = "mamaquan_boost_dtt";
 			
-			Pattern compile = Pattern.compile(regex);
-			
+//			Pattern compile = Pattern.compile(regex);
+			int i = 0;
 			while ((str = reader.readLine()) != null) {
 				
-				if (str.contains("remote_addr")) {
-					String[] strs = str.split("\\|");
-					String msg = strs[6];
-					String replace = msg.replace("\\", "");
-//					System.out.println();
-					Matcher matcher = compile.matcher(replace);
-					if (matcher.find()) {
-						String ip = matcher.group(2);
-						if (ip.length() > 15) {
-							System.out.println(ip);
-						}
-//						System.err.println(replace);
-					}
+				if (str.contains(regex)) {
+				    String[] split = str.split("|");
+				    reader.readLine();
+				    String readLine = reader.readLine();
+				    if (readLine.startsWith("WARN")) {
+				        System.out.println(readLine);
+				        i++;
+				    }
 				}
-				
 			}
+			System.out.println(i);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

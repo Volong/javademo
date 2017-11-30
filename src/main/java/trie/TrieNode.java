@@ -9,7 +9,9 @@ import java.util.Set;
 
 /**
  * Trie 树的实现 <br>
- * 参考：http://www.cnblogs.com/huangxincheng/archive/2012/11/25/2788268.html
+ * 参考：http://www.cnblogs.com/huangxincheng/archive/2012/11/25/2788268.html <br>
+ * 
+ * 26叉trie树
  * @time 2017年11月24日 下午4:34:29
  * @author Volong
  *
@@ -67,6 +69,8 @@ public class TrieNode {
         }
         
         int index = word.charAt(0) - 'a';
+
+        System.out.println(word);
         
         // 如果子节点为null，则生成一个新的子节点
         if (root.childNode[index] == null) { 
