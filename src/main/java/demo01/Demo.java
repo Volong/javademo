@@ -720,7 +720,7 @@ public class Demo {
 	public void test49() {
 		BufferedReader reader = null;
 		try {
-			File f = new File("C:\\Users\\Volong\\Desktop\\sql.txt");
+			File f = new File("C:\\Users\\Volong\\Desktop\\api.2017-12-20_3.log");
 			
 			reader = new BufferedReader(new FileReader(f));
 			String str = "";
@@ -729,23 +729,15 @@ public class Demo {
 			
 			int num = 0;
 			// 提交8442条数据到 collection2
-			Pattern compile = Pattern.compile("(.*)&q=(.*)&(.*)");
+//			Pattern compile = Pattern.compile(".*fq=pj_source:\\((\\d*\\+OR\\+.*?)\\).*");
+			Pattern compile = Pattern.compile(".*mamas_wap.*");
 			
 			while ((str = reader.readLine()) != null) {
 				
-				if (str.contains("查询参数为")) {
-					String[] split = str.split("\\|");
-					String msg = split[6];
-//					System.out.println("msg:" + msg);
-					Matcher matcher = compile.matcher(msg);
-					if(matcher.find()) {
-						String q = matcher.group(2);
-						String keyword = q.split("&")[0];
-						if (keyword.length() > 60) {
-							System.out.println(keyword);
-						}
+					Matcher matcher = compile.matcher(str);
+					if(matcher.matches()) {
+					    System.out.println(str);
 					}
-				}
 			}
 			
 			System.out.println("num:" + num);
