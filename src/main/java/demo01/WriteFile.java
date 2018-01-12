@@ -11,7 +11,7 @@ public class WriteFile {
     public static void main(String[] args) {
         
         try {
-            File inputFile = new File("D:\\E\\project\\import\\src\\main\\resources\\run\\databases.properties");
+            File inputFile = new File("C:\\Users\\Volong\\Downloads\\log\\ai.2018-01-09_0.log");
             
             BufferedReader reader = new BufferedReader(new FileReader(inputFile));
             
@@ -21,14 +21,15 @@ public class WriteFile {
             String regex = ".*product=(.*)_final";
 
             Pattern compile = Pattern.compile(regex);
+            int i = 0;
             while ((str = reader.readLine()) != null) {
-                
-                Matcher matcher = compile.matcher(str);
-                if (matcher.matches()) {
-                    System.out.println(matcher.group(1) + "_final");
+                if (str.contains("百度图片处理时间为")) {
+                    System.out.println(str);
+                    i++;
                 }
             }
-            
+            System.out.println(i);
+                  
             reader.close();
             
         } catch (Exception e) {
