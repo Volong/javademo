@@ -23,9 +23,9 @@ public class Main {
         // TODO Auto-generated constructor stub
 
         String driver = "com.mysql.jdbc.Driver";
-        String url = "jdbc:mysql://10.0.0.120:3306/solr?tinyInt1isBit=false&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull";
+        String url = "jdbc:mysql://127.0.0.1:3306/solr?tinyInt1isBit=false&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull";
         String userName = "root";
-        String password = "sa";
+        String password = "root";
 
         ConnectionSource source = ConnectionSourceHelper.getSimple(driver, url, userName, password);
         DBStyle mysql = new MySqlStyle();

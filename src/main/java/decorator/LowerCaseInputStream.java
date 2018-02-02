@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
+ * 装饰器模式
  * http://www.cnblogs.com/god_bless_you/archive/2010/06/10/1755212.html
  * @time 2017年12月13日 下午3:04:25
  * @author Volong
@@ -35,7 +36,7 @@ public class LowerCaseInputStream extends FilterInputStream {
             System.out.print((char)c);
         }
         
-        lowerCaseInputStream.close();;
+        lowerCaseInputStream.close();
     }
 
 }
