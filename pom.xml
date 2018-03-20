@@ -35,6 +35,11 @@
 
 	<dependencies>
 		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aop</artifactId>
+			<version>4.1.6.RELEASE</version>
+		</dependency>
+		<dependency>
 			<groupId>org.msgpack</groupId>
 			<artifactId>msgpack</artifactId>
 			<version>0.6.9</version>
