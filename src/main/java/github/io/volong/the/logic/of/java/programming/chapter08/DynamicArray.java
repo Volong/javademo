@@ -3,6 +3,8 @@ package github.io.volong.the.logic.of.java.programming.chapter08;
 import java.util.Arrays;
 import java.util.Random;
 
+import javax.servlet.FilterRegistration.Dynamic;
+
 public class DynamicArray<E> {
 	
 	private static final int DEFAULT_CAPACITY = 10;
@@ -118,7 +120,6 @@ public class DynamicArray<E> {
 		arr.set(j, tmp);
 	}
 	 
-	
 	public static void main(String[] args) {
 		
 		DynamicArray<Double> dynamicArray = new DynamicArray<>();
@@ -130,21 +131,30 @@ public class DynamicArray<E> {
 		
 		System.out.println(dynamicArray.get(random.nextInt(size)));
 		
-		DynamicArray<Integer> ints = new DynamicArray<>();
 		DynamicArray<Number> numbers = new DynamicArray<>();
+		DynamicArray<Integer> ints = new DynamicArray<>();
 		ints.add(1);
 		ints.add(2);
 		numbers.addAll(ints);
 		
-//		DynamicArray<? extends Number> numbers = new DynamicArray<>();
-//		Double d = new Double(1.2);
+		DynamicArray<Double> dous = new DynamicArray<>();
+		dous.add(1.2);
+		dous.add(1.3);
+		numbers.addAll(dous);
+		
+		
+//		DynamicArray<? extends Number> numbers1 = new DynamicArray<>();
+//		numbers1 = ints;
 		/*
 		 * 会报错；因为 <? extends Number> 表示是 Number 的某个子类型，但是不知道具体子类型
 		 * 如果允许写入，Java 无法保证安全性
 		 * 所以只能允许读，不能写
+		 * 
 		 */
-//		numbers.addAll(d);
+//		numbers1.addAll(1.2);
 		
+//		DynamicArray<?> numbers2 = new DynamicArray<>();
+//		numbers2.add(1);
 		
 	}
 }
