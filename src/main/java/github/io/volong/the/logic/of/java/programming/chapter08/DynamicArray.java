@@ -3,8 +3,6 @@ package github.io.volong.the.logic.of.java.programming.chapter08;
 import java.util.Arrays;
 import java.util.Random;
 
-import javax.servlet.FilterRegistration.Dynamic;
-
 public class DynamicArray<E> {
 	
 	private static final int DEFAULT_CAPACITY = 10;
@@ -119,7 +117,28 @@ public class DynamicArray<E> {
 		arr.set(i, arr.get(j));
 		arr.set(j, tmp);
 	}
-	 
+
+	
+	public static <T extends Comparable<? super T>> T max(DynamicArray<T> arr) {
+		T max = arr.get(0);
+		
+		for (int i = 0; i < arr.size(); i++) {
+			if (arr.get(i).compareTo(max) > 0) {
+				max = arr.get(i);
+			}
+		}
+		
+		return max;
+	}
+	
+	/*
+	 * 下面这两个重载方法会报错
+	 * 虽然参数都是 DynamicArray，但是实例化类型不同，一个是 DynamicArray<Integer>，一个是 DynamicArray<String>
+	 * 看似是两个不同类型的参数，但是类型擦除之后，它们的声明是一样的
+	 */
+//	public static void test(DynamicArray<Integer> ints) {};
+//	public static void test(DynamicArray<String> strs) {};
+	
 	public static void main(String[] args) {
 		
 		DynamicArray<Double> dynamicArray = new DynamicArray<>();
@@ -133,6 +152,7 @@ public class DynamicArray<E> {
 		
 		DynamicArray<Number> numbers = new DynamicArray<>();
 		DynamicArray<Integer> ints = new DynamicArray<>();
+		
 		ints.add(1);
 		ints.add(2);
 		numbers.addAll(ints);
@@ -151,10 +171,36 @@ public class DynamicArray<E> {
 		 * 所以只能允许读，不能写
 		 * 
 		 */
-//		numbers1.addAll(1.2);
+//		numbers1.addAll(dous);
 		
-//		DynamicArray<?> numbers2 = new DynamicArray<>();
-//		numbers2.add(1);
+		DynamicArray<?> numbers2 = new DynamicArray<>();
+		numbers2 = dous;
 		
+		DynamicArray<Child> childs = new DynamicArray<>();
+		childs.add(new Child(20));
+		childs.add(new Child(20));
+		
+		Child child = max(childs);
+		System.out.println(child);
+		
+		// 泛型对象的 getClass 方法的返回值与原始类型对象相同
+		System.out.println(DynamicArray.class == numbers.getClass()); // true
+		System.out.println(DynamicArray.class == ints.getClass());    // true
+		System.out.println(numbers.getClass() == ints.getClass());    // true
+		
+		/*
+		 * 这种方式是错误的
+		 * 因为 instanceof 是运行时判断，与泛型无关 
+		 */
+//		if (numbers instanceof DynamicArray<Number>) {
+//			
+//		}
+		
+		// 但是却支持这种写法
+		// 我的理解是 ? 表示任意类型，也就是与泛型无关
+		// 不过这样写没有什么意义，因为无论如何这都是成立的
+		if (numbers instanceof DynamicArray<?>) {
+			System.out.println(1111);
+		}
 	}
 }
