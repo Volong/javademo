@@ -1,4 +1,4 @@
-package github.io.volong.the.logic.of.java.programming.chapter17;
+package github.io.volong.tlojp.chapter17;
 
 public class Entry<K, V> {
 

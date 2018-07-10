@@ -1,4 +1,4 @@
-package github.io.volong.thinkinginjava.chapter21.semaphore;
+package github.io.volong.tij.chapter21.semaphore;
 
 public class Fat {
 
