@@ -1,4 +1,4 @@
-package github.io.volong.thinkinginjava.chapter21.concurrency;
+package github.io.volong.tij.chapter21.concurrency;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;

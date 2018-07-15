@@ -1,4 +1,4 @@
-package github.io.volong.java8.functional.programming;
+package github.io.volong.j8fp;
 
 
 import static org.junit.Assert.assertEquals;

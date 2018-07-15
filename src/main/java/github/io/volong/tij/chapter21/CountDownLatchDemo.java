@@ -1,4 +1,4 @@
-package github.io.volong.thinkinginjava.chapter21;
+package github.io.volong.tij.chapter21;
 
 import java.util.Random;
 import java.util.concurrent.CountDownLatch;
