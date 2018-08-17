@@ -85,9 +85,16 @@ public final class Unsafe {
      */
     @CallerSensitive
     public static Unsafe getUnsafe() {
+    	// 获取调用 getUnsage() 这个方法的对象的 Class 对象
         Class<?> caller = Reflection.getCallerClass();
+        
+        /*
+         * 判断是不是 Bootstrap 类加载器加载的 caller
+         * 启动 main 函数所在的类是使用 AppClassLoader 去加载的，而 rt.jar 里面的类是通过 Bootstrap 类加载器去加载的
+         */
         if (!VM.isSystemDomainLoader(caller.getClassLoader()))
             throw new SecurityException("Unsafe");
+        
         return theUnsafe;
     }
 
