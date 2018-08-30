@@ -1,19 +1,10 @@
 package github.io.volong;
 
-import java.io.IOException;
-import java.util.HashSet;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+public class Main {
 
-import github.io.volong.util.FileUtil;
-
-public class Main implements Comparable<String>{
-
-	@Override
-	public int compareTo(String o) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-	
+    public static void main(String[] args) {
+        for (int i = 1; i <= 10000; i++) {
+            System.out.println(Math.log10(i));
+        }
+    }
 }
