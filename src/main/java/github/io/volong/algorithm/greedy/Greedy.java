@@ -5,11 +5,13 @@ import java.util.List;
 
 public class Greedy {
 
-    public static List<Item> greedyAlgo(List<Item> items) {
+    public static List<Item> greedyAlgo(List<Item> items, SelectPolicy policy) {
         
         int weight = 0;
         
         List<Item> selectItems = new ArrayList<>();
+        
+        sortItemsWithPolicy(items, policy);
         
         for (int i = 0; i < items.size(); i++) {
             if ((items.get(i).getWeight() + weight) <= 150) {
@@ -19,6 +21,16 @@ public class Greedy {
         }
         return selectItems;
     }
+
+	private static void sortItemsWithPolicy(List<Item> items, SelectPolicy policy) {
+		if (SelectPolicy.PRICE == policy) {
+        	items.sort((o1, o2) -> o2.getPrice() - o1.getPrice());
+        } else if (SelectPolicy.WEIGHT == policy) {
+        	items.sort((o1, o2) -> o1.getWeight() - o2.getWeight());
+        } else if (SelectPolicy.PRICE_OF_WEIGHT == policy) {
+        	items.sort((o1, o2) -> (o2.getPrice() / o2.getWeight()) - (o1.getPrice() / o1.getWeight()));
+        }
+	}
 
     public static void main(String[] args) {
         int[] w= {35, 30, 60, 50, 40, 10, 25};
@@ -37,18 +49,20 @@ public class Greedy {
             items.get(i).setPrice(p[i]);
         }
         
-        items.sort((o1, o2) -> o2.getPrice() - o1.getPrice());
-        
         System.out.println(items);
         
-        List<Item> greedyAlgo = greedyAlgo(items);
+        output(greedyAlgo(items, SelectPolicy.PRICE), SelectPolicy.PRICE);
         
-        System.out.println(greedyAlgo);
+        output(greedyAlgo(items, SelectPolicy.WEIGHT), SelectPolicy.WEIGHT);
         
-        int sumWeight = greedyAlgo.stream().mapToInt(Item::getWeight).sum();
-        System.out.println("总重量为:" + sumWeight);
+        output(greedyAlgo(items, SelectPolicy.PRICE_OF_WEIGHT), SelectPolicy.PRICE_OF_WEIGHT);
+    }
+
+	private static void output(List<Item> greedyAlgo, SelectPolicy policy) {
+		int sumWeight = greedyAlgo.stream().mapToInt(Item::getWeight).sum();
+        System.out.println("选择策略为: " + policy + " 的总重量为:" + sumWeight);
         
         int sumPrice = greedyAlgo.stream().mapToInt(Item::getPrice).sum();
-        System.out.println("总价值为:" + sumPrice);
-    }
+        System.out.println("选择策略为: " + policy + " 的总价值为:" + sumPrice);
+	}
 }
