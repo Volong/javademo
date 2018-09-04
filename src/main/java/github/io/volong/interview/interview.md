@@ -100,3 +100,5 @@
 贪婪法的每次决策都以当前情况为基础并根据某个最优原则进行选择，不从整体上考虑其他各种可能的情况。
 
 贪婪法只在很少的情况下可以得到真正的最优解，比如最短路径问题、图的最小生成树问题。
+
+具体实现见: [Greedy](https://github.com/Volong/javademo/blob/master/src/main/java/github/io/volong/algorithm/greedy/Greedy.java)
