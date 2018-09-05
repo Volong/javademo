@@ -5,14 +5,12 @@ import java.util.Arrays;
 /**
  * 快速排序
  * 
- * @date 2018年3月16日 下午4:27:27
- *
  */
 public class QuickSort2 {
 
     public static void main(String[] args) {
         
-        int[] arr = {2, 6, 0, 8, 4, -1};
+        int[] arr = {2, 6, 8, 0, 4, -1};
         
         quickSort(arr);
         
@@ -23,20 +21,34 @@ public class QuickSort2 {
         quickSort(arr, 0, arr.length - 1);
     }
 
+    /**
+     * 
+     * 分区
+     * 
+     * @param arr 
+     * @param left       开始位置
+     * @param right      结束位置
+     * @param pivotIndex 基准位置
+     * @return
+     */
     private static int partition(int[] arr, int left, int right, int pivotIndex) {
         
-        int pivotValue = arr[pivotIndex];
-        int storeIndex = left;
+        int pivotValue = arr[pivotIndex]; // 2
+        int storeIndex = left; // 0
         
+        // 将基准位置的值临时保存在右边
         swap(arr, pivotIndex, right);
         
+        // -1, 6, 8, 0, 4, 2 
         for (int i = left; i < right; i++) {
-            if (arr[i] < pivotValue) {
+            if (arr[i] < pivotValue) { // ? < 2
                 swap(arr, i, storeIndex);
                 storeIndex++;
             }
         }
         
+        // 将基准位置的值与新的基准值互换
+        // 这就保证了基准值的左边都比它小，右边都比它大
         swap(arr, right, storeIndex);
         
         return storeIndex;

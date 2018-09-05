@@ -7,8 +7,6 @@ import java.util.Arrays;
  * 第一次选择最小的元素与第一个元素交换
  * 然后从剩下的元素中选择最小的元素与未排序元素的第一个元素交换。
  * 
- * @date 2018年3月16日 下午2:48:39
- *
  */
 public class SelectSort {
 

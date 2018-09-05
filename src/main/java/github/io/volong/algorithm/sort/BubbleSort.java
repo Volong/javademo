@@ -10,8 +10,6 @@ import java.util.Arrays;
  * 时间复杂度：O(n^2)
  * 空间复杂度:O(1)
  * 
- * @author volong
- *
  */
 public class BubbleSort {
 
