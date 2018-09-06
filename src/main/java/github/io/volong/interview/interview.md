@@ -28,6 +28,14 @@
 
   > 参考：[疫苗：JAVA HASHMAP的死循环](https://coolshell.cn/articles/9606.html)
 
+- hashcode() 与 equals()  
+
+  1.  如果两个对象通过 equals() 方法返回相等，那么它们的 hashcode 必须相等
+  2.  在应用程序中对同一个对象多次调用 hashcode() 方法，返回值相同。
+      但是在多次执行应用程序期间不需要保持相同。 
+  3.  如果对象通过 equals() 方法返回不相等，那么不要求它们的 hashcode 也不相等。也就是说不同的对象，可能 hashcode 值相同。
+
+  >   参考：[override-hashcode-in-java-example](https://javarevisited.blogspot.com/2011/10/override-hashcode-in-java-example.html)
 - ArrayList、LinkedList、Vector的区别
 - HashMap、ConcurrentHashMap的区别
 - HashMap、LinkedHashMap的区别
@@ -37,7 +45,15 @@
 - 创建线程的方式
 - 线程池
 - Runnable 接口和 Callable 接口的区别
-- wait 方法和 sleep 方法的区别
+- wait() 和 sleep() 的区别
+  1.  wait 需要在同步的环境中被调用，sleep 没有这个要求
+  2.  wait 的线程需要通过 notify() 或 notifyAll() 方法来唤醒，但是 sleep 则不需要
+  3.  wait 通常是有条件的，但是 sleep 则没有
+  4.  wait 会释放锁，但是 sleep 则不会
+  5.  wait 在同步块锁定的对象上调用，但是 sleep 通过线程调用
+- yield 与 sleep 的区别
+  1.  
+
 - ReentrantLock
 - ReadWriteLock
 - CAS
