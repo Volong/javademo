@@ -52,7 +52,9 @@
   4.  wait 会释放锁，但是 sleep 则不会
   5.  wait 在同步块锁定的对象上调用，但是 sleep 通过线程调用
 - yield 与 sleep 的区别
-  1.  
+
+  1.  yield 会临时暂停当前线程，将机会让给其余等待的线程去执行。但是如果其它的线程优先级比较低或者没有其它等待的线程，那么该线程将会继续执行。
+  2.  sleep 暂停当前线程指定的时间。
 
 - ReentrantLock
 - ReadWriteLock
