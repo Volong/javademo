@@ -1,4 +1,7 @@
-
+- **Comparable** 接口与 **Comparator** 接口的区别
+  1. `Comparable` 接口一般用于自然排序，`Comparator` 接口常常用于自定义排序。
+  2. 原始类都实现了 `Comparable` 接口。除非是自定义了实现了 `Comparator`，否则排序为自然排序。
+  3. 没有实现 `Comparable` 接口的类在调用 `Arrays.sort` 时会抛出 `ClassCastException` 异常。
 
 - HashMap
 
@@ -36,76 +39,137 @@
   3.  如果对象通过 equals() 方法返回不相等，那么不要求它们的 hashcode 也不相等。也就是说不同的对象，可能 hashcode 值相同。
 
   >   参考：[override-hashcode-in-java-example](https://javarevisited.blogspot.com/2011/10/override-hashcode-in-java-example.html)
+
 - ArrayList、LinkedList、Vector的区别
+
 - HashMap、ConcurrentHashMap的区别
+
 - HashMap、LinkedHashMap的区别
+
 - ConcurrentHashMap 是怎么实现线程安全的
+
 - HashMap 的长度为什么是 2 的幂次方
+
 - HashMap 在 JAVA8 做了什么优化 
+
 - 创建线程的方式
+
 - 线程池
+
 - Runnable 接口和 Callable 接口的区别
+
 - wait() 和 sleep() 的区别
   1.  wait 需要在同步的环境中被调用，sleep 没有这个要求
   2.  wait 的线程需要通过 notify() 或 notifyAll() 方法来唤醒，但是 sleep 则不需要
   3.  wait 通常是有条件的，但是 sleep 则没有
   4.  wait 会释放锁，但是 sleep 则不会
   5.  wait 在同步块锁定的对象上调用，但是 sleep 通过线程调用
+
 - yield 与 sleep 的区别
 
   1.  yield 会临时暂停当前线程，将机会让给其余等待的线程去执行。但是如果其它的线程优先级比较低或者没有其它等待的线程，那么该线程将会继续执行。
   2.  sleep 暂停当前线程指定的时间。
 
 - ReentrantLock
+
 - ReadWriteLock
+
 - CAS
+
 - 悲观锁
+
 - 乐观锁
+
 - volatile关键字的作用和原理
+
 - ThreadLocal
+
 - 创建线程池的4种方式
+
 - ThreadPoolExecutor 的内部工作原理
+
 - 分布式环境下，怎么保证线程安全
+
 - synchronized
+
 - volatile
+
 - lock
+
 - CountDownLatch 
+
 - CyclicBarrier  
+
 - Semaphore  
+
 - 垃圾回收算法
+
 - 类加载的过程
+
 - 双亲委派模型
+
 - 什么情况会打破双亲委派机制 
+
 - 有哪些类加载器，原理是怎样  
+
 - 设计模式
+
 - MySQL 事务
+
 - MySQL 储存引擎的区别 
+
 - 父子线程穿透如何解决 
+
 - JVM 如何加载类  
+
 - 什么是 IOC
+
 - Spring 事务
+
 - B 树
+
 - 二叉树
+
 - B+ 树
+
 - trie 树
+
 - 双数组 trie 树
+
 - 分布式锁的实现
+
 - Spring Bean 的生命周期
+
 - Spring IOC 如何实现
+
 - Spring AOP 实现原理
+
 - 动态代理
+
 - Spring 跟 SpringBoot 的区别
+
 - Redis 的数据类型
+
 - HTTP 3 次握手 
+
 - HTTP
+
 - TCP
+
 - IP 
+
 - NIO
+
 - BIO
+
 - AIO
+
 - GC 调优 
+
 - GC 原理 
+
 - JAVA 内存模型 
+
 - 数据结构
 
 ### 算法 
@@ -120,7 +184,6 @@
 贪婪法只在很少的情况下可以得到真正的最优解，比如最短路径问题、图的最小生成树问题。
 
 具体实现见: [Greedy](https://github.com/Volong/javademo/blob/master/src/main/java/github/io/volong/algorithm/greedy/Greedy.java)
-
 
 **分治法 (Divide and Conquer)**
 分治，顾名思义，分而治之。将无法着手解决的大问题分解成一系列规模较小的相同问题，然后逐个解决小问题，
