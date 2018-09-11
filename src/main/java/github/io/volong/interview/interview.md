@@ -1,7 +1,24 @@
 - **Comparable** 接口与 **Comparator** 接口的区别
+
   1. `Comparable` 接口一般用于自然排序，`Comparator` 接口常常用于自定义排序。
   2. 原始类都实现了 `Comparable` 接口。除非是自定义了实现了 `Comparator`，否则排序为自然排序。
   3. 没有实现 `Comparable` 接口的类在调用 `Arrays.sort` 时会抛出 `ClassCastException` 异常。
+
+- 冒泡排序
+
+  依次比较两个相邻的元素，如果第一个元素比第二个元素大，则交换它们的位置。
+
+  每次比较完一轮，最大的元素会排到最后。接着对剩下的元素重复这个过程。
+
+  具体实现：[BubbleSort](https://github.com/Volong/javademo/blob/master/src/main/java/github/io/volong/algorithm/sort/BubbleSort.java)
+
+- 插入排序
+
+- 快速排序
+
+- 归并排序
+
+- 二分查找
 
 - HashMap
 
