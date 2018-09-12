@@ -1,4 +1,5 @@
 package github.io.volong.jcpb;
+
 public class TestForContent2 {
 
     static final int LINE_NUM = 1024;
