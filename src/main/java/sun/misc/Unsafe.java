@@ -25,8 +25,9 @@
 
 package sun.misc;
 
-import java.security.*;
-import java.lang.reflect.*;
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
+import java.security.ProtectionDomain;
 
 import sun.reflect.CallerSensitive;
 import sun.reflect.Reflection;
@@ -110,6 +111,13 @@ public final class Unsafe {
      * object <code>o</code> at the given offset, or (if <code>o</code> is
      * null) from the memory address whose numerical value is the given
      * offset.
+     * <p>
+     * 
+     * 根据 offset 获取变量 o 中的字段或者数组元素的值，如果 o 为 null，则从内存地址中获取<br>
+     * o 为 null，获取到的值不是 null 吗？
+     * 
+     * 看不懂 -_-!
+     * 
      * <p>
      * The results are undefined unless one of the following cases is true:
      * <ul>
@@ -875,6 +883,11 @@ public final class Unsafe {
     /**
      * Atomically update Java variable to <tt>x</tt> if it is currently
      * holding <tt>expected</tt>.
+     * <p>
+     * 
+     * 比较对象 o 中偏移量为 offset 的变量的值是不是和 expected 相等，
+     * 相等则使用 x 值更新，然后返回 true，否者返回 false。
+     * 
      * @return <tt>true</tt> if successful
      */
     public final native boolean compareAndSwapObject(Object o, long offset,
@@ -902,6 +915,9 @@ public final class Unsafe {
     /**
      * Fetches a reference value from a given Java variable, with volatile
      * load semantics. Otherwise identical to {@link #getObject(Object, long)}
+     * <p>
+     * 
+     * 获取对象 o 中偏移量为 offset 的变量对应的 volatile 内存语义的值。
      */
     public native Object getObjectVolatile(Object o, long offset);
 
