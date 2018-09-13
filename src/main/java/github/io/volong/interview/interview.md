@@ -1,4 +1,14 @@
-- **Comparable** 接口与 **Comparator** 接口的区别
+- simhash 算法
+
+  用于海量文本去重。具有局部敏感性。
+
+  >   参考：
+  >
+  >   [simhash算法原理及实现](http://www.lanceyan.com/tech/arch/simhash_hamming_distance_similarity.html)
+  >
+  >   [海量数据相似度计算之simhash和海明距离](http://www.lanceyan.com/tech/arch/simhash_hamming_distance_similarity.html)
+
+- Comparable** 接口与 **Comparator** 接口的区别
 
   1. `Comparable` 接口一般用于自然排序，`Comparator` 接口常常用于自定义排序。
   2. 原始类都实现了 `Comparable` 接口。除非是自定义了实现了 `Comparator`，否则排序为自然排序。
