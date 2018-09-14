@@ -1,8 +1,5 @@
 package github.io.volong.trie;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
@@ -117,21 +114,28 @@ public class TrieNode {
     
     public static void main(String[] args) throws IOException {
         
-        File f = new File("C:\\Users\\Volong\\Desktop\\1.txt");
+        /*File f = new File("C:\\Users\\Volong\\Desktop\\1.txt");
         
         BufferedReader reader = new BufferedReader(new FileReader(f));
         
         String str = null;
-        TrieNode root = new TrieNode();
         
         while ((str = reader.readLine()) != null) {
             String[] words = str.split(" ");
             root.addTrieNode(root, words[1].trim().toLowerCase(), Integer.parseInt(words[0]));
         }
         
-        reader.close();
+        reader.close();*/
         
-        Set<Integer> searchTrie = root.searchTrie("go");
+        TrieNode root = new TrieNode();
+        
+        root.addTrieNode(root, "abc", 1);
+        root.addTrieNode(root, "b", 2);
+        root.addTrieNode(root, "bc", 3);
+        root.addTrieNode(root, "ab", 4);
+        root.addTrieNode(root, "abcd", 5);
+        
+        Set<Integer> searchTrie = root.searchTrie("a");
         
         System.out.println(searchTrie);
     }
