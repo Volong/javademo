@@ -67,8 +67,6 @@ public class TrieNode {
         
         int index = word.charAt(0) - 'a';
 
-        System.out.println(word);
-        
         // 如果子节点为null，则生成一个新的子节点
         if (root.childNode[index] == null) { 
             root.childNode[index] = new TrieNode();
@@ -138,5 +136,6 @@ public class TrieNode {
         Set<Integer> searchTrie = root.searchTrie("a");
         
         System.out.println(searchTrie);
+        
     }
 }
