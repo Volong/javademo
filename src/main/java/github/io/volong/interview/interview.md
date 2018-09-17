@@ -1,3 +1,15 @@
+- `equals()` 与 `==` 的区别
+
+  `==` 用来判断两个对象的地址是否相等
+
+  `equals` 在没有重写时通过 `==` 来进行判断；否则通过具体的重写规则来判断
+
+- `hashCode()` 与 `equals()` (在没有重写时的情况) 的关系
+
+  如果两个对象通过 `equals()` 比较相等，那么它们的 `hashCode()` 值一定相等
+
+  但是如果它们的 `hashCode()` 值相等，并不能说明它们使用 `equals()` 比较会相等
+
 - simhash 算法
 
   用于海量文本去重。具有局部敏感性。
@@ -103,11 +115,35 @@
 
 - CAS
 
+  Compare And Swap 即比较并交换。
+
+  例：`compareAndSwapLong(Object obj, long offset, long expect, long update)`
+
+  比较对象 `obj` 中偏移量为 `offset` 的变量的值是不是和 `expect` 相等，相等则使用 `update` 值更新，然后返回 `true`，否者返回 `false`。
+
+  `CAS` 会有如下问题：
+
+  - `ABA` 问题
+
+    > 1. 线程1 想将 A 替换成 C，但是在未替换成功的时候被阻塞。
+    >
+    > 2. 线程2 将 A 替换成 B，再替换成 A。
+    > 3. 线程1 发现内存中的值还是 A，则将 A 替换成 B。
+
+  - 长时间自旋问题
+
+    > 如果 CAS 长时间更新不成功，会给 CPU 带来非常大的开销
+
+  > 两个疑问 (待解决)：
+  >
+  > 1. 既然 CAS 有 ABA 问题，为什么 JUC 包还大量使用？是因为发生的概率比较低吗？
+  > 2. 为什么长时间自旋会给 CPU 带来非常大的开销？
+
 - 悲观锁
 
 - 乐观锁
 
-- volatile关键字的作用和原理
+- volatile 关键字的作用和原理
 
 - ThreadLocal
 
