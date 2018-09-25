@@ -66,7 +66,9 @@
 
 - HashMap 什么情况下会产生死循环
 
-  在并发的情况下，rehash 操作会形成环形链表导致死循环。
+  JDK1.7，在并发的情况下，rehash 操作会形成环形链表导致死循环。
+
+  JDK1.8 不会出现这个问题。
 
   > 参考：[疫苗：JAVA HASHMAP的死循环](https://coolshell.cn/articles/9606.html)
 
