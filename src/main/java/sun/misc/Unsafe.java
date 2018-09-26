@@ -1059,7 +1059,9 @@ public final class Unsafe {
     /**
      * Atomically adds the given value to the current value of a field
      * or array element within the given object <code>o</code>
-     * at the given <code>offset</code>.
+     * at the given <code>offset</code>. <p>
+     * 
+     * 在高并发的情况下，会导致大量线程 CAS 失败而自旋，浪费 CPU 的资源，降低并发性
      *
      * @param o object/array to update the field/element in
      * @param offset field/element offset
