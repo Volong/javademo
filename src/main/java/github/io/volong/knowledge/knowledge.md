@@ -20,7 +20,7 @@
   >
   >   [海量数据相似度计算之simhash和海明距离](http://www.lanceyan.com/tech/arch/simhash_hamming_distance_similarity.html)
 
-- Comparable** 接口与 **Comparator** 接口的区别
+- **Comparable** 接口与 **Comparator** 接口的区别
 
   1. `Comparable` 接口一般用于自然排序，`Comparator` 接口常常用于自定义排序。
   2. 原始类都实现了 `Comparable` 接口。除非是自定义了实现了 `Comparator`，否则排序为自然排序。
@@ -64,7 +64,7 @@
 
   TreeMap 是基于红黑树的实现，提供顺序访问的 Map。put 或 get 或 remove 操作都是 O(log(n)) 的时间复杂度。具体顺序可以为自然顺序或者根据 Comparator 来判断。
 
-- HashMap 什么情况下会产生死循环
+- `HashMap` 什么情况下会产生死循环
 
   JDK1.7，在并发的情况下，rehash 操作会形成环形链表导致死循环。
 
@@ -72,7 +72,7 @@
 
   > 参考：[疫苗：JAVA HASHMAP的死循环](https://coolshell.cn/articles/9606.html)
 
-- hashcode() 与 equals()  
+- `hashcode()` 与 `equals()`
 
   1.  如果两个对象通过 equals() 方法返回相等，那么它们的 hashcode 必须相等
   2.  在应用程序中对同一个对象多次调用 hashcode() 方法，返回值相同。
@@ -99,17 +99,18 @@
 
 - Runnable 接口和 Callable 接口的区别
 
-- wait() 和 sleep() 的区别
+- `wait()` 和 `sleep()` 的区别
+
   1.  wait 需要在同步的环境中被调用，sleep 没有这个要求
   2.  wait 的线程需要通过 notify() 或 notifyAll() 方法来唤醒，但是 sleep 则不需要
   3.  wait 通常是有条件的，但是 sleep 则没有
   4.  wait 会释放锁，但是 sleep 则不会
   5.  wait 在同步块锁定的对象上调用，但是 sleep 通过线程调用
 
-- yield 与 sleep 的区别
+- `yield()` 与 `sleep()` 的区别
 
-  1.  yield 会临时暂停当前线程，将机会让给其余等待的线程去执行。但是如果其它的线程优先级比较低或者没有其它等待的线程，那么该线程将会继续执行。
-  2.  sleep 暂停当前线程指定的时间。
+  1.  `yield()` 会临时暂停当前线程，将机会让给其余等待的线程去执行。但是如果其它的线程优先级比较低或者没有其它等待的线程，那么该线程将会继续执行。
+  2.  `sleep()` 暂停当前线程指定的时间。
 
 - ReentrantLock
 
@@ -205,15 +206,24 @@
 
 - Spring Bean 的生命周期
 
-- Spring IOC 如何实现
+- Spring IOC
 
-- Spring AOP 实现原理
+  博客：[Spring IOC的原理及详解](https://www.cnblogs.com/wang-meng/p/5597490.html)
 
-- 动态代理
+- Spring AOP
+
+  慕课网视频：[探秘Spring AOP](https://www.imooc.com/learn/869)
 
 - Spring 跟 SpringBoot 的区别
 
 - Redis 的数据类型
+
+  - string（字符串）
+
+  - hash（哈希）
+  - list（列表）
+  - set（集合）
+  - zset(sorted set：有序集合)
 
 - HTTP 3 次握手 
 
