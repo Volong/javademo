@@ -17,7 +17,6 @@
 -   [第二章：线程安全性](https://github.com/Volong/javademo/blob/master/src/main/java/github/io/volong/jcip/doc/02%E7%AC%AC%E4%BA%8C%E7%AB%A0%EF%BC%9A%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E6%80%A7.md)
 -   [第三章：对象的共享](https://github.com/Volong/javademo/blob/master/src/main/java/github/io/volong/jcip/doc/03%E7%AC%AC%E4%B8%89%E7%AB%A0%EF%BC%9A%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%85%B1%E4%BA%AB.md)
 -   [第四章：对象的组合](https://github.com/Volong/javademo/blob/master/src/main/java/github/io/volong/jcip/doc/04%E7%AC%AC%E5%9B%9B%E7%AB%A0%EF%BC%9A%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%BB%84%E5%90%88.md)
-
 -   [第五章：基础构建模块](https://github.com/Volong/javademo/blob/master/src/main/java/github/io/volong/jcip/doc/05%E7%AC%AC%E4%BA%94%E7%AB%A0%EF%BC%9A%E5%9F%BA%E7%A1%80%E6%9E%84%E5%BB%BA%E6%A8%A1%E5%9D%97.md)
 -   [第八章：线程池的使用](https://github.com/Volong/javademo/blob/master/src/main/java/github/io/volong/jcip/doc/08%E7%AC%AC%E5%85%AB%E7%AB%A0%EF%BC%9A%E7%BA%BF%E7%A8%8B%E6%B1%A0%E7%9A%84%E4%BD%BF%E7%94%A8.md)
 
@@ -30,4 +29,3 @@
 ## 正则表达式
 
 [正则表达式知识点](https://github.com/Volong/javademo/blob/master/src/main/java/github/io/volong/regex/doc/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9F%A5%E8%AF%86%E7%82%B9.md)
-
