@@ -21,3 +21,12 @@
 -   [第五章：基础构建模块](https://github.com/Volong/javademo/blob/master/src/main/java/github/io/volong/jcip/doc/05%E7%AC%AC%E4%BA%94%E7%AB%A0%EF%BC%9A%E5%9F%BA%E7%A1%80%E6%9E%84%E5%BB%BA%E6%A8%A1%E5%9D%97.md)
 -   [第八章：线程池的使用](https://github.com/Volong/javademo/blob/master/src/main/java/github/io/volong/jcip/doc/08%E7%AC%AC%E5%85%AB%E7%AB%A0%EF%BC%9A%E7%BA%BF%E7%A8%8B%E6%B1%A0%E7%9A%84%E4%BD%BF%E7%94%A8.md)
 
+## 自然语言处理
+
+[数学之美第二版](https://volong.github.io/2018/10/13/de887055f2a2350d39572333ea99179a/)
+
+[新词发现](https://volong.github.io/2018/10/13/e207fd12e67d934b6a9aed1e1f02bc47/)
+
+## 正则表达式
+
+[正则表达式知识点]()
