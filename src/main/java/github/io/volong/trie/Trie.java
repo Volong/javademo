@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
+import github.io.volong.util.StringUs;
+
 /**
  * Trie 树的实现 <br>
  * 参考：http://www.cnblogs.com/huangxincheng/archive/2012/11/25/2788268.html <br>
@@ -13,9 +15,9 @@ import java.util.Set;
  * @author Volong
  *
  */
-public class TrieNode {
+public class Trie {
 
-    private TrieNode[] childNode;
+    private Trie[] childNode;
     
     private int freq;
     
@@ -23,15 +25,15 @@ public class TrieNode {
     
     private Set<Integer> ids = new HashSet<>();
 
-    public TrieNode() {
-        childNode = new TrieNode[26];
+    public Trie() {
+        childNode = new Trie[26];
     }
 
-    public TrieNode[] getChildNode() {
+    public Trie[] getChildNode() {
         return childNode;
     }
 
-    public void setChildNode(TrieNode[] childNode) {
+    public void setChildNode(Trie[] childNode) {
         this.childNode = childNode;
     }
 
@@ -54,22 +56,53 @@ public class TrieNode {
     public Set<Integer> getIds() {
         return ids;
     }
-
-    public void setIds(Set<Integer> ids) {
-        this.ids = ids;
+    
+    private boolean deleteTrie(String word, int id) {
+        if (StringUs.isBlank(word)) {
+            return false;
+        }
+        return deleteTrie(this, word, id);
+    }
+    
+    private boolean deleteTrie(Trie root, String word, int id) {
+        
+        if (word.length() == 0) {
+            return true;
+        }
+        
+        int index = word.charAt(0) - 'a';
+        
+        if (root.childNode[index] == null) {
+            return false;
+        }
+        
+        // 如果是最后一个单词，且要删除的字符串存在
+        if (word.length() == 0 && this.childNode[index].freq > 0) {
+            root.childNode[index].freq--;
+        }
+        
+        root.childNode[index].ids.remove(id);
+        
+        String remainWord = word.substring(1);
+        
+        return deleteTrie(root.childNode[index], remainWord, id);
     }
 
-    private void addTrieNode(TrieNode root, String word, int id) {
+    private void addTrieNode(String word, int id) {
+        addTrie(this, word, id);
+    }
+
+    private void addTrie(Trie root, String word, int id) {
         
         if (word.length() == 0) {
             return;
         }
         
         int index = word.charAt(0) - 'a';
-
+        
         // 如果子节点为null，则生成一个新的子节点
         if (root.childNode[index] == null) { 
-            root.childNode[index] = new TrieNode();
+            root.childNode[index] = new Trie();
             root.childNode[index].nodeChar = word.charAt(0);
         }
         
@@ -79,26 +112,30 @@ public class TrieNode {
         // 剩余字符
         String remainWord = word.substring(1);
         
-        // 记录该单词出现几次
+        // 记录该字符串出现几次
         if (remainWord.length() == 0) {
             root.childNode[index].freq++;
         }
         
-        addTrieNode(root.childNode[index], remainWord, id);
+        addTrie(root.childNode[index], remainWord, id);
     }
     
     private Set<Integer> searchTrie(String word) {
         Set<Integer> idSet = new HashSet<>();
-        return SearchTrie(this, word, idSet);
+        return searchTrie(this, word, idSet);
     }
 
-    private Set<Integer> SearchTrie(TrieNode root, String word, Set<Integer> idSet) {
+    private Set<Integer> searchTrie(Trie root, String word, Set<Integer> idSet) {
         
         if (word.length() == 0) {
             return idSet;
         }
         
         int index = word.charAt(0) - 'a';
+        
+        if (root.childNode[index] == null) {
+            return idSet;
+        }
         
         String remainWord = word.substring(1);
         
@@ -107,7 +144,7 @@ public class TrieNode {
             idSet = root.childNode[index].getIds();
         }
         
-        return SearchTrie(root.childNode[index], remainWord, idSet);
+        return searchTrie(root.childNode[index], remainWord, idSet);
     }
     
     public static void main(String[] args) throws IOException {
@@ -125,15 +162,19 @@ public class TrieNode {
         
         reader.close();*/
         
-        TrieNode root = new TrieNode();
+        Trie root = new Trie();
         
-        root.addTrieNode(root, "abc", 1);
-        root.addTrieNode(root, "b", 2);
-        root.addTrieNode(root, "bc", 3);
-        root.addTrieNode(root, "ab", 4);
-        root.addTrieNode(root, "abcd", 5);
+        root.addTrieNode("abc", 1);
+        root.addTrieNode("b", 2);
+        root.addTrieNode("bc", 3);
+        root.addTrieNode("ab", 4);
+        root.addTrieNode("abcd", 5);
         
-        Set<Integer> searchTrie = root.searchTrie("a");
+        System.out.println(root.deleteTrie("abcde", 3));
+        
+        Set<Integer> searchTrie = root.searchTrie("bc");
+        
+        System.out.println(searchTrie);
         
         System.out.println(searchTrie);
         
