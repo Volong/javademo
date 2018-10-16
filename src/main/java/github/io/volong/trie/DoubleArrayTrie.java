@@ -26,13 +26,17 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *  来源：https://github.com/komiya-atsushi/darts-java
+ *
+ */
 public class DoubleArrayTrie {
 	private final static int BUF_SIZE = 16384;
 	private final static int UNIT_SIZE = 8; // size of int + int
 
 	private static class Node {
 	    /**
-	     * 字符的编码
+	     * 字符的编码 (其实真正的值为编码 + 1)
 	     */
 		int code;
 		/**
@@ -130,18 +134,21 @@ public class DoubleArrayTrie {
 	 * @return
 	 */
 	private int fetch(Node parent, List<Node> siblings) {
-		if (error_ < 0)
-			return 0;
+		if (error_ < 0) {
+            return 0;
+        }
 
 		// 前一个节点
 		int prev = 0;
-
-		// 将每个词的第一个字放到字典里面 
-		for (int i = parent.left; i < parent.right; i++) {
+		
+		// 将每个词的第一个字放到字典里面
+		// 父节点的 left 与 right 表示查询范围
+        for (int i = parent.left; i < parent.right; i++) {
 		    
 		    // 获取当前的词
 			String tmp = key.get(i);
-
+			
+			// 如果当前词的所有字都放到了字典中 
 			if ((length != null ? length[i] : tmp.length()) < parent.depth) {
 			    continue;
 			}
@@ -149,17 +156,15 @@ public class DoubleArrayTrie {
             // 当前节点
 			int cur = 0;
 			
-			// 当 tmp.length = parent.length 时，即该词已经全部放入词典
-			// 因为父节点的 depth 就代表了一个完整词的长度
+			// 当 tmp.length = parent.depth 时，即该词已经全部放入词典
 			if ((length != null ? length[i] : tmp.length()) != parent.depth) {
-
 			    // 某个节点的父节点的 depth 就代表了这个字在一个词中的位置
 			    char charAt = tmp.charAt(parent.depth);
-			    System.out.println(charAt);
+			    System.out.println(charAt + ":" + (int)charAt);
                 cur = (int) charAt + 1;
 			}
 			
-			// 前一个节点的 unicode 是否大于当前节点
+			// 前一个节点的位置 是否大于当前节点
 			if (prev > cur) {
 				error_ = -3;
 				return 0;
@@ -167,83 +172,99 @@ public class DoubleArrayTrie {
 			
 			// cur = prev 时为空节点，即叶子节点
 			// 或者是相同的字
-			if (cur != prev || siblings.size() == 0) {
-				Node tmp_node = new Node();
+			if (cur != prev || siblings.isEmpty()) {
+				Node tmpNode = new Node();
 				// 子节点的 depth 为父节点 +1
-				tmp_node.depth = parent.depth + 1;
-				tmp_node.code = cur;
+				tmpNode.depth = parent.depth + 1;
+				tmpNode.code = cur;
 				// 处于第几个兄弟节点，left 就为几
-				tmp_node.left = i;
+				tmpNode.left = i;
 				
 				// 如果有兄弟节点，则设置已有兄弟节点中最后一个兄弟节点的 right
-				if (siblings.size() != 0) {
-				    siblings.get(siblings.size() - 1).right = i;
+				if (!siblings.isEmpty()) {
+				 // 最后一个兄弟节点
+			        final Node lastSiblingNode = siblings.get(siblings.size() - 1);
+				    lastSiblingNode.right = i;
 				}
 
-				siblings.add(tmp_node);
+				siblings.add(tmpNode);
 			}
-
+			// 将当前节点的位置保存
 			prev = cur;
 		}
 
 		// 设置兄弟节点中最后一个节点的 right = 父节点的 right
-		if (siblings.size() != 0) {
-		    siblings.get(siblings.size() - 1).right = parent.right;
+		if (!siblings.isEmpty()) {
+		    // 最后一个兄弟节点
+	        final Node lastSiblingNode = siblings.get(siblings.size() - 1);
+		    lastSiblingNode.right = parent.right;
 		}
 
 		return siblings.size();
 	}
 
 	private int insert(List<Node> siblings) {
-		if (error_ < 0)
-			return 0;
+		if (error_ < 0) {
+		    return 0;
+		}
 
 		// 记录字典中哪些位置已经有值了
 		int begin = 0;
-		int pos = ((siblings.get(0).code + 1 > nextCheckPos) 
-		        ? siblings.get(0).code + 1
-				: nextCheckPos) - 1;
 		
-		int nonzero_num = 0;
+		// 第一个兄弟节点
+		final int firstSiblingNode = siblings.get(0).code;
+		
+		// 实在是没有搞懂为什么 +1 又 -1 
+        int pos = ((firstSiblingNode + 1)> nextCheckPos ? (firstSiblingNode + 1): nextCheckPos) - 1;
+		
+		int nonzeroNum = 0;
 		int first = 0;
 
-		if (allocSize <= pos)
-			resize(pos + 1);
-
-		outer: while (true) {
+//		if (allocSize <= pos) {分配内存的临时注释
+//		    resize(pos + 1);
+//		}
+		// 最后一个兄弟节点
+		final int lastSiblingCode = siblings.get(siblings.size() - 1).code;
+		
+        outer: while (true) {
 		    
+            // 又加了一次 1
 			pos++;
 
-			if (allocSize <= pos)
-				resize(pos + 1);
+//			if (allocSize <= pos) { 分配内存的临时注释
+//			    resize(pos + 1);
+//			}
 
-			
+			// 不等于 0 则表示当前位置已经被占用了
 			if (check[pos] != 0) {
-			    System.out.println("nonzero_num:" + nonzero_num);
-				nonzero_num++;
+			    System.out.println("nonzeroNum:" + nonzeroNum);
+				nonzeroNum++;
 				continue;
 			} else if (first == 0) {
+			    // 记录下一个需要检查的位置
 				nextCheckPos = pos;
 				first = 1;
 			}
-
 			
 			begin = pos - siblings.get(0).code;
 			
-			if (allocSize <= (begin + siblings.get(siblings.size() - 1).code)) {
-				// progress can be zero
-				double l = (1.05 > 1.0 * keySize / (progress + 1)) 
-				        ? 1.05 
-		                : 1.0	* keySize / (progress + 1);
-				resize((int) (allocSize * l));
+//			if (allocSize <= (begin + lastSiblingCode)) { 分配内存的临时注释
+//				// progress can be zero
+//				double l = (1.05 > 1.0 * keySize / (progress + 1)) 
+//				        ? 1.05 
+//		                : 1.0 * keySize / (progress + 1);
+//				resize((int) (allocSize * l));
+//			}
+			
+			if (used[begin]) {
+			    continue;
 			}
 
-			if (used[begin])
-				continue;
-
-			for (int i = 1; i < siblings.size(); i++)
-				if (check[begin + siblings.get(i).code] != 0)
-					continue outer;
+			for (int i = 1; i < siblings.size(); i++) {
+			    if (check[begin + siblings.get(i).code] != 0) {
+			        continue outer;
+			    }
+			}
 
 			break;
 		}
@@ -253,16 +274,17 @@ public class DoubleArrayTrie {
 		// 'next_check_pos' and 'check' is greater than some constant value
 		// (e.g. 0.9),
 		// new 'next_check_pos' index is written by 'check'.
-		if (1.0 * nonzero_num / (pos - nextCheckPos + 1) >= 0.95) {
-		    System.out.println("nonzero_num--------------:" + nonzero_num);
+		if (1.0 * nonzeroNum / (pos - nextCheckPos + 1) >= 0.95) {
+		    System.out.println("nonzero_num--------------:" + nonzeroNum);
 		    nextCheckPos = pos;
 		}
 
 		used[begin] = true;
 		
-		size = (size > begin + siblings.get(siblings.size() - 1).code + 1) 
-		        ? size
-				: begin + siblings.get(siblings.size() - 1).code + 1;
+		// 用于扩容
+//		size = (size > begin + lastSiblingCode + 1) 临时注释 
+//		        ? size
+//				: begin + lastSiblingCode + 1;
 
 		for (int i = 0; i < siblings.size(); i++) {
 		    check[begin + siblings.get(i).code] = begin;
@@ -351,10 +373,11 @@ public class DoubleArrayTrie {
 		return build(key, null, null, key.size());
 	}
 
-	public int build(List<String> _key, int _length[], int _value[],
-			int _keySize) {
-		if (_keySize > _key.size() || _key == null)
-			return 0;
+	public int build(List<String> _key, int _length[], int _value[], int _keySize) {
+
+	    if (_key == null || _keySize > _key.size()) {
+		    return 0;
+		}
 
 		// progress_func_ = progress_func;
 		key = _key;
@@ -369,14 +392,14 @@ public class DoubleArrayTrie {
 		nextCheckPos = 0;
 
 		// 初始化 root 节点
-		Node root_node = new Node();
-		root_node.left = 0;
+		Node rootNode = new Node();
+		rootNode.left = 0;
 		// 右边界的长度等于词组的长度
-		root_node.right = keySize;
-		root_node.depth = 0;
+		rootNode.right = keySize;
+		rootNode.depth = 0;
 
-		List<Node> siblings = new ArrayList<Node>();
-		fetch(root_node, siblings);
+		List<Node> siblings = new ArrayList<>();
+		fetch(rootNode, siblings);
 		insert(siblings);
 
 		// size += (1 << 8 * 2) + 1; // ???
