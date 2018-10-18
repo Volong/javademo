@@ -15,14 +15,6 @@
  */
 package github.io.volong.trie;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,8 +23,7 @@ import java.util.List;
  *
  */
 public class DoubleArrayTrie {
-	private final static int BUF_SIZE = 16384;
-	private final static int UNIT_SIZE = 8; // size of int + int
+	private static final int UNIT_SIZE = 8; // size of int + int
 
 	private static class Node {
 	    /**
@@ -54,12 +45,12 @@ public class DoubleArrayTrie {
 	};
 
 	/**
-	 * 验证当前节点的字符是否由同一个状态转移而来
+	 * 存储每个节点的起始索引位置，可以用来确定该节点是否存在
 	 */
 	private int check[];
 	
 	/**
-	 * 存储当前状态
+	 * 存储子节点的起始索引位置，可以通过这个找到子节点的位置
 	 */
 	private int base[];
 
@@ -67,10 +58,7 @@ public class DoubleArrayTrie {
 	 * 用来记录那个位置被使用
 	 */
 	private boolean used[];
-	/**
-	 * 词典的长度
-	 */
-	private int size;
+	
 	/**
 	 * 分配内存的大小
 	 */
@@ -86,20 +74,6 @@ public class DoubleArrayTrie {
 	private int length[];
 	private int value[];
 	
-	/**
-	 * 代表处理了多少个词组，即有多少个空节点
-	 */
-	private int progress;
-	
-	
-	public int getProgress() {
-        return progress;
-    }
-
-    public void setProgress(int progress) {
-        this.progress = progress;
-    }
-
     private int nextCheckPos;
 	// boolean no_delete_;
 	int error_;
@@ -160,7 +134,6 @@ public class DoubleArrayTrie {
 			if ((length != null ? length[i] : tmp.length()) != parent.depth) {
 			    // 某个节点的父节点的 depth 就代表了这个字在一个词中的位置
 			    char charAt = tmp.charAt(parent.depth);
-			    System.out.println(charAt + ":" + (int)charAt);
                 cur = (int) charAt + 1;
 			}
 			
@@ -217,28 +190,15 @@ public class DoubleArrayTrie {
 		// 实在是没有搞懂为什么 +1 又 -1 
         int pos = ((firstSiblingNode + 1)> nextCheckPos ? (firstSiblingNode + 1): nextCheckPos) - 1;
 		
-		int nonzeroNum = 0;
 		int first = 0;
 
-//		if (allocSize <= pos) {分配内存的临时注释
-//		    resize(pos + 1);
-//		}
-		// 最后一个兄弟节点
-		final int lastSiblingCode = siblings.get(siblings.size() - 1).code;
-		
         outer: while (true) {
 		    
             // 又加了一次 1
 			pos++;
 
-//			if (allocSize <= pos) { 分配内存的临时注释
-//			    resize(pos + 1);
-//			}
-
 			// 不等于 0 则表示当前位置已经被占用了
 			if (check[pos] != 0) {
-			    System.out.println("nonzeroNum:" + nonzeroNum);
-				nonzeroNum++;
 				continue;
 			} else if (first == 0) {
 			    // 记录下一个需要检查的位置
@@ -248,19 +208,12 @@ public class DoubleArrayTrie {
 			
 			begin = pos - siblings.get(0).code;
 			
-//			if (allocSize <= (begin + lastSiblingCode)) { 分配内存的临时注释
-//				// progress can be zero
-//				double l = (1.05 > 1.0 * keySize / (progress + 1)) 
-//				        ? 1.05 
-//		                : 1.0 * keySize / (progress + 1);
-//				resize((int) (allocSize * l));
-//			}
-			
 			if (used[begin]) {
 			    continue;
 			}
 
 			for (int i = 1; i < siblings.size(); i++) {
+			    // 这个位置已经有数据插入进去了
 			    if (check[begin + siblings.get(i).code] != 0) {
 			        continue outer;
 			    }
@@ -269,32 +222,18 @@ public class DoubleArrayTrie {
 			break;
 		}
 
-		// -- Simple heuristics --
-		// if the percentage of non-empty contents in check between the index
-		// 'next_check_pos' and 'check' is greater than some constant value
-		// (e.g. 0.9),
-		// new 'next_check_pos' index is written by 'check'.
-		if (1.0 * nonzeroNum / (pos - nextCheckPos + 1) >= 0.95) {
-		    System.out.println("nonzero_num--------------:" + nonzeroNum);
-		    nextCheckPos = pos;
-		}
-
 		used[begin] = true;
 		
-		// 用于扩容
-//		size = (size > begin + lastSiblingCode + 1) 临时注释 
-//		        ? size
-//				: begin + lastSiblingCode + 1;
-
 		for (int i = 0; i < siblings.size(); i++) {
+		    // 为所有的兄弟节点找到了一个开始位置 begin
 		    check[begin + siblings.get(i).code] = begin;
 		}
 
 		for (int i = 0; i < siblings.size(); i++) {
-			List<Node> new_siblings = new ArrayList<Node>();
+			List<Node> newSiblings = new ArrayList<>();
 			
 			// 获取子节点，如果没有子节点，则返回 0 
-			if (fetch(siblings.get(i), new_siblings) == 0) {
+			if (fetch(siblings.get(i), newSiblings) == 0) {
 			    
 			    // value 永远为空
 			    // 如果某个节点没有子节点，则将该节点对应的 base 设置为负
@@ -302,19 +241,16 @@ public class DoubleArrayTrie {
 				        (value != null) 
 				            ? (-value[siblings.get(i).left] - 1) 
 				            : (-siblings.get(i).left - 1);
-
-				if (value != null && (-value[siblings.get(i).left] - 1) >= 0) {
+				            
+	            if (value != null && (-value[siblings.get(i).left] - 1) >= 0) {
 					error_ = -2;
 					return 0;
 				}
 
-				progress++;
-				// if (progress_func_) (*progress_func_) (progress,
-				// keySize);
 			} else {
-			    // 获取下一层的兄弟节点
-				int h = insert(new_siblings);
-				base[begin + siblings.get(i).code] = h;
+			    // 获取下一层的兄弟节点的开始索引
+				int childBegin = insert(newSiblings);
+				base[begin + siblings.get(i).code] = childBegin;
 			}
 		}
 		return begin;
@@ -324,7 +260,6 @@ public class DoubleArrayTrie {
 		check = null;
 		base = null;
 		used = null;
-		size = 0;
 		allocSize = 0;
 		// no_delete_ = false;
 		error_ = 0;
@@ -345,28 +280,10 @@ public class DoubleArrayTrie {
 		base = null;
 		used = null;
 		allocSize = 0;
-		size = 0;
-		// no_delete_ = false;
 	}
 
 	public int getUnitSize() {
 		return UNIT_SIZE;
-	}
-
-	public int getSize() {
-		return size;
-	}
-
-	public int getTotalSize() {
-		return size * UNIT_SIZE;
-	}
-
-	public int getNonzeroSize() {
-		int result = 0;
-		for (int i = 0; i < size; i++)
-			if (check[i] != 0)
-				result++;
-		return result;
 	}
 
 	public int build(List<String> key) {
@@ -384,7 +301,6 @@ public class DoubleArrayTrie {
 		length = _length;
 		keySize = _keySize;
 		value = _value;
-		progress = 0;
 
 		resize(65536 * 32);
 		
@@ -399,53 +315,17 @@ public class DoubleArrayTrie {
 		rootNode.depth = 0;
 
 		List<Node> siblings = new ArrayList<>();
+		
 		fetch(rootNode, siblings);
+		
 		insert(siblings);
 
-		// size += (1 << 8 * 2) + 1; // ???
-		// if (size >= allocSize) resize (size);
-
-		used = null;
-		key = null;
-
+        used = null;
+        key = null;
+        
 		return error_;
 	}
 
-	public void open(String fileName) throws IOException {
-		File file = new File(fileName);
-		size = (int) file.length() / UNIT_SIZE;
-		check = new int[size];
-		base = new int[size];
-
-		DataInputStream is = null;
-		try {
-			is = new DataInputStream(new BufferedInputStream(
-					new FileInputStream(file), BUF_SIZE));
-			for (int i = 0; i < size; i++) {
-				base[i] = is.readInt();
-				check[i] = is.readInt();
-			}
-		} finally {
-			if (is != null)
-				is.close();
-		}
-	}
-
-	public void save(String fileName) throws IOException {
-		DataOutputStream out = null;
-		try {
-			out = new DataOutputStream(new BufferedOutputStream(
-					new FileOutputStream(fileName)));
-			for (int i = 0; i < size; i++) {
-				out.writeInt(base[i]);
-				out.writeInt(check[i]);
-			}
-			out.close();
-		} finally {
-			if (out != null)
-				out.close();
-		}
-	}
 
 	public int exactMatchSearch(String key) {
 		return exactMatchSearch(key, 0, 0, 0);
@@ -524,15 +404,4 @@ public class DoubleArrayTrie {
 		return result;
 	}
 
-	// debug
-	public void dump() {
-		for (int i = 0; i < size; i++) {
-			System.err.println("i: " + i + " [" + base[i] + ", " + check[i]
-					+ "]");
-		}
-	}
-	
-	public static void main(String[] args) {
-
-	}
 }

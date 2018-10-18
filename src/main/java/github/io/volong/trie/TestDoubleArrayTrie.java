@@ -37,30 +37,26 @@ public class TestDoubleArrayTrie {
         // }
         System.out.println("字典词条：" + words.size());
 
-        {
-            String infoCharsetValue = "";
-            String infoCharsetCode = "";
-            for (Character c : charset) {
-                infoCharsetValue += c.charValue() + "    ";
-                infoCharsetCode += (int) c.charValue() + " ";
-            }
-            infoCharsetValue += '\n';
-            infoCharsetCode += '\n';
-            System.out.print(infoCharsetValue);
-            System.out.print(infoCharsetCode);
+        String infoCharsetValue = "";
+        String infoCharsetCode = "";
+        for (Character c : charset) {
+            infoCharsetValue += c.charValue() + "           ";
+            infoCharsetCode += (int) c.charValue() + " ";
         }
+        infoCharsetValue += '\n';
+        infoCharsetCode += '\n';
+        System.out.print(infoCharsetValue);
+        System.out.print(infoCharsetCode);
         
         System.out.println("-----------------");
         
         DoubleArrayTrie dat = new DoubleArrayTrie();
         System.out.println("是否错误: " + dat.build(words));
-        System.out.println("progress:" + dat.getProgress());
+        
         List<Integer> integerList = dat.commonPrefixSearch("一举一动");
         for (int index : integerList) {
             System.out.println(words.get(index));
         }
         
-//        System.out.println("dump:");
-//        dat.dump();
     }
 }
