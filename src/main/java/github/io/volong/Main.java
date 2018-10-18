@@ -6,7 +6,7 @@ public class Main {
 
 	public static void main(String[] args) throws InterruptedException {
 		
-		System.out.println((8 > 1) ? 1 << 6 : 0);
+		System.out.println((8 > 1) ? 1 << 16 : 0);
 		
 		StampedLock lock = new StampedLock();
 		
