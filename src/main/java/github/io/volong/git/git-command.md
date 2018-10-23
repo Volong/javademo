@@ -130,5 +130,12 @@
 
     `git branch --set-upstream-to=origin/<branch> <branch>`
 
-27. 
+27. 打标签
 
+    `git tag <name>`
+
+28. 对某一次提交打标签
+
+    `git tag <name> <commitid>`
+
+29. 
