@@ -138,4 +138,27 @@
 
     `git tag <name> <commitid>`
 
-29. 
+29. 查看所有的标签
+
+    `git tag`
+
+30. 查看具体的标签
+
+    `git show <tagname>`
+
+31. 删除本地标签
+
+    `git tag -d <tagname>`
+
+32. 推送标签到远程
+
+    `git push origin <tagname>`
+
+33. 推送所有未推送的标签到远程
+
+    `git push origin --tags`
+
+34. 删除远程标签
+
+    先删除本地标签，再执行 `git push origin :refs/tags/<tagname>`
+
