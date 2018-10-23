@@ -26,8 +26,6 @@
 
    `git reset --hard HEAD^^` 退回到上上次提交。依此类推。
 
-
-
    `git reset --hard HEAD~n` 退回 `n` 次提交
 
    `git reset --hard commit-id`   退回到指定的 `commit-id` 处
@@ -102,4 +100,35 @@
 
     `git branch -d <branch>`
 
-20. 
+20. 强行删除分支
+
+    `git branch -D <branch>`
+
+21. 暂存文件
+
+    `git stash`
+
+22. 查看暂存文件列表
+
+    `git stash list`
+
+23. 恢复暂存文件
+
+    `git stash apply <stash>`
+
+    >   恢复之后需要进行手动删除
+
+24. 在恢复的同时删除暂存文件
+
+    `git stash pop`
+
+25. 删除暂存文件
+
+    `git stash drop <stash>`
+
+26. 将本地分支与远程分支进行关联
+
+    `git branch --set-upstream-to=origin/<branch> <branch>`
+
+27. 
+
