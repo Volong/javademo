@@ -72,6 +72,12 @@
 
     `git clone <giturl>`
 
+    >   将生成跟远程仓库同名的文件夹
+
+    `git clone <giturl> <dir>`
+
+    >   将仓库放在指定的文件夹中
+
 14. 新建分支
 
     `git branch <branch>`
@@ -99,6 +105,8 @@
 19. 删除分支
 
     `git branch -d <branch>`
+
+    >   在没有 `push` 的情况下 (做了 `add` 或者 `commit` 操作)，不能进行删除，但是可以强制删除。
 
 20. 强行删除分支
 
