@@ -2,23 +2,41 @@
 
    `git init`
 
-2. 将文件添加到仓库
+2. 将文件添加到暂存区
 
    `git add <file>`
 
-3. 将文件提交到仓库
+3. 将文件提交到版本库
 
    `git commit -m <message>`
 
-4. 查看仓库当前的状态
+4. 重新提交
+
+   `git commit --amend -m <message>`
+
+   >   在发现提交信息写错了或者某些文件忘记添加的情况下使用
+
+5. 查看仓库当前的状态
 
    `git status`
 
-5. 查看文件的改动
+6. 查看文件的改动
 
    `git diff`
 
-6. 版本回退
+   >   比较的是工作区与暂存区的差异
+
+   `git diff <commitid>`
+
+   >   比较工作区与某次提交的差异
+
+   `git diff [--staged | --cached]`
+
+   >   比较暂存区与上一次提交的差异
+   >
+   >   加了 `<commitid>` 可以比较与某一个提交的差异 
+
+7. 版本回退
 
    `HEAD` 表示当前版本
 
@@ -30,23 +48,39 @@
 
    `git reset --hard commit-id`   退回到指定的 `commit-id` 处
 
-7. 查看提交历史
+8. 查看提交历史
 
    `git log`
 
-8. 查看操作历史
+   >   --pretty=online    提交信息只显示一行
+   >
+   >   --abbrev-commit 显示 commitid 的缩写
+   >
+   >   -p (--patch 的缩写)显示详细信息
+   >
+   >   --stat 显示统计信息
+
+9. 查看操作历史
 
    `git reflog`
 
-9. 丢弃工作区的修改
+10. 查看当前提交的改动
+
+    `git show`
+
+11. 查看任意提交的改动
+
+    `git show <commitid>`
+
+12. 丢弃工作区的修改
 
    `git checkout -- <file>`
 
-10. 丢弃暂存区的修改
+11. 丢弃暂存区的修改
 
     `git reset HEAD <file>`
 
-11. 删除文件
+12. 删除文件
 
     `rm <file> ` 或者在文件管理器中进行删除，则只是把文件从工作区删除了，但是在暂存区中还存在。
 
@@ -56,7 +90,7 @@
 
     使用 `git reset HEAD <file>` 将文件从暂存区恢复。
 
-12. 先有本地仓库，后有远程仓库的情况下，将本地仓库与远程仓库关联起来
+13. 先有本地仓库，后有远程仓库的情况下，将本地仓库与远程仓库关联起来
 
     `git remote add origin <giturl>` 
 
@@ -68,7 +102,7 @@
 
     >   第一次推送时的操作，后续的推送直接使用 `git push` 就可以了。
 
-13. 从已存在的远程仓库进行克隆
+14. 从已存在的远程仓库进行克隆
 
     `git clone <giturl>`
 
@@ -78,23 +112,27 @@
 
     >   将仓库放在指定的文件夹中
 
-14. 新建分支
+15. 新建分支
 
     `git branch <branch>`
 
-15. 切换分支
+16. 切换分支
 
     `git checkout <branch>`
 
-16. 新建并切换分支
+17. 新建并切换分支
 
     `git checkout -b <branch>`
 
-17. 将指定分支合并到当前分支
+18. 将指定分支合并到当前分支
 
     `git merge <branch>`
 
-18. 查看分支本地分支
+19. 取消合并
+
+    `git merge --abort`
+
+11. 查看分支本地分支
 
     `git branch`
 
@@ -102,71 +140,71 @@
     >
     >   `-a` 表示查看本地与远程分支
 
-19. 删除分支
+12. 删除分支
 
     `git branch -d <branch>`
 
     >   在没有 `push` 的情况下 (做了 `add` 或者 `commit` 操作)，不能进行删除，但是可以强制删除。
 
-20. 强行删除分支
+13. 强行删除分支
 
     `git branch -D <branch>`
 
-21. 暂存文件
+14. 暂存文件
 
     `git stash`
 
-22. 查看暂存文件列表
+15. 查看暂存文件列表
 
     `git stash list`
 
-23. 恢复暂存文件
+16. 恢复暂存文件
 
     `git stash apply <stash>`
 
     >   恢复之后需要进行手动删除
 
-24. 在恢复的同时删除暂存文件
+17. 在恢复的同时删除暂存文件
 
     `git stash pop`
 
-25. 删除暂存文件
+18. 删除暂存文件
 
     `git stash drop <stash>`
 
-26. 将本地分支与远程分支进行关联
+19. 将本地分支与远程分支进行关联
 
     `git branch --set-upstream-to=origin/<branch> <branch>`
 
-27. 打标签
+20. 打标签
 
     `git tag <name>`
 
-28. 对某一次提交打标签
+21. 对某一次提交打标签
 
     `git tag <name> <commitid>`
 
-29. 查看所有的标签
+22. 查看所有的标签
 
     `git tag`
 
-30. 查看具体的标签
+23. 查看具体的标签
 
     `git show <tagname>`
 
-31. 删除本地标签
+24. 删除本地标签
 
     `git tag -d <tagname>`
 
-32. 推送标签到远程
+25. 推送标签到远程
 
     `git push origin <tagname>`
 
-33. 推送所有未推送的标签到远程
+26. 推送所有未推送的标签到远程
 
     `git push origin --tags`
 
-34. 删除远程标签
+27. 删除远程标签
 
     先删除本地标签，再执行 `git push origin :refs/tags/<tagname>`
 
