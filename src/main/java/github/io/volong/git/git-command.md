@@ -48,7 +48,13 @@
 
    `git reset --hard commit-id`   退回到指定的 `commit-id` 处
 
-8. 查看提交历史
+   >   `reset --hard` 会重置工作区与暂存区中的内容。
+   >
+   >   `reset --soft` 会保留工作区与暂存区中的内容，并把文件之间的差异放进暂存区。
+   >
+   >   `reset ` 不加参数表示默认使用 `--mixed`，会保留工作区，但是会清空暂存区，并把文件之间的差异放进工作区。
+
+1. 查看提交历史
 
    `git log`
 
@@ -60,21 +66,21 @@
    >
    >   --stat 显示统计信息
 
-9. 查看操作历史
+2. 查看操作历史
 
    `git reflog`
 
-10. 查看当前提交的改动
+3. 查看当前提交的改动
 
     `git show`
 
-11. 查看任意提交的改动
+4. 查看任意提交的改动
 
     `git show <commitid>`
 
-12. 丢弃工作区的修改
+5. 丢弃工作区的修改
 
-   `git checkout -- <file>`
+    `git checkout -- <file>`
 
 11. 丢弃暂存区的修改
 
@@ -124,21 +130,25 @@
 
     `git checkout -b <branch>`
 
-18. 将指定分支合并到当前分支
+18. 将 `HEAD` 与当前分支进行分离
+
+    `git checkout --detach`
+
+19. 将指定分支合并到当前分支
 
     `git merge <branch>`
 
-19. 取消合并
+20. 取消合并
 
     `git merge --abort`
 
-20. 变基
+21. 变基
 
     `git rebase <commit>`
 
     >    将指定的 `commit` 之前的提交在当前分支上重新提交一遍。
 
-21. 交互式变基
+22. 交互式变基
 
     `git rebase -i <commit>`
 
@@ -162,61 +172,80 @@
 
     `git branch -D <branch>`
 
-14. 暂存文件
+14. 隐藏文件
 
     `git stash`
 
-15. 查看暂存文件列表
+    >   临时隐藏工作区文件的改动。默认情况下，没有被追踪的文件不会被隐藏。
+    >
+    >   `-u` 被追踪的文件也隐藏。
+
+15. 隐藏文件的时候添加备注信息
+
+    `git stash save -m <message>`
+
+16. 隐藏文件的时候隐藏
+
+17. 查看隐藏文件列表
 
     `git stash list`
 
-16. 恢复暂存文件
+18. 恢复隐藏文件
 
     `git stash apply <stash>`
 
     >   恢复之后需要进行手动删除
 
-17. 在恢复的同时删除暂存文件
+19. 在恢复的同时删除隐藏文件
 
     `git stash pop`
 
-18. 删除暂存文件
+20. 删除某个隐藏文件
 
     `git stash drop <stash>`
 
-19. 将本地分支与远程分支进行关联
+21. 清空隐藏的文件
+
+    `git stash clear`
+
+22. 将本地分支与远程分支进行关联
 
     `git branch --set-upstream-to=origin/<branch> <branch>`
 
-20. 打标签
+23. 打标签
 
     `git tag <name>`
 
-21. 对某一次提交打标签
+24. 对某一次提交打标签
 
     `git tag <name> <commitid>`
 
-22. 查看所有的标签
+25. 查看所有的标签
 
     `git tag`
 
-23. 查看具体的标签
+26. 查看具体的标签
 
     `git show <tagname>`
 
-24. 删除本地标签
+27. 删除本地标签
 
     `git tag -d <tagname>`
 
-25. 推送标签到远程
+28. 推送标签到远程
 
     `git push origin <tagname>`
 
-26. 推送所有未推送的标签到远程
+29. 推送所有未推送的标签到远程
 
     `git push origin --tags`
 
-27. 删除远程标签
+30. 删除远程标签
 
     先删除本地标签，再执行 `git push origin :refs/tags/<tagname>`
+
+31. 撤销提交
+
+    `git revert <commitid>`
+
 
