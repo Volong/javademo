@@ -132,6 +132,18 @@
 
     `git merge --abort`
 
+20. 变基
+
+    `git rebase <commit>`
+
+    >    将指定的 `commit` 之前的提交在当前分支上重新提交一遍。
+
+21. 交互式变基
+
+    `git rebase -i <commit>`
+
+    >   可以用来修改或者删除指定的 `commit`
+
 11. 查看分支本地分支
 
     `git branch`
