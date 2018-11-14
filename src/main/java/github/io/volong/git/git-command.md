@@ -1,10 +1,14 @@
 1. 初始化仓库
 
-   `git init`
+   `git init` 在当前文件夹中进行初始化
+
+   `git init <dir>` 在指定文件夹中进行初始化
 
 2. 将文件添加到暂存区
 
-   `git add <file>`
+   `git add <file>..` 添加指定的文件，多个文件可以使用空格进行分隔
+
+   `git add .` 添加所有的文件
 
 3. 将文件提交到版本库
 
@@ -54,7 +58,7 @@
    >
    >   `reset ` 不加参数表示默认使用 `--mixed`，会保留工作区，但是会清空暂存区，并把文件之间的差异放进工作区。
 
-1. 查看提交历史
+8. 查看提交历史
 
    `git log`
 
@@ -66,186 +70,186 @@
    >
    >   --stat 显示统计信息
 
-2. 查看操作历史
+9. 查看操作历史
 
    `git reflog`
 
-3. 查看当前提交的改动
+10. 查看当前提交的改动
 
     `git show`
 
-4. 查看任意提交的改动
+11. 查看任意提交的改动
 
-    `git show <commitid>`
+     `git show <commitid>`
 
-5. 丢弃工作区的修改
+12. 丢弃工作区的修改
 
-    `git checkout -- <file>`
+     `git checkout -- <file>`
 
-11. 丢弃暂存区的修改
+13. 丢弃暂存区的修改
 
-    `git reset HEAD <file>`
+     `git reset HEAD <file>`
 
-12. 删除文件
+14. 删除文件
 
-    `rm <file> ` 或者在文件管理器中进行删除，则只是把文件从工作区删除了，但是在暂存区中还存在。
+     `rm <file> ` 或者在文件管理器中进行删除，则只是把文件从工作区删除了，但是在暂存区中还存在。
 
-    使用 `git checkout -- <file>` 可以恢复删除的文件。
+     使用 `git checkout -- <file>` 可以恢复删除的文件。
 
-    `git rm <file>` 表示把文件从工作区与暂存区都删除了。
+     `git rm <file>` 表示把文件从工作区与暂存区都删除了。
 
-    使用 `git reset HEAD <file>` 将文件从暂存区恢复。
+     使用 `git reset HEAD <file>` 将文件从暂存区恢复。
 
-13. 先有本地仓库，后有远程仓库的情况下，将本地仓库与远程仓库关联起来
+15. 先有本地仓库，后有远程仓库的情况下
 
-    `git remote add origin <giturl>` 
+     先将本地仓库与远程仓库关联起来：
+     `git remote add origin <giturl>` 
 
-    `git push -u origin master` 
+     再进行推送：
+     `git push -u origin master`  或者 `git push --set-upstream origin <branch>`
 
-    或者
+     >   第一次推送时的操作，后续的推送直接使用 `git push` 就可以了。
+     >
+     >   origin 是对远程仓库的命名。一般为这个，也可以改成其他的名字。
 
-    `git push --set-upstream origin <branch>`
+16. 从已存在的远程仓库进行克隆
 
-    >   第一次推送时的操作，后续的推送直接使用 `git push` 就可以了。
+     `git clone <giturl>`
 
-14. 从已存在的远程仓库进行克隆
+     >   将生成跟远程仓库同名的文件夹
 
-    `git clone <giturl>`
+     `git clone <giturl> <dir>`
 
-    >   将生成跟远程仓库同名的文件夹
+     >   将仓库放在指定的文件夹中
 
-    `git clone <giturl> <dir>`
+17. 新建分支
 
-    >   将仓库放在指定的文件夹中
+     `git branch <branch>`
 
-15. 新建分支
+18. 切换分支
 
-    `git branch <branch>`
+     `git checkout <branch>`
 
-16. 切换分支
+19. 新建并切换分支
 
-    `git checkout <branch>`
+     `git checkout -b <branch>`
 
-17. 新建并切换分支
+20. 将 `HEAD` 与当前分支进行分离
 
-    `git checkout -b <branch>`
+     `git checkout --detach`
 
-18. 将 `HEAD` 与当前分支进行分离
+21. 将指定分支合并到当前分支
 
-    `git checkout --detach`
+     `git merge <branch>`
 
-19. 将指定分支合并到当前分支
+22. 取消合并
 
-    `git merge <branch>`
+     `git merge --abort`
 
-20. 取消合并
+23. 变基
 
-    `git merge --abort`
+     `git rebase <commit>`
 
-21. 变基
+     >    将指定的 `commit` 之前的提交在当前分支上重新提交一遍。
 
-    `git rebase <commit>`
+24. 交互式变基
 
-    >    将指定的 `commit` 之前的提交在当前分支上重新提交一遍。
+     `git rebase -i <commit>`
 
-22. 交互式变基
+     >   可以用来修改或者删除指定的 `commit`
 
-    `git rebase -i <commit>`
+25. 查看分支本地分支
 
-    >   可以用来修改或者删除指定的 `commit`
+     `git branch`
 
-11. 查看分支本地分支
+     >   `-r` 表示查看远程分支
+     >
+     >   `-a` 表示查看本地与远程分支
 
-    `git branch`
+26. 删除分支
 
-    >   `-r` 表示查看远程分支
-    >
-    >   `-a` 表示查看本地与远程分支
+     `git branch -d <branch>`
 
-12. 删除分支
+     >   在没有 `push` 的情况下 (做了 `add` 或者 `commit` 操作)，不能进行删除，但是可以强制删除。
 
-    `git branch -d <branch>`
+27. 强行删除分支
 
-    >   在没有 `push` 的情况下 (做了 `add` 或者 `commit` 操作)，不能进行删除，但是可以强制删除。
+     `git branch -D <branch>`
 
-13. 强行删除分支
+28. 隐藏文件
 
-    `git branch -D <branch>`
+     `git stash`
 
-14. 隐藏文件
+     >   临时隐藏工作区文件的改动。默认情况下，没有被追踪的文件不会被隐藏。
+     >
+     >   `-u` 被追踪的文件也隐藏。
 
-    `git stash`
+29. 隐藏文件的时候添加备注信息
 
-    >   临时隐藏工作区文件的改动。默认情况下，没有被追踪的文件不会被隐藏。
-    >
-    >   `-u` 被追踪的文件也隐藏。
+     `git stash save -m <message>`
 
-15. 隐藏文件的时候添加备注信息
+30. 隐藏文件的时候隐藏
 
-    `git stash save -m <message>`
+31. 查看隐藏文件列表
 
-16. 隐藏文件的时候隐藏
+     `git stash list`
 
-17. 查看隐藏文件列表
+32. 恢复隐藏文件
 
-    `git stash list`
+     `git stash apply <stash>`
 
-18. 恢复隐藏文件
+     >   恢复之后需要进行手动删除
 
-    `git stash apply <stash>`
+33. 在恢复的同时删除隐藏文件
 
-    >   恢复之后需要进行手动删除
+     `git stash pop`
 
-19. 在恢复的同时删除隐藏文件
+34. 删除某个隐藏文件
 
-    `git stash pop`
+     `git stash drop <stash>`
 
-20. 删除某个隐藏文件
+35. 清空隐藏的文件
 
-    `git stash drop <stash>`
+     `git stash clear`
 
-21. 清空隐藏的文件
+36. 将本地分支与远程分支进行关联
 
-    `git stash clear`
+     `git branch --set-upstream-to=origin/<branch> <branch>`
 
-22. 将本地分支与远程分支进行关联
+37. 打标签
 
-    `git branch --set-upstream-to=origin/<branch> <branch>`
+     `git tag <name>`
 
-23. 打标签
+38. 对某一次提交打标签
 
-    `git tag <name>`
+     `git tag <name> <commitid>`
 
-24. 对某一次提交打标签
+39. 查看所有的标签
 
-    `git tag <name> <commitid>`
+     `git tag`
 
-25. 查看所有的标签
+40. 查看具体的标签
 
-    `git tag`
+     `git show <tagname>`
 
-26. 查看具体的标签
+41. 删除本地标签
 
-    `git show <tagname>`
+     `git tag -d <tagname>`
 
-27. 删除本地标签
+42. 推送标签到远程
 
-    `git tag -d <tagname>`
+     `git push origin <tagname>`
 
-28. 推送标签到远程
+43. 推送所有未推送的标签到远程
 
-    `git push origin <tagname>`
+     `git push origin --tags`
 
-29. 推送所有未推送的标签到远程
+44. 删除远程标签
 
-    `git push origin --tags`
+     先删除本地标签，再执行 `git push origin :refs/tags/<tagname>`
 
-30. 删除远程标签
+45. 撤销提交
 
-    先删除本地标签，再执行 `git push origin :refs/tags/<tagname>`
-
-31. 撤销提交
-
-    `git revert <commitid>`
+     `git revert <commitid>`
 
 
