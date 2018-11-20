@@ -82,3 +82,27 @@ git clone https://github.com/libgit2/libgit2 mylibgit
 
 该命令会在当前目录下创建一个名为 "mylibgit" 的文件夹。
 
+### 状态简览
+
+使用 `git status -s` 可以看到更加简单的状态输出信息。
+
+> `-s` 为 `--short` 的缩写
+
+```bash
+$ git status -s
+M README
+MM Rakefile
+A lib/git.rb
+M lib/simplegit.rb
+?? LICENSE.txt
+```
+
+新添加的未跟踪文件前面有 `??` 标记。
+新添加到暂存区的文件前面有 `A` 标记。
+修改过的文件前面有 `M` 标记。
+有两个 `MM` 的地方，右边的 `M` 表示该文件被修改了但是还没有放入暂存区，左边的 `M` 表示该文件被修改了并放入了暂存区。
+
+> 虽然在工作区被修改后提交到了暂存区，但是之后又在工作区被修改了并且还没有被提交到暂存区
+
+### 忽略文件
+
