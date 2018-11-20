@@ -62,5 +62,23 @@ git init
 
 ### 克隆现有的仓库
 
+使用如下命令进行克隆：
 
+```git
+git clone [url]
+```
+
+例：
+
+```bash
+git clone https://github.com/libgit2/libgit2
+```
+
+该命令会在当前目录下创建一个名为 "libgit2" 的文件夹。
+
+```bash
+git clone https://github.com/libgit2/libgit2 mylibgit
+```
+
+该命令会在当前目录下创建一个名为 "mylibgit" 的文件夹。
 
