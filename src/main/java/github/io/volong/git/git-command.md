@@ -252,4 +252,7 @@
 
      `git revert <commitid>`
 
+46. 更新 Git bash
+
+    `git update-git-for-windows`
 
