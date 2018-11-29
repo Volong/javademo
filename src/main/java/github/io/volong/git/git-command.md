@@ -248,9 +248,11 @@
 
      先删除本地标签，再执行 `git push origin :refs/tags/<tagname>`
 
-45. 撤销提交
+45. 撤销本次的更改
 
      `git revert <commitid>`
+
+    > 会产生一条提交记录
 
 46. 更新 Git bash
 
@@ -260,5 +262,6 @@
 
     `git cherry-pick <commitid>...`
 
-48. 
+48. 将指定分支切换到某次提交上
 
+    `git branch -f <branch> <commitid>`
