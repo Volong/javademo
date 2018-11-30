@@ -258,8 +258,10 @@
 
     `git update-git-for-windows`
 
-47. 将指定分支切换到某次提交上
+47. 将某些提交合并到当前分支
+
+    `git cherry-pick <commitid>...`
+
+48. 将指定分支切换到某次提交上
 
     `git branch -f <branch> <commitid>`
-
-48. 
