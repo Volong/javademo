@@ -124,7 +124,7 @@
 
 17. 新建分支
 
-     `git branch <branch>`
+     `git branch <branch>` 或 `git fetch origin :<branch-name>`
 
     在当前提交上创建分支
 
@@ -172,17 +172,21 @@
      >
      >   `-a` 表示查看本地与远程分支
 
-26. 删除分支
+26. 删除本地分支
 
      `git branch -d <branch>`
 
      >   在没有 `push` 的情况下 (做了 `add` 或者 `commit` 操作)，不能进行删除，但是可以强制删除。
 
-27. 强行删除分支
+27. 强行删除本地分支
 
      `git branch -D <branch>`
 
-28. 隐藏文件
+28. 删除远程分支
+
+    `git push origin :<branch-name>`
+
+29. 隐藏文件
 
      `git stash`
 
@@ -190,86 +194,86 @@
      >
      >   `-u` 被追踪的文件也隐藏。
 
-29. 隐藏文件的时候添加备注信息
+30. 隐藏文件的时候添加备注信息
 
      `git stash save -m <message>`
 
-30. 隐藏文件的时候隐藏
+31. 隐藏文件的时候隐藏
 
-31. 查看隐藏文件列表
+32. 查看隐藏文件列表
 
      `git stash list`
 
-32. 恢复隐藏文件
+33. 恢复隐藏文件
 
      `git stash apply <stash>`
 
      >   恢复之后需要进行手动删除
 
-33. 在恢复的同时删除隐藏文件
+34. 在恢复的同时删除隐藏文件
 
      `git stash pop`
 
-34. 删除某个隐藏文件
+35. 删除某个隐藏文件
 
      `git stash drop <stash>`
 
-35. 清空隐藏的文件
+36. 清空隐藏的文件
 
      `git stash clear`
 
-36. 将本地分支与远程分支进行关联
+37. 将本地分支与远程分支进行关联
 
      `git branch --set-upstream-to=origin/<branch> <branch>`
 
-37. 打标签
+38. 打标签
 
      `git tag <name>`
 
     >   默认对当前的提交打标签
 
-38. 对某一次提交打标签
+39. 对某一次提交打标签
 
      `git tag <name> <commitid>`
 
-39. 查看所有的标签
+40. 查看所有的标签
 
      `git tag`
 
-40. 查看具体的标签
+41. 查看具体的标签
 
      `git show <tagname>`
 
-41. 删除本地标签
+42. 删除本地标签
 
      `git tag -d <tagname>`
 
-42. 推送标签到远程
+43. 推送标签到远程
 
      `git push origin <tagname>`
 
-43. 推送所有未推送的标签到远程
+44. 推送所有未推送的标签到远程
 
      `git push origin --tags`
 
-44. 删除远程标签
+45. 删除远程标签
 
      先删除本地标签，再执行 `git push origin :refs/tags/<tagname>`
 
-45. 撤销本次的更改
+46. 撤销本次的更改
 
      `git revert <commitid>`
 
     > 会产生一条提交记录
 
-46. 更新 Git bash
+47. 更新 Git bash
 
     `git update-git-for-windows`
 
-47. 将某些提交合并到当前分支
+48. 将某些提交合并到当前分支
 
     `git cherry-pick <commitid>...`
 
-48. 将指定分支切换到某次提交上
+49. 将指定分支切换到某次提交上
 
     `git branch -f <branch> <commitid>`
