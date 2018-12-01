@@ -126,6 +126,12 @@
 
      `git branch <branch>`
 
+    在当前提交上创建分支
+
+     `git branch <branch> <commitid>`
+
+    在指定提交上创建分支
+
 18. 切换分支
 
      `git checkout <branch>`
@@ -219,6 +225,8 @@
 37. 打标签
 
      `git tag <name>`
+
+    >   默认对当前的提交打标签
 
 38. 对某一次提交打标签
 
