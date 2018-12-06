@@ -34,3 +34,6 @@
 
 [算法第四版](https://github.com/Volong/javademo/blob/master/src/main/java/github/io/volong/algorithm/doc/%E7%AE%97%E6%B3%95%E7%AC%AC%E5%9B%9B%E7%89%88.md)
 
+## 搜索相关
+
+[理解 SolrCloud 的事务日志、软提交和硬提交](https://hacpai.com/article/1489704451481)  
