@@ -58,8 +58,6 @@
    >
    >   `reset ` 不加参数表示默认使用 `--mixed`，会保留工作区，但是会清空暂存区，并把文件之间的差异放进工作区。
 
-   `git reset --hard ORIG_HEAD` 回退到 `reset` 前的状态
-
 8. 查看提交历史
 
    `git log`
@@ -100,9 +98,10 @@
 
     >   该文件需要被追踪才可以被删除
 
-    `git rm --cached <file>` 从暂存区删除文件。
+    `git rm --cached <file>` 
+    从暂存区删除文件。Git 将不会追踪该文件。
 
-     使用 `git reset HEAD <file>` 将文件从暂存区恢复。
+    使用 `git reset HEAD <file>` 将文件从暂存区恢复。
 
 15. 先有本地仓库，后有远程仓库的情况下
 
@@ -188,7 +187,8 @@
 
 28. 删除远程分支
 
-    `git push origin :<branch-name>`
+    `git push origin :<branch-name>` 或
+    `git push orign -d <branch-name>`
 
 29. 隐藏文件
 
@@ -266,7 +266,8 @@
 
 45. 删除远程标签
 
-     先删除本地标签，再执行 `git push origin :refs/tags/<tagname>`
+    `git push origin :refs/tags/<tagname>` 或
+    `git push origin -d <tagname>`
 
 46. 撤销本次的更改
 
@@ -293,3 +294,20 @@
     >   `-d` 表示移除文件夹
     >
     >   `-f` 表示强制
+
+51. 停止追踪远程仓库
+
+    `git branch --unset-upstream`
+
+52. 解除远程仓库的关联
+
+    `git remote remove origin`
+
+53. 查看远程仓库的信息
+
+    `git remote`
+
+    >   `-v` 显示仓库对应的 URL
+
+54. 
+
