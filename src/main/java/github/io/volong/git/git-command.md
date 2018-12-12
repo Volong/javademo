@@ -106,7 +106,9 @@
 15. 先有本地仓库，后有远程仓库的情况下
 
      先将本地仓库与远程仓库关联起来：
-     `git remote add origin <giturl>` 
+     `git remote add <shortname:origin><giturl>` 
+
+    >   默认名字为 origin
 
      再进行推送：
      `git push -u origin master`  或者 `git push --set-upstream origin <branch>`
