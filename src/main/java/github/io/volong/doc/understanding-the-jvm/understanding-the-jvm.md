@@ -28,6 +28,7 @@ Java 虚拟机所管理的内存将会包括一下几个运行时数据区域：
 
 >   基本数据类型 : boolean、byte、char、short、int、float、long、double  
 >   对象应用 : reference 类型，它不等同于对象本身，可能是一个指向对象起始地址的引用指针，也可能是指向
+>
 >   ​                  一个代表对象的句柄或其它与此对象相关的位置。                   	    
 >   `returnAddress` 类型 : 指向一条字节码指令的地址。
 
