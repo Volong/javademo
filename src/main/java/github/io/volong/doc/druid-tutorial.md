@@ -167,3 +167,11 @@ Druid 支持的列类型为：`String`、`Long`、`Float`、`Double`。
 
 
 
+---
+
+### 时间序列查询
+
+
+
+
+
