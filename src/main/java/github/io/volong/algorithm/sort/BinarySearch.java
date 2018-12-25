@@ -4,7 +4,7 @@ public class BinarySearch {
 
     public static void main(String[] args) {
 
-        int srcArray[] = { 3, 5, 11, 17, 21, 23, 28, 30, 32, 50, 64, 78, 81, 95, 101 };
+        int[] srcArray = { 3, 5, 11, 17, 21, 23, 28, 30, 32, 50, 64, 78, 81, 95, 101 };
         
         int target = 30;
         
