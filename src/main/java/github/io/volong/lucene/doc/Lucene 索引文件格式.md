@@ -1,8 +1,3 @@
----
-title: Lucene 索引文件格式
-date: 2018-07-06 14:54
-
----
 
 >   翻译自：[Index File Formats](https://lucene.apache.org/core/3_6_2/fileformats.html#Index%20File%20Formats)
 
