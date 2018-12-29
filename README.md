@@ -37,6 +37,7 @@
 ## 搜索相关
 
 [理解 SolrCloud 的事务日志、软提交和硬提交](https://hacpai.com/article/1489704451481)  
+[优化 Solr 的索引](https://github.com/Volong/javademo/blob/master/src/main/java/github/io/volong/doc/%E4%BC%98%E5%8C%96%20solr%20%E7%9A%84%E7%B4%A2%E5%BC%95.md)
 
 ### JVM
 [深入理解 Java 虚拟机](https://github.com/Volong/javademo/blob/master/src/main/java/github/io/volong/doc/understanding-the-jvm/understanding-the-jvm.md)
