@@ -427,3 +427,12 @@ ParNew 收集器相当于 Serial 收集器的多线程版本，除了使用多�
 >   ParNew 收集器的工作过程
 
 ![ParNew 收集器的工作过程](images/ParNew-collector.png)
+
+ParNew 收集器是许多运行在 Server 模式下的虚拟机中首选的新生代收集器，其中有一个与性能无关但是很重要的原因是，除了 Serial 收集器外，目前只有它能与 CMS 收集器配合工作。
+
+ParNew 收集器在单 CPU 的环境中不会比 Serial 收集器有更好的效果，甚至由于存在线程交互的开销，在通过超线程技术实现的两个 CPU 的环境中不能百分之百的保证可以超越 Serial 收集器。但是随着可以使用的 CPU 数量的增加，它对于 GC 时系统资源的有效利用还是有好处的。
+
+ParNew 收集器默认开启的收集线程数与 CPU 的数量相同，可以通过 `-XX:ParallelGCThreads` 来限制垃圾收集的线程数。
+
+#### 3.5.3 Parallel Scavenge 收集器
+
