@@ -453,5 +453,25 @@ Parallel Scavenge 收集器提供了两个参数来精确控制吞吐量。
 
     >   如果此参数的值为 19，那允许的最大 GC 时间就占总时间的 5%
 
-Parallel Scavenge 收集器可以通过一个开关参数 `-XX:+UseAdaptiveSizePolicy` 来动态调整新生代的大小、Eden 和 Survivor 区的比例，晋升老年代对象年龄等参数。这种调节方式成为**GC 自适应的调节策略（GC Ergonomics）**。
+Parallel Scavenge 收集器可以通过一个开关参数 `-XX:+UseAdaptiveSizePolicy` 来动态调整新生代的大小、Eden 和 Survivor 区的比例，晋升老年代对象年龄等参数。这种调节方式称为**GC 自适应的调节策略（GC Ergonomics）**。
+
+#### 3.5.4 Serial Old 收集器
+
+Serial Old 是 Serial 收集器的老年代版本，也是一个单线程收集器，使用“标记-整理”算法。这个收集器主要给 Client 模式下的虚拟机使用。
+
+如果在 Server 模式下，主要有两大用途：
+
+-   在 JDK 1.5 以及之前的版本中与 Parallel Scavenge 收集器搭配使用
+-   作为 CMS 收集器的后备预案，在并发收集发生 Concurrent Mode Failure 时使用。
+
+Serial Old 收集器的工作过程如下图：
+
+![](images/serial-old.png)
+
+#### 3.5.5 Parallel Old 收集器
+
+Parallel Old 是 Parallel Scavenge 收集器的老年代版本，使用多线程和“标记-整理”算法。
+
+在注重吞吐量以及 CPU 资源敏感的场合，都可以优先考虑 Parallel Scavenge 加 Parallel Old 收集器。工作过程如下：
+![](images/parallel-scavenge.png)
 
