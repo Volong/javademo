@@ -525,3 +525,13 @@ CMS 虽然有并发收集、低停顿的优点，但是也有以下 3 个明显�
 100.667:[ Full GC[ Tenured: 0K -> 210K(10240K), 0.0149142 secs] 4603K -> 210K(19456K), [ Perm: 2999K -> 2999K(21248K)], 0.0150007 secs] [ Times: user=0.01 sys=0.00, real=0.02 secs]
 ```
 
+-   `33.125 和 100.667`：GC 发生的时间。这个数字表示从 Java 虚拟机启动以来经过的秒数
+
+-   `[GC 和 [Full GC`：垃圾收集的停顿类型。Full 表示这次 GC 发声了 Stop The World。如果是调用 `System.gc()` 方法所触发的收集，那么将显示 [Full GC (System)。
+
+-   `[DefNew、[Tenured、[Perm`：GC 发生的区域。显示的区域名称与使用的 GC 收集器是密切相关的。
+
+    >   Serial 收集器中新生代名为“Default New Generation”，所以显示的是 [DefNew  
+    >   如果是 ParNew 收集器，新生代名称就会变为 [ParNew，表示“Parallel New Generation”  
+    >   如果采用 Parallel Scavenge 收集器，那么将会显示 PSYoungGen  
+    >   老年代和永久代同理，名称也由收集器决定。
