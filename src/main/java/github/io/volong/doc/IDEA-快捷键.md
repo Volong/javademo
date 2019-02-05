@@ -8,7 +8,7 @@ Restore Default Layout: `Ctrl + F12`
 
 Reformat Code: `Ctrl + Alt + L`
 
-Optimize Imports: `Ctrl + Alt + O`
+Optimize Imports (去除掉无用的包导入): `Ctrl + Alt + O`
 
 Build | Make Project: `Ctrl + F9`
 
