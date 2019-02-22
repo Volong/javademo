@@ -1,8 +1,10 @@
 package github.io.volong.collection;
 
+import java.util.LinkedHashMap;
+
 public class LinkedHashMapSample {
 
-	public static void main(String[] args) {/*
+	public static void main(String[] args) {
 		LinkedHashMap<String, String> accessOrderedMap = new LinkedHashMap<>(16, 0.75F, true){
             @Override
             protected boolean removeEldestEntry(Map.Entry<String, String> eldest) { // 实现自定义删除策略，否则行为就和普遍 Map 没有区别
@@ -29,7 +31,7 @@ public class LinkedHashMapSample {
         accessOrderedMap.forEach( (k,v) -> {// 遍历顺序不变
             System.out.println(k +":" + v);
         });
-	*/
+	
 		System.out.println(2 & 4);
 	}
 	

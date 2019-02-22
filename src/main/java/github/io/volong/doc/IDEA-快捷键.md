@@ -117,3 +117,12 @@ Generating code: `Alt+Insert`
 查找文件: `command + ⬆️ + O`
 
 查找符号(函数名或者变量名等): `option + command + O`
+
+隐藏当前窗口: `shift + esc`
+
+快速打出 main 函数: `psvm`
+
+使用 if..else 等包裹代码: `command + option + T`
+
+快速生成 for array: `itar`
+
