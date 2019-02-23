@@ -126,3 +126,5 @@ Generating code: `Alt+Insert`
 
 快速生成 for array: `itar`
 
+大小写转换: `command + shift + u`
+
