@@ -18,9 +18,9 @@ Channel 代表一个到实体（如一个硬件设备、一个文件、一个网
 > 例：被回调触发的 ChannelHandler
 >
 > ```java
-> public class ConnectHandler extends ChannelInboundHandlerAdapter {  
->  
-> 	// 当一个新的连接已经被建立时，channelActive(ChannelHandlerContext)将会被调用         
+> public class ConnectHandler extends ChannelInboundHandlerAdapter {
+>      
+>     // 当一个新的连接已经被建立时，channelActive(ChannelHandlerContext)将会被调用
 >      @Override
 >        public void channelActive(ChannelHandlerContext ctx) throws Exception {
 >            System.out.println("Client " + ctx.channel().remoteAddress() + " connected");
