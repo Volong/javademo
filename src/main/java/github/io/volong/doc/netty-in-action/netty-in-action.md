@@ -95,3 +95,33 @@ Netty 使用不同的事件来通知我们状态的改变或者是操作的状�
 
 在服务端，`write()` 操作是异步的，直到 `channelRead()` 方法返回后可能仍然没有完成，`ChannelInboundHandlerAdabter` 在这个时间点上不会释放消息。消息在 `channelReadComplete()` 方法中，当 `writeAndFlush()` 方法被调用时被释放。
 
+### 3.1 Channel、EventLoop 和 ChannelFuture
+
+- `Channel`：Socket
+- `EventLoop`：控制流、多线程处理、兵法
+- `ChannelFuture`：异步通知
+
+#### 3.1.1 Channel 接口
+
+基本的 I/O 操作（`bind()`、`connect()`、`read()`、`write()`）依赖于底层网络传输所提供的原语。在基于 Java 的网络编程中，其基本的构造是 `Socket` 类。Netty 的 `Channel` 接口所提供的 API 降低了直接使用 `Socket` 类的复杂性。
+
+#### 3.1.2 EventLoop 接口
+
+`EventLoop` 用于处理连接的生命周期中所发生的事件。
+
+> Channel、EventLoop、Thread 以及 EventLoopGroup 之间的关系
+
+![](images/channel-eventloop-eventloopgroup.png)
+
+- 一个 `EventLoopGroup` 包含一个或者多个 `EventLoop`
+- 一个 `EventLoop` 在它的生命周期内只和一个 `Thread` 绑定
+- 所有由 `EventLoop` 处理的 I/O 事件都将在它专有的 `Thread` 上被处理
+- 一个 `Channel` 在它的生命周期内只注册一个 `EventLoop`
+- 一个 `EventLoop` 可能会被分配给一个或多个 `Channel`
+
+> 在这种设计中，一个给定 `Channel` 的 I/O 操作都是由相同的 `Thread` 执行的，所以消除了对于同步的要求
+
+#### 3.1.3 ChannelFuture 接口
+
+Netty 中所有的 I/O 操作都是异步的，因此一个操作可能不会立即返回，所以我们需要一种确定其结果的方法。Netty 提供了 `ChannelFuture` 接口，其 `addListener()` 方法注册了一个 `ChannelFutureListener`，以便在某个操作完成时（无论是否成功）得到通知。
+
