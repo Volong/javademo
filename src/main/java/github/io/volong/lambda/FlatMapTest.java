@@ -14,6 +14,11 @@ public class FlatMapTest {
     public static void main(String[] args) {
 
         List<String> teamIndia = Arrays.asList("Virat", "Dhoni", "Jadeja");
+
+        String collect1 = teamIndia.stream().collect(Collectors.joining(" OR "));
+        System.out.println("collect1:" + collect1);
+
+
         List<String> teamAustralia = Arrays.asList("Warner", "Watson", "Smith");
         List<String> teamEngland = Arrays.asList("Alex", "Bell", "Broad");
         List<String> teamNewZeland = Arrays.asList("Kane", "Nathan", "Vettori");
