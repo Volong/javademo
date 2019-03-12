@@ -38,7 +38,8 @@
 
 [理解 SolrCloud 的事务日志、软提交和硬提交](https://hacpai.com/article/1489704451481)  
 [优化 Solr 的索引](https://github.com/Volong/javademo/blob/master/src/main/java/github/io/volong/doc/%E4%BC%98%E5%8C%96%20solr%20%E7%9A%84%E7%B4%A2%E5%BC%95.md)  
-[Lucene 索引文件格式](https://github.com/Volong/javademo/blob/master/src/main/java/github/io/volong/lucene/doc/Lucene%20%E7%B4%A2%E5%BC%95%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F.md)
+[Lucene 索引文件格式](https://github.com/Volong/javademo/blob/master/src/main/java/github/io/volong/lucene/doc/Lucene%20%E7%B4%A2%E5%BC%95%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F.md)  
+[搜索引擎-信息检索实战](https://github.com/Volong/javademo/blob/master/src/main/java/github/io/volong/doc/%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E-%E4%BF%A1%E6%81%AF%E6%A3%80%E7%B4%A2%E5%AE%9E%E6%88%98.md)
 
 ### JVM
 [深入理解 Java 虚拟机](https://github.com/Volong/javademo/blob/master/src/main/java/github/io/volong/doc/understanding-the-jvm/understanding-the-jvm.md)
@@ -49,4 +50,6 @@
 
 ### 其它
 [分布式锁原理探究](https://github.com/Volong/javademo/blob/master/src/main/java/github/io/volong/knowledge/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81%E5%8E%9F%E7%90%86%E6%8E%A2%E7%A9%B6.md)  
-[在命令行运行 Java 程序](https://github.com/Volong/javademo/blob/master/src/main/java/github/io/volong/doc/Run-Java-App-in-Command-Line.md)
+[在命令行运行 Java 程序](https://github.com/Volong/javademo/blob/master/src/main/java/github/io/volong/doc/Run-Java-App-in-Command-Line.md)  
+[Mac 快捷键](https://github.com/Volong/javademo/blob/master/src/main/java/github/io/volong/doc/Mac-%E5%BF%AB%E6%8D%B7%E9%94%AE.md)  
+[IDEA 快捷键](https://github.com/Volong/javademo/blob/master/src/main/java/github/io/volong/doc/IDEA-%E5%BF%AB%E6%8D%B7%E9%94%AE.md)
