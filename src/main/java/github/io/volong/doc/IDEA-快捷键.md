@@ -36,5 +36,7 @@ recently changes (最近更改过的文件): `⬆️ + command + E`
 
 快速生成 for array: `itar`
 
-大小写转换: `command + shift + u`
+大小写转换: `command + shift + U`
+
+全局查找: `command + shift + F`
 
