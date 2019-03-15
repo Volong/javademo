@@ -40,3 +40,5 @@ recently changes (最近更改过的文件): `⬆️ + command + E`
 
 全局查找: `command + shift + F`
 
+显示当前类中的方法: `command + F12`
+
