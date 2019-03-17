@@ -1,11 +1,13 @@
 package github.io.volong.jcip.examples;
 
-import java.util.*;
-import java.util.concurrent.*;
-import java.awt.*;
 import java.awt.Point;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
-import net.jcip.annotations.*;
+import net.jcip.annotations.ThreadSafe;
 
 /**
  * DelegatingVehicleTracker

@@ -1,0 +1,176 @@
+[WARN ]-[2019-03-17 13:34:31]-[org.b3log.latke.Latkes:531]: !!!!Runtime mode is [DEVELOPMENT], please make sure configured it with [PRODUCTION] in latke.properties if deployed on production environment!!!!
+[WARN ]-[2019-03-17 13:36:58]-[org.b3log.latke.Latkes:531]: !!!!Runtime mode is [DEVELOPMENT], please make sure configured it with [PRODUCTION] in latke.properties if deployed on production environment!!!!
+[WARN ]-[2019-03-17 13:45:24]-[org.b3log.latke.Latkes:531]: !!!!Runtime mode is [DEVELOPMENT], please make sure configured it with [PRODUCTION] in latke.properties if deployed on production environment!!!!
+[WARN ]-[2019-03-17 13:47:26]-[org.b3log.latke.Latkes:531]: !!!!Runtime mode is [DEVELOPMENT], please make sure configured it with [PRODUCTION] in latke.properties if deployed on production environment!!!!
+[WARN ]-[2019-03-17 13:48:14]-[org.b3log.latke.Latkes:531]: !!!!Runtime mode is [DEVELOPMENT], please make sure configured it with [PRODUCTION] in latke.properties if deployed on production environment!!!!
+[WARN ]-[2019-03-17 13:59:00]-[org.b3log.latke.Latkes:531]: !!!!Runtime mode is [DEVELOPMENT], please make sure configured it with [PRODUCTION] in latke.properties if deployed on production environment!!!!
+[WARN ]-[2019-03-17 14:00:49]-[org.b3log.latke.Latkes:531]: !!!!Runtime mode is [DEVELOPMENT], please make sure configured it with [PRODUCTION] in latke.properties if deployed on production environment!!!!
+[WARN ]-[2019-03-17 14:03:15]-[org.b3log.latke.Latkes:531]: !!!!Runtime mode is [DEVELOPMENT], please make sure configured it with [PRODUCTION] in latke.properties if deployed on production environment!!!!
+[WARN ]-[2019-03-17 14:48:14]-[org.b3log.latke.Latkes:531]: !!!!Runtime mode is [DEVELOPMENT], please make sure configured it with [PRODUCTION] in latke.properties if deployed on production environment!!!!
+[WARN ]-[2019-03-17 14:50:28]-[org.b3log.latke.Latkes:531]: !!!!Runtime mode is [DEVELOPMENT], please make sure configured it with [PRODUCTION] in latke.properties if deployed on production environment!!!!
+[WARN ]-[2019-03-17 14:52:22]-[org.b3log.latke.Latkes:531]: !!!!Runtime mode is [DEVELOPMENT], please make sure configured it with [PRODUCTION] in latke.properties if deployed on production environment!!!!
+[WARN ]-[2019-03-17 14:54:54]-[org.b3log.latke.Latkes:531]: !!!!Runtime mode is [DEVELOPMENT], please make sure configured it with [PRODUCTION] in latke.properties if deployed on production environment!!!!
+[WARN ]-[2019-03-17 14:57:25]-[org.b3log.latke.Latkes:531]: !!!!Runtime mode is [DEVELOPMENT], please make sure configured it with [PRODUCTION] in latke.properties if deployed on production environment!!!!
+[WARN ]-[2019-03-17 14:57:34]-[org.b3log.latke.Latkes:531]: !!!!Runtime mode is [DEVELOPMENT], please make sure configured it with [PRODUCTION] in latke.properties if deployed on production environment!!!!
+[WARN ]-[2019-03-17 14:58:30]-[org.b3log.latke.Latkes:531]: !!!!Runtime mode is [DEVELOPMENT], please make sure configured it with [PRODUCTION] in latke.properties if deployed on production environment!!!!
+[INFO ]-[2019-03-17 14:58:30]-[org.eclipse.jetty.util.log:193]: Logging initialized @579ms to org.eclipse.jetty.util.log.Slf4jLog
+[INFO ]-[2019-03-17 14:58:31]-[org.eclipse.jetty.server.Server:371]: jetty-9.4.12.v20180830; built: 2018-08-30T13:59:14.071Z; git: 27208684755d94a92186989f695db2d7b21ebc51; jvm 1.8.0_111-b14
+[INFO ]-[2019-03-17 14:58:31]-[org.eclipse.jetty.webapp.StandardDescriptorProcessor:283]: NO JSP Support for /, did not find org.eclipse.jetty.jsp.JettyJspServlet
+[INFO ]-[2019-03-17 14:58:31]-[org.eclipse.jetty.server.session:365]: DefaultSessionIdManager workerName=node0
+[INFO ]-[2019-03-17 14:58:31]-[org.eclipse.jetty.server.session:370]: No SessionScavenger set, using defaults
+[INFO ]-[2019-03-17 14:58:31]-[org.eclipse.jetty.server.session:149]: node0 Scavenging every 660000ms
+[INFO ]-[2019-03-17 14:58:31]-[org.eclipse.jetty.server.handler.ContextHandler:850]: Started o.e.j.w.WebAppContext@7fee8714{/,file:///F:/project/javademo/,AVAILABLE}
+[INFO ]-[2019-03-17 14:58:31]-[org.eclipse.jetty.server.AbstractConnector:292]: Started ServerConnector@72e5a8e{HTTP/1.1,[http/1.1]}{0.0.0.0:8080}
+[INFO ]-[2019-03-17 14:58:31]-[org.eclipse.jetty.server.Server:408]: Started @1062ms
+[INFO ]-[2019-03-17 14:59:11]-[org.eclipse.jetty.server.AbstractConnector:341]: Stopped ServerConnector@72e5a8e{HTTP/1.1,[http/1.1]}{0.0.0.0:8080}
+[INFO ]-[2019-03-17 14:59:11]-[org.eclipse.jetty.server.session:167]: node0 Stopped scavenging
+[INFO ]-[2019-03-17 14:59:11]-[org.eclipse.jetty.server.handler.ContextHandler:1040]: Stopped o.e.j.w.WebAppContext@7fee8714{/,file:///F:/project/javademo/,UNAVAILABLE}
+[WARN ]-[2019-03-17 14:59:14]-[org.b3log.latke.Latkes:531]: !!!!Runtime mode is [DEVELOPMENT], please make sure configured it with [PRODUCTION] in latke.properties if deployed on production environment!!!!
+[INFO ]-[2019-03-17 14:59:14]-[org.b3log.latke.Latkes:574]: Runtime cache is [LOCAL_LRU]
+[INFO ]-[2019-03-17 14:59:14]-[org.b3log.latke.Latkes:578]: Initialized Latke
+[INFO ]-[2019-03-17 14:59:14]-[org.eclipse.jetty.util.log:193]: Logging initialized @653ms to org.eclipse.jetty.util.log.Slf4jLog
+[INFO ]-[2019-03-17 14:59:14]-[org.eclipse.jetty.server.Server:371]: jetty-9.4.12.v20180830; built: 2018-08-30T13:59:14.071Z; git: 27208684755d94a92186989f695db2d7b21ebc51; jvm 1.8.0_111-b14
+[INFO ]-[2019-03-17 14:59:14]-[org.eclipse.jetty.webapp.StandardDescriptorProcessor:283]: NO JSP Support for /, did not find org.eclipse.jetty.jsp.JettyJspServlet
+[INFO ]-[2019-03-17 14:59:14]-[org.eclipse.jetty.server.session:365]: DefaultSessionIdManager workerName=node0
+[INFO ]-[2019-03-17 14:59:14]-[org.eclipse.jetty.server.session:370]: No SessionScavenger set, using defaults
+[INFO ]-[2019-03-17 14:59:14]-[org.eclipse.jetty.server.session:149]: node0 Scavenging every 600000ms
+[INFO ]-[2019-03-17 14:59:14]-[org.eclipse.jetty.server.handler.ContextHandler:850]: Started o.e.j.w.WebAppContext@7fee8714{/,file:///F:/project/javademo/,AVAILABLE}
+[INFO ]-[2019-03-17 14:59:14]-[org.eclipse.jetty.server.AbstractConnector:292]: Started ServerConnector@72e5a8e{HTTP/1.1,[http/1.1]}{0.0.0.0:8080}
+[INFO ]-[2019-03-17 14:59:14]-[org.eclipse.jetty.server.Server:408]: Started @1154ms
+[INFO ]-[2019-03-17 15:00:16]-[org.eclipse.jetty.server.AbstractConnector:341]: Stopped ServerConnector@72e5a8e{HTTP/1.1,[http/1.1]}{0.0.0.0:8080}
+[INFO ]-[2019-03-17 15:00:16]-[org.eclipse.jetty.server.session:167]: node0 Stopped scavenging
+[INFO ]-[2019-03-17 15:00:16]-[org.eclipse.jetty.server.handler.ContextHandler:1040]: Stopped o.e.j.w.WebAppContext@7fee8714{/,file:///F:/project/javademo/,UNAVAILABLE}
+[WARN ]-[2019-03-17 15:00:19]-[org.b3log.latke.Latkes:531]: !!!!Runtime mode is [DEVELOPMENT], please make sure configured it with [PRODUCTION] in latke.properties if deployed on production environment!!!!
+[INFO ]-[2019-03-17 15:00:19]-[org.b3log.latke.Latkes:574]: Runtime cache is [LOCAL_LRU]
+[INFO ]-[2019-03-17 15:00:19]-[org.b3log.latke.Latkes:578]: Initialized Latke
+[INFO ]-[2019-03-17 15:00:19]-[org.eclipse.jetty.util.log:193]: Logging initialized @560ms to org.eclipse.jetty.util.log.Slf4jLog
+[INFO ]-[2019-03-17 15:00:19]-[org.eclipse.jetty.server.Server:371]: jetty-9.4.12.v20180830; built: 2018-08-30T13:59:14.071Z; git: 27208684755d94a92186989f695db2d7b21ebc51; jvm 1.8.0_111-b14
+[INFO ]-[2019-03-17 15:00:20]-[org.eclipse.jetty.webapp.StandardDescriptorProcessor:283]: NO JSP Support for /, did not find org.eclipse.jetty.jsp.JettyJspServlet
+[INFO ]-[2019-03-17 15:00:20]-[org.eclipse.jetty.server.session:365]: DefaultSessionIdManager workerName=node0
+[INFO ]-[2019-03-17 15:00:20]-[org.eclipse.jetty.server.session:370]: No SessionScavenger set, using defaults
+[INFO ]-[2019-03-17 15:00:20]-[org.eclipse.jetty.server.session:149]: node0 Scavenging every 660000ms
+[INFO ]-[2019-03-17 15:00:20]-[org.eclipse.jetty.server.handler.ContextHandler:850]: Started o.e.j.w.WebAppContext@7fee8714{/,file:///F:/project/javademo/,AVAILABLE}
+[INFO ]-[2019-03-17 15:00:20]-[org.eclipse.jetty.server.AbstractConnector:292]: Started ServerConnector@72e5a8e{HTTP/1.1,[http/1.1]}{0.0.0.0:8080}
+[INFO ]-[2019-03-17 15:00:20]-[org.eclipse.jetty.server.Server:408]: Started @1064ms
+[INFO ]-[2019-03-17 15:02:38]-[org.eclipse.jetty.server.AbstractConnector:341]: Stopped ServerConnector@72e5a8e{HTTP/1.1,[http/1.1]}{0.0.0.0:8080}
+[INFO ]-[2019-03-17 15:02:38]-[org.eclipse.jetty.server.session:167]: node0 Stopped scavenging
+[INFO ]-[2019-03-17 15:02:38]-[org.eclipse.jetty.server.handler.ContextHandler:1040]: Stopped o.e.j.w.WebAppContext@7fee8714{/,file:///F:/project/javademo/,UNAVAILABLE}
+[WARN ]-[2019-03-17 15:04:42]-[org.b3log.latke.Latkes:531]: !!!!Runtime mode is [DEVELOPMENT], please make sure configured it with [PRODUCTION] in latke.properties if deployed on production environment!!!!
+[INFO ]-[2019-03-17 15:04:42]-[org.b3log.latke.Latkes:574]: Runtime cache is [LOCAL_LRU]
+[INFO ]-[2019-03-17 15:04:42]-[org.b3log.latke.Latkes:578]: Initialized Latke
+[INFO ]-[2019-03-17 15:04:42]-[org.eclipse.jetty.util.log:193]: Logging initialized @594ms to org.eclipse.jetty.util.log.Slf4jLog
+[INFO ]-[2019-03-17 15:04:42]-[org.eclipse.jetty.server.Server:371]: jetty-9.4.12.v20180830; built: 2018-08-30T13:59:14.071Z; git: 27208684755d94a92186989f695db2d7b21ebc51; jvm 1.8.0_111-b14
+[INFO ]-[2019-03-17 15:04:43]-[org.eclipse.jetty.webapp.StandardDescriptorProcessor:283]: NO JSP Support for /, did not find org.eclipse.jetty.jsp.JettyJspServlet
+[INFO ]-[2019-03-17 15:04:43]-[org.eclipse.jetty.server.session:365]: DefaultSessionIdManager workerName=node0
+[INFO ]-[2019-03-17 15:04:43]-[org.eclipse.jetty.server.session:370]: No SessionScavenger set, using defaults
+[INFO ]-[2019-03-17 15:04:43]-[org.eclipse.jetty.server.session:149]: node0 Scavenging every 660000ms
+[INFO ]-[2019-03-17 15:04:43]-[org.eclipse.jetty.server.handler.ContextHandler:850]: Started o.e.j.w.WebAppContext@7fee8714{/,file:///F:/project/javademo/,AVAILABLE}
+[ERROR]-[2019-03-17 15:04:43]-[org.b3log.solo.Starter:180]: Server start failed
+java.net.BindException: Address already in use: bind
+	at sun.nio.ch.Net.bind0(Native Method)
+	at sun.nio.ch.Net.bind(Net.java:433)
+	at sun.nio.ch.Net.bind(Net.java:425)
+	at sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:223)
+	at sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:74)
+	at org.eclipse.jetty.server.ServerConnector.openAcceptChannel(ServerConnector.java:339)
+	at org.eclipse.jetty.server.ServerConnector.open(ServerConnector.java:307)
+	at org.eclipse.jetty.server.AbstractNetworkConnector.doStart(AbstractNetworkConnector.java:80)
+	at org.eclipse.jetty.server.ServerConnector.doStart(ServerConnector.java:235)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:68)
+	at org.eclipse.jetty.server.Server.doStart(Server.java:395)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:68)
+	at org.b3log.solo.Starter.main(Starter.java:178)
+[WARN ]-[2019-03-17 15:05:15]-[org.b3log.latke.Latkes:531]: !!!!Runtime mode is [DEVELOPMENT], please make sure configured it with [PRODUCTION] in latke.properties if deployed on production environment!!!!
+[INFO ]-[2019-03-17 15:05:15]-[org.b3log.latke.Latkes:574]: Runtime cache is [LOCAL_LRU]
+[INFO ]-[2019-03-17 15:05:15]-[org.b3log.latke.Latkes:578]: Initialized Latke
+[INFO ]-[2019-03-17 15:05:15]-[org.eclipse.jetty.util.log:193]: Logging initialized @610ms to org.eclipse.jetty.util.log.Slf4jLog
+[INFO ]-[2019-03-17 15:05:15]-[org.eclipse.jetty.server.Server:371]: jetty-9.4.12.v20180830; built: 2018-08-30T13:59:14.071Z; git: 27208684755d94a92186989f695db2d7b21ebc51; jvm 1.8.0_111-b14
+[INFO ]-[2019-03-17 15:05:16]-[org.eclipse.jetty.webapp.StandardDescriptorProcessor:283]: NO JSP Support for /, did not find org.eclipse.jetty.jsp.JettyJspServlet
+[INFO ]-[2019-03-17 15:05:16]-[org.eclipse.jetty.server.session:365]: DefaultSessionIdManager workerName=node0
+[INFO ]-[2019-03-17 15:05:16]-[org.eclipse.jetty.server.session:370]: No SessionScavenger set, using defaults
+[INFO ]-[2019-03-17 15:05:16]-[org.eclipse.jetty.server.session:149]: node0 Scavenging every 660000ms
+[INFO ]-[2019-03-17 15:05:16]-[org.eclipse.jetty.server.handler.ContextHandler:850]: Started o.e.j.w.WebAppContext@7fee8714{/,file:///F:/project/javademo/,AVAILABLE}
+[ERROR]-[2019-03-17 15:05:16]-[org.b3log.solo.Starter:180]: Server start failed
+java.net.BindException: Address already in use: bind
+	at sun.nio.ch.Net.bind0(Native Method)
+	at sun.nio.ch.Net.bind(Net.java:433)
+	at sun.nio.ch.Net.bind(Net.java:425)
+	at sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:223)
+	at sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:74)
+	at org.eclipse.jetty.server.ServerConnector.openAcceptChannel(ServerConnector.java:339)
+	at org.eclipse.jetty.server.ServerConnector.open(ServerConnector.java:307)
+	at org.eclipse.jetty.server.AbstractNetworkConnector.doStart(AbstractNetworkConnector.java:80)
+	at org.eclipse.jetty.server.ServerConnector.doStart(ServerConnector.java:235)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:68)
+	at org.eclipse.jetty.server.Server.doStart(Server.java:395)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:68)
+	at org.b3log.solo.Starter.main(Starter.java:178)
+[WARN ]-[2019-03-17 15:05:26]-[org.b3log.latke.Latkes:531]: !!!!Runtime mode is [DEVELOPMENT], please make sure configured it with [PRODUCTION] in latke.properties if deployed on production environment!!!!
+[INFO ]-[2019-03-17 15:05:26]-[org.b3log.latke.Latkes:574]: Runtime cache is [LOCAL_LRU]
+[INFO ]-[2019-03-17 15:05:26]-[org.b3log.latke.Latkes:578]: Initialized Latke
+[INFO ]-[2019-03-17 15:05:26]-[org.eclipse.jetty.util.log:193]: Logging initialized @619ms to org.eclipse.jetty.util.log.Slf4jLog
+[INFO ]-[2019-03-17 15:05:26]-[org.eclipse.jetty.server.Server:371]: jetty-9.4.12.v20180830; built: 2018-08-30T13:59:14.071Z; git: 27208684755d94a92186989f695db2d7b21ebc51; jvm 1.8.0_111-b14
+[INFO ]-[2019-03-17 15:05:26]-[org.eclipse.jetty.webapp.StandardDescriptorProcessor:283]: NO JSP Support for /, did not find org.eclipse.jetty.jsp.JettyJspServlet
+[INFO ]-[2019-03-17 15:05:26]-[org.eclipse.jetty.server.session:365]: DefaultSessionIdManager workerName=node0
+[INFO ]-[2019-03-17 15:05:26]-[org.eclipse.jetty.server.session:370]: No SessionScavenger set, using defaults
+[INFO ]-[2019-03-17 15:05:26]-[org.eclipse.jetty.server.session:149]: node0 Scavenging every 660000ms
+[INFO ]-[2019-03-17 15:05:26]-[org.eclipse.jetty.server.handler.ContextHandler:850]: Started o.e.j.w.WebAppContext@7fee8714{/,file:///F:/project/javademo/,AVAILABLE}
+[INFO ]-[2019-03-17 15:05:26]-[org.eclipse.jetty.server.AbstractConnector:292]: Started ServerConnector@72e5a8e{HTTP/1.1,[http/1.1]}{0.0.0.0:8080}
+[INFO ]-[2019-03-17 15:05:26]-[org.eclipse.jetty.server.Server:408]: Started @1128ms
+[INFO ]-[2019-03-17 15:06:51]-[org.eclipse.jetty.server.AbstractConnector:341]: Stopped ServerConnector@72e5a8e{HTTP/1.1,[http/1.1]}{0.0.0.0:8080}
+[INFO ]-[2019-03-17 15:06:51]-[org.eclipse.jetty.server.session:167]: node0 Stopped scavenging
+[INFO ]-[2019-03-17 15:06:51]-[org.eclipse.jetty.server.handler.ContextHandler:1040]: Stopped o.e.j.w.WebAppContext@7fee8714{/,file:///F:/project/javademo/,UNAVAILABLE}
+[WARN ]-[2019-03-17 15:08:46]-[org.b3log.latke.Latkes:531]: !!!!Runtime mode is [DEVELOPMENT], please make sure configured it with [PRODUCTION] in latke.properties if deployed on production environment!!!!
+[INFO ]-[2019-03-17 15:08:46]-[org.b3log.latke.Latkes:574]: Runtime cache is [LOCAL_LRU]
+[INFO ]-[2019-03-17 15:08:46]-[org.b3log.latke.Latkes:578]: Initialized Latke
+[INFO ]-[2019-03-17 15:08:46]-[org.eclipse.jetty.util.log:193]: Logging initialized @571ms to org.eclipse.jetty.util.log.Slf4jLog
+[INFO ]-[2019-03-17 15:08:46]-[org.eclipse.jetty.server.Server:371]: jetty-9.4.12.v20180830; built: 2018-08-30T13:59:14.071Z; git: 27208684755d94a92186989f695db2d7b21ebc51; jvm 1.8.0_111-b14
+[INFO ]-[2019-03-17 15:08:46]-[org.eclipse.jetty.webapp.StandardDescriptorProcessor:283]: NO JSP Support for /, did not find org.eclipse.jetty.jsp.JettyJspServlet
+[INFO ]-[2019-03-17 15:08:46]-[org.eclipse.jetty.server.session:365]: DefaultSessionIdManager workerName=node0
+[INFO ]-[2019-03-17 15:08:46]-[org.eclipse.jetty.server.session:370]: No SessionScavenger set, using defaults
+[INFO ]-[2019-03-17 15:08:46]-[org.eclipse.jetty.server.session:149]: node0 Scavenging every 660000ms
+[INFO ]-[2019-03-17 15:08:46]-[org.eclipse.jetty.server.handler.ContextHandler:850]: Started o.e.j.w.WebAppContext@7fee8714{/,file:///F:/project/javademo/,AVAILABLE}
+[INFO ]-[2019-03-17 15:08:46]-[org.eclipse.jetty.server.AbstractConnector:292]: Started ServerConnector@72e5a8e{HTTP/1.1,[http/1.1]}{0.0.0.0:8080}
+[INFO ]-[2019-03-17 15:08:46]-[org.eclipse.jetty.server.Server:408]: Started @1113ms
+[INFO ]-[2019-03-17 15:10:09]-[org.eclipse.jetty.server.AbstractConnector:341]: Stopped ServerConnector@72e5a8e{HTTP/1.1,[http/1.1]}{0.0.0.0:8080}
+[INFO ]-[2019-03-17 15:10:09]-[org.eclipse.jetty.server.session:167]: node0 Stopped scavenging
+[INFO ]-[2019-03-17 15:10:09]-[org.eclipse.jetty.server.handler.ContextHandler:1040]: Stopped o.e.j.w.WebAppContext@7fee8714{/,file:///F:/project/javademo/,UNAVAILABLE}
+[WARN ]-[2019-03-17 15:10:17]-[org.b3log.latke.Latkes:531]: !!!!Runtime mode is [DEVELOPMENT], please make sure configured it with [PRODUCTION] in latke.properties if deployed on production environment!!!!
+[INFO ]-[2019-03-17 15:10:17]-[org.b3log.latke.Latkes:574]: Runtime cache is [LOCAL_LRU]
+[INFO ]-[2019-03-17 15:10:17]-[org.b3log.latke.Latkes:578]: Initialized Latke
+[INFO ]-[2019-03-17 15:10:17]-[org.eclipse.jetty.util.log:193]: Logging initialized @568ms to org.eclipse.jetty.util.log.Slf4jLog
+[INFO ]-[2019-03-17 15:10:17]-[org.eclipse.jetty.server.Server:371]: jetty-9.4.12.v20180830; built: 2018-08-30T13:59:14.071Z; git: 27208684755d94a92186989f695db2d7b21ebc51; jvm 1.8.0_111-b14
+[INFO ]-[2019-03-17 15:10:17]-[org.eclipse.jetty.webapp.StandardDescriptorProcessor:283]: NO JSP Support for /, did not find org.eclipse.jetty.jsp.JettyJspServlet
+[INFO ]-[2019-03-17 15:10:17]-[org.eclipse.jetty.server.session:365]: DefaultSessionIdManager workerName=node0
+[INFO ]-[2019-03-17 15:10:17]-[org.eclipse.jetty.server.session:370]: No SessionScavenger set, using defaults
+[INFO ]-[2019-03-17 15:10:17]-[org.eclipse.jetty.server.session:149]: node0 Scavenging every 660000ms
+[INFO ]-[2019-03-17 15:10:17]-[org.eclipse.jetty.server.handler.ContextHandler:850]: Started o.e.j.w.WebAppContext@7fee8714{/,file:///F:/project/javademo/,AVAILABLE}
+[INFO ]-[2019-03-17 15:10:17]-[org.eclipse.jetty.server.AbstractConnector:292]: Started ServerConnector@72e5a8e{HTTP/1.1,[http/1.1]}{0.0.0.0:8080}
+[INFO ]-[2019-03-17 15:10:17]-[org.eclipse.jetty.server.Server:408]: Started @1074ms
+[INFO ]-[2019-03-17 15:11:16]-[org.eclipse.jetty.server.AbstractConnector:341]: Stopped ServerConnector@72e5a8e{HTTP/1.1,[http/1.1]}{0.0.0.0:8080}
+[INFO ]-[2019-03-17 15:11:16]-[org.eclipse.jetty.server.session:167]: node0 Stopped scavenging
+[INFO ]-[2019-03-17 15:11:16]-[org.eclipse.jetty.server.handler.ContextHandler:1040]: Stopped o.e.j.w.WebAppContext@7fee8714{/,file:///F:/project/javademo/,UNAVAILABLE}
+[WARN ]-[2019-03-17 15:11:21]-[org.b3log.latke.Latkes:531]: !!!!Runtime mode is [DEVELOPMENT], please make sure configured it with [PRODUCTION] in latke.properties if deployed on production environment!!!!
+[INFO ]-[2019-03-17 15:11:21]-[org.b3log.latke.Latkes:574]: Runtime cache is [LOCAL_LRU]
+[INFO ]-[2019-03-17 15:11:21]-[org.b3log.latke.Latkes:578]: Initialized Latke
+[INFO ]-[2019-03-17 15:11:21]-[org.eclipse.jetty.util.log:193]: Logging initialized @401ms to org.eclipse.jetty.util.log.Slf4jLog
+[INFO ]-[2019-03-17 15:11:22]-[org.eclipse.jetty.server.Server:371]: jetty-9.4.12.v20180830; built: 2018-08-30T13:59:14.071Z; git: 27208684755d94a92186989f695db2d7b21ebc51; jvm 1.8.0_111-b14
+[INFO ]-[2019-03-17 15:11:22]-[org.eclipse.jetty.webapp.StandardDescriptorProcessor:283]: NO JSP Support for /, did not find org.eclipse.jetty.jsp.JettyJspServlet
+[INFO ]-[2019-03-17 15:11:22]-[org.eclipse.jetty.server.session:365]: DefaultSessionIdManager workerName=node0
+[INFO ]-[2019-03-17 15:11:22]-[org.eclipse.jetty.server.session:370]: No SessionScavenger set, using defaults
+[INFO ]-[2019-03-17 15:11:22]-[org.eclipse.jetty.server.session:149]: node0 Scavenging every 600000ms
+[INFO ]-[2019-03-17 15:11:22]-[org.eclipse.jetty.server.handler.ContextHandler:850]: Started o.e.j.w.WebAppContext@13c27452{/,file:///F:/project/javademo/,AVAILABLE}
+[INFO ]-[2019-03-17 15:11:22]-[org.eclipse.jetty.server.AbstractConnector:292]: Started ServerConnector@42eca56e{HTTP/1.1,[http/1.1]}{0.0.0.0:8080}
+[INFO ]-[2019-03-17 15:11:22]-[org.eclipse.jetty.server.Server:408]: Started @912ms
+[WARN ]-[2019-03-17 15:14:39]-[org.b3log.latke.Latkes:531]: !!!!Runtime mode is [DEVELOPMENT], please make sure configured it with [PRODUCTION] in latke.properties if deployed on production environment!!!!
+[INFO ]-[2019-03-17 15:14:39]-[org.b3log.latke.Latkes:574]: Runtime cache is [LOCAL_LRU]
+[INFO ]-[2019-03-17 15:14:39]-[org.b3log.latke.Latkes:578]: Initialized Latke
+[INFO ]-[2019-03-17 15:14:39]-[org.eclipse.jetty.util.log:193]: Logging initialized @380ms to org.eclipse.jetty.util.log.Slf4jLog
+[INFO ]-[2019-03-17 15:14:39]-[org.eclipse.jetty.server.Server:371]: jetty-9.4.12.v20180830; built: 2018-08-30T13:59:14.071Z; git: 27208684755d94a92186989f695db2d7b21ebc51; jvm 1.8.0_111-b14
+[INFO ]-[2019-03-17 15:14:39]-[org.eclipse.jetty.webapp.StandardDescriptorProcessor:283]: NO JSP Support for /, did not find org.eclipse.jetty.jsp.JettyJspServlet
+[INFO ]-[2019-03-17 15:14:39]-[org.eclipse.jetty.server.session:365]: DefaultSessionIdManager workerName=node0
+[INFO ]-[2019-03-17 15:14:39]-[org.eclipse.jetty.server.session:370]: No SessionScavenger set, using defaults
+[INFO ]-[2019-03-17 15:14:39]-[org.eclipse.jetty.server.session:149]: node0 Scavenging every 660000ms
+[INFO ]-[2019-03-17 15:14:39]-[org.eclipse.jetty.server.handler.ContextHandler:850]: Started o.e.j.w.WebAppContext@13c27452{/,file:///F:/project/javademo/,AVAILABLE}
+[INFO ]-[2019-03-17 15:14:39]-[org.eclipse.jetty.server.AbstractConnector:292]: Started ServerConnector@64728da3{HTTP/1.1,[http/1.1]}{0.0.0.0:8080}
+[INFO ]-[2019-03-17 15:14:39]-[org.eclipse.jetty.server.Server:408]: Started @892ms

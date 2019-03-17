@@ -1,10 +1,9 @@
 package github.io.volong.j8fp;
 
-import java.util.Arrays;
+import static java.util.Arrays.asList;
+
 import java.util.List;
 import java.util.stream.Stream;
-
-import static java.util.Arrays.asList;
 
 public class SampleData {
 
@@ -33,6 +32,14 @@ public class SampleData {
 
     public static List<Artist> getThreeArtists() {
         return asList(johnColtrane, johnLennon, theBeatles);
+    }
+
+    public static Stream<Album> albums() {
+        return Stream.of(aLoveSupreme);
+    }
+
+    public static Stream<Album> allAlbums() {
+        return Stream.of(aLoveSupreme, sampleShortAlbum, manyTrackAlbum);
     }
 
 }

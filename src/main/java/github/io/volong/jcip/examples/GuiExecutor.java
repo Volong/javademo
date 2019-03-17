@@ -1,7 +1,8 @@
 package github.io.volong.jcip.examples;
 
-import java.util.*;
-import java.util.concurrent.*;
+import java.util.List;
+import java.util.concurrent.AbstractExecutorService;
+import java.util.concurrent.TimeUnit;
 
 /**
  * GuiExecutor

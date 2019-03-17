@@ -1,6 +1,6 @@
 package github.io.volong.jcip.examples;
 
-import net.jcip.annotations.*;
+import net.jcip.annotations.ThreadSafe;
 
 /**
  * CasCounter

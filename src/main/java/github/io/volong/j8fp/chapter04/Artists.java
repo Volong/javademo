@@ -1,10 +1,9 @@
 package github.io.volong.j8fp.chapter04;
 
-import github.io.volong.j8fp.Artist;
-import org.apache.zookeeper.Op;
-
 import java.util.List;
 import java.util.Optional;
+
+import github.io.volong.j8fp.Artist;
 
 public class Artists {
     private List<Artist> artists;

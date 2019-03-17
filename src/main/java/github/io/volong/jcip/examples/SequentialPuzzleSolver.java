@@ -1,6 +1,8 @@
 package github.io.volong.jcip.examples;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * SequentialPuzzleSolver

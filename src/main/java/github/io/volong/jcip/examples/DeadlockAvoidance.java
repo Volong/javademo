@@ -1,9 +1,10 @@
 package github.io.volong.jcip.examples;
 
-import java.util.*;
-import java.util.concurrent.*;
-import java.util.concurrent.locks.*;
 import static java.util.concurrent.TimeUnit.NANOSECONDS;
+
+import java.util.Random;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.Lock;
 
 /**
  * DeadlockAvoidance

@@ -1,10 +1,14 @@
 package github.io.volong.jcip.examples;
 
 import java.math.BigInteger;
-import java.util.concurrent.atomic.*;
-import javax.servlet.*;
+import java.util.concurrent.atomic.AtomicLong;
 
-import net.jcip.annotations.*;
+import javax.servlet.GenericServlet;
+import javax.servlet.Servlet;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+
+import net.jcip.annotations.ThreadSafe;
 
 /**
  * CountingFactorizer

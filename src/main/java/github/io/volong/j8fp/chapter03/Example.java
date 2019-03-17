@@ -1,16 +1,15 @@
 package github.io.volong.j8fp.chapter03;
 
-import com.alibaba.druid.sql.visitor.functions.Char;
-import github.io.volong.j8fp.Artist;
-import github.io.volong.j8fp.SampleData;
-import github.io.volong.j8fp.Track;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import github.io.volong.j8fp.Artist;
+import github.io.volong.j8fp.SampleData;
+import github.io.volong.j8fp.Track;
 
 public class Example {
 

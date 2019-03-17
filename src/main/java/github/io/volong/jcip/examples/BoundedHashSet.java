@@ -1,7 +1,9 @@
 package github.io.volong.jcip.examples;
 
-import java.util.*;
-import java.util.concurrent.*;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.concurrent.Semaphore;
 
 /**
  * BoundedHashSet

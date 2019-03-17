@@ -1,7 +1,9 @@
 package github.io.volong.jcip.examples;
 
-import java.util.*;
 import static java.util.concurrent.TimeUnit.SECONDS;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * OutOfTime

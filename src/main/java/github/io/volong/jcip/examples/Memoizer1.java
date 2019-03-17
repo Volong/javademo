@@ -1,9 +1,10 @@
 package github.io.volong.jcip.examples;
 
 import java.math.BigInteger;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
-import net.jcip.annotations.*;
+import net.jcip.annotations.GuardedBy;
 
 /**
  * Memoizer1

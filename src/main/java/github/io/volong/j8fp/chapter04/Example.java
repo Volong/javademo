@@ -1,17 +1,15 @@
 package github.io.volong.j8fp.chapter04;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
+import java.util.IntSummaryStatistics;
+import java.util.Optional;
+
 import github.io.volong.j8fp.Album;
-import github.io.volong.j8fp.Artist;
 import github.io.volong.j8fp.SampleData;
 import github.io.volong.j8fp.Track;
-
-import java.util.Arrays;
-import java.util.IntSummaryStatistics;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Stream;
-
-import static org.junit.Assert.*;
 
 public class Example {
 

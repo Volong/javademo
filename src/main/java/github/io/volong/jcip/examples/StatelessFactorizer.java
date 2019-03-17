@@ -1,9 +1,13 @@
 package github.io.volong.jcip.examples;
 
 import java.math.BigInteger;
-import javax.servlet.*;
 
-import net.jcip.annotations.*;
+import javax.servlet.GenericServlet;
+import javax.servlet.Servlet;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+
+import net.jcip.annotations.ThreadSafe;
 
 /**
  * StatelessFactorizer

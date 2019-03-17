@@ -2,9 +2,10 @@ package github.io.volong.jcip.examples;
 
 import java.io.PrintWriter;
 import java.io.Writer;
-import java.util.concurrent.*;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 
-import net.jcip.annotations.*;
+import net.jcip.annotations.GuardedBy;
 
 /**
  * LogService

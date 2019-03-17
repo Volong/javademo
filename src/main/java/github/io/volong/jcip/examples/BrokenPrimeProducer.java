@@ -1,7 +1,7 @@
 package github.io.volong.jcip.examples;
 
 import java.math.BigInteger;
-import java.util.concurrent.*;
+import java.util.concurrent.BlockingQueue;
 
 /**
  * BrokenPrimeProducer

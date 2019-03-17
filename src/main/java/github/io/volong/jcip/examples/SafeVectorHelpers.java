@@ -1,6 +1,6 @@
 package github.io.volong.jcip.examples;
 
-import java.util.*;
+import java.util.Vector;
 
 /**
  * SafeVectorHelpers

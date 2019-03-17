@@ -1,12 +1,12 @@
 package github.io.volong.j8fp;
 
+import static java.util.stream.Collectors.toList;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Stream;
-
-import static java.util.stream.Collectors.toList;
 
 public final class Artist {
     

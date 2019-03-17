@@ -1,8 +1,9 @@
 package github.io.volong.jcip.examples;
 
-import java.util.concurrent.*;
+import java.util.concurrent.CountDownLatch;
 
-import net.jcip.annotations.*;
+import net.jcip.annotations.GuardedBy;
+import net.jcip.annotations.ThreadSafe;
 
 /**
  * ValueLatch

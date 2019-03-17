@@ -1,12 +1,17 @@
 package github.io.volong.jcip.examples;
 
-import java.net.URL;
-import java.util.*;
-import java.util.concurrent.*;
-
-import net.jcip.annotations.*;
-
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
+
+import java.net.URL;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+
+import net.jcip.annotations.GuardedBy;
 
 /**
  * WebCrawler

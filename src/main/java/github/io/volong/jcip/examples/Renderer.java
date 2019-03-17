@@ -1,8 +1,14 @@
 package github.io.volong.jcip.examples;
 
-import java.util.*;
-import java.util.concurrent.*;
 import static github.io.volong.jcip.examples.LaunderThrowable.launderThrowable;
+
+import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.concurrent.CompletionService;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorCompletionService;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Future;
 
 /**
  * Renderer

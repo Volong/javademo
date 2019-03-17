@@ -1,8 +1,10 @@
 package github.io.volong.jcip.examples;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.Set;
 
-import net.jcip.annotations.*;
+import net.jcip.annotations.GuardedBy;
+import net.jcip.annotations.ThreadSafe;
 
 /**
  * ServerStatusAfterSplit

@@ -1,18 +1,15 @@
 package github.io.volong.j8fp.chapter03.exercises;
 
-import github.io.volong.demo01.Arr;
-import github.io.volong.j8fp.Album;
-import github.io.volong.j8fp.Artist;
-import github.io.volong.j8fp.SampleData;
-import jdk.nashorn.internal.ir.ReturnNode;
+import static github.io.volong.j8fp.SampleData.sampleShortAlbum;
+import static java.util.Arrays.asList;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static github.io.volong.j8fp.SampleData.sampleShortAlbum;
-import static java.util.Arrays.asList;
+import github.io.volong.j8fp.Album;
+import github.io.volong.j8fp.Artist;
+import github.io.volong.j8fp.SampleData;
 
 public class Question01 {
 

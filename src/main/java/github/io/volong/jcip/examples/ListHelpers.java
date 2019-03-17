@@ -1,8 +1,11 @@
 package github.io.volong.jcip.examples;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
-import net.jcip.annotations.*;
+import net.jcip.annotations.NotThreadSafe;
+import net.jcip.annotations.ThreadSafe;
 
 /**
  * ListHelder

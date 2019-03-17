@@ -1,13 +1,11 @@
 package github.io.volong.j8fp.chapter03.exercises;
 
-import github.io.volong.j8fp.Artist;
-import github.io.volong.j8fp.SampleData;
-import github.io.volong.tlojp.chapter08.Main;
-
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
+
+import github.io.volong.j8fp.Artist;
+import github.io.volong.j8fp.SampleData;
 
 public class Question02 {
 

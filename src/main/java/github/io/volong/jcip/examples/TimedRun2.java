@@ -1,8 +1,10 @@
 package github.io.volong.jcip.examples;
 
-import java.util.concurrent.*;
-import static java.util.concurrent.Executors.newScheduledThreadPool;
 import static github.io.volong.jcip.examples.LaunderThrowable.launderThrowable;
+import static java.util.concurrent.Executors.newScheduledThreadPool;
+
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 /**
  * TimedRun2

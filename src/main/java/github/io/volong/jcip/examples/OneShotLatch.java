@@ -1,8 +1,8 @@
 package github.io.volong.jcip.examples;
 
-import java.util.concurrent.locks.*;
+import java.util.concurrent.locks.AbstractQueuedSynchronizer;
 
-import net.jcip.annotations.*;
+import net.jcip.annotations.ThreadSafe;
 
 /**
  * OneShotLatch

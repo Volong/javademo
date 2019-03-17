@@ -1,8 +1,8 @@
 package github.io.volong.jcip.examples;
 
-import java.util.*;
+import java.util.Vector;
 
-import net.jcip.annotations.*;
+import net.jcip.annotations.ThreadSafe;
 
 /**
  * BetterVector

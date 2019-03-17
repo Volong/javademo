@@ -1,7 +1,8 @@
 package github.io.volong.jcip.examples;
 
-import java.util.concurrent.atomic.*;
-import java.util.logging.*;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * MyAppThread

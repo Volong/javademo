@@ -1,10 +1,8 @@
 package github.io.volong.j8fp.chapter02;
 
-import com.github.benmanes.caffeine.cache.Weigher;
-import com.google.common.base.Predicate;
-
 import java.util.function.BinaryOperator;
-import java.util.function.LongBinaryOperator;
+
+import com.google.common.base.Predicate;
 
 public class Example {
 

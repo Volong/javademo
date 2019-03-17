@@ -1,7 +1,5 @@
 package github.io.volong.j8fp.chapter03.exercises;
 
-import github.io.volong.Main;
-
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;

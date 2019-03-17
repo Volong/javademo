@@ -1,11 +1,15 @@
 package github.io.volong.jcip.examples;
 
 import static java.util.concurrent.TimeUnit.SECONDS;
-import java.math.BigInteger;
-import java.util.*;
-import java.util.concurrent.*;
 
-import net.jcip.annotations.*;
+import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+import net.jcip.annotations.GuardedBy;
+import net.jcip.annotations.ThreadSafe;
 
 /**
  * PrimeGenerator

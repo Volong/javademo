@@ -1,8 +1,9 @@
 package github.io.volong.jcip.examples;
 
-import java.util.*;
+import java.util.LinkedList;
+import java.util.List;
 
-import net.jcip.annotations.*;
+import net.jcip.annotations.Immutable;
 
 /**
  * PuzzleNode
