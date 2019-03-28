@@ -42,3 +42,7 @@ recently changes (最近更改过的文件): `⬆️ + command + E`
 
 显示当前类中的方法: `command + F12`
 
+上下移动代码: `shift + option + 上/下`
+
+代码块注释: `command + shift + /`
+
