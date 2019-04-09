@@ -52,4 +52,5 @@
 [分布式锁原理探究](https://github.com/Volong/javademo/blob/master/src/main/java/github/io/volong/knowledge/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81%E5%8E%9F%E7%90%86%E6%8E%A2%E7%A9%B6.md)  
 [在命令行运行 Java 程序](https://github.com/Volong/javademo/blob/master/src/main/java/github/io/volong/doc/Run-Java-App-in-Command-Line.md)  
 [Mac 快捷键](https://github.com/Volong/javademo/blob/master/src/main/java/github/io/volong/doc/Mac-%E5%BF%AB%E6%8D%B7%E9%94%AE.md)  
-[IDEA 快捷键](https://github.com/Volong/javademo/blob/master/src/main/java/github/io/volong/doc/IDEA-%E5%BF%AB%E6%8D%B7%E9%94%AE.md)
+[IDEA 快捷键](https://github.com/Volong/javademo/blob/master/src/main/java/github/io/volong/doc/IDEA-%E5%BF%AB%E6%8D%B7%E9%94%AE.md)  
+[Linux 基础命令](https://github.com/Volong/javademo/blob/master/src/main/java/github/io/volong/doc/basic-linux-commands.md)
