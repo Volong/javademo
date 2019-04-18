@@ -1,10 +1,11 @@
 package github.io.volong.validate;
 
-import com.sun.org.apache.bcel.internal.generic.CHECKCAST;
-
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
+/**
+ * 自定义验证
+ */
 public class CheckCaseValidator implements ConstraintValidator<CheckCase, String> {
 
     private CaseMode caseMode;

@@ -1,8 +1,5 @@
 package github.io.volong.validate;
 
-import github.io.volong.Main;
-import org.apache.lucene.spatial.prefix.PrefixTreeFacetCounter;
-
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
