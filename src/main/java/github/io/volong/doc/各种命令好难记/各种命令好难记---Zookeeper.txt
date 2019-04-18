@@ -1,7 +1,0 @@
-
-
-
-1.Windows∆Ù∂ØZookeeper
-@echo off
-set cp="./*;./lib/*;../../*;../../lib/*"
-java -cp %cp% org.apache.zookeeper.inspector.ZooInspector
