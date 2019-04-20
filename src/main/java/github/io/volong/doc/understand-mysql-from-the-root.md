@@ -1,6 +1,6 @@
 > 来自: [字符集和比较规则](<https://juejin.im/book/5bffcbc9f265da614b11b731/section/5bffd9c651882520980229a0>)
 
-#### 字符集
+### 字符集
 
 - `ASCII` 字符集
   共收录 128 个字符，包括空格、标点符号、数字、大小写字母和一些不可见字符。由于总共才 128 个字符，所以可以使用 1 个字节来进行编码。
@@ -48,4 +48,76 @@
 | `_ci`  | `case insensitive`   | 不区分大小写     |
 | `_cs`  | `case sensitive`     | 区分大小写       |
 | `_bin` | `binary`             | 以二进制方式比较 |
+
+##### 服务器级别
+
+设置：
+- 在启动服务器时通过启动选项，使用 `SET` 修改
+
+- 在服务器运行过程中使用 `SET` 修改
+
+- 在配置文件中修改
+  ```mysql
+  [server]
+  character_set_server=gbk
+  collation_server=gbk_chinese_ci
+  ```
+  
+
+查看字符集：`SHOW VARIABLES LIKE 'character_set_server';`
+查看比较规则：`SHOW VARIABLES LIKE 'collation_server';`
+
+##### 数据库级别
+创建时指定 :
+```mysql
+CREATE DATABASE 数据库名
+    [[DEFAULT] CHARACTER SET 字符集名称]
+    [[DEFAULT] COLLATE 比较规则名称];
+```
+
+修改时指定 :
+```mysql
+ALTER DATABASE 数据库名
+    [[DEFAULT] CHARACTER SET 字符集名称]
+    [[DEFAULT] COLLATE 比较规则名称];
+```
+
+查看字符集：`SHOW VARIABLES LIKE 'character_set_database';`
+查看比较规则：`SHOW VARIABLES LIKE 'collation_database';`
+
+##### 表级别
+
+创建时指定：
+
+```mysql
+CREATE TABLE 表名 (列的信息)
+    [[DEFAULT] CHARACTER SET 字符集名称]
+    [COLLATE 比较规则名称]]
+```
+
+修改时指定：
+
+```mysql
+ALTER TABLE 表名
+    [[DEFAULT] CHARACTER SET 字符集名称]
+    [COLLATE 比较规则名称]
+```
+
+##### 列级别
+
+创建时指定：
+
+```mysql
+CREATE TABLE 表名(
+    列名 字符串类型 [CHARACTER SET 字符集名称] [COLLATE 比较规则名称],
+    其他列...
+);
+```
+
+修改时指定：
+
+```mysql
+ALTER TABLE 表名 MODIFY 列名 字符串类型 [CHARACTER SET 字符集名称] [COLLATE 比较规则名称];
+```
+> 在转换列的字符集时需要注意，如果转换前列中存储的数据不能用转换后的字符集进行表示会发生错误。
 
