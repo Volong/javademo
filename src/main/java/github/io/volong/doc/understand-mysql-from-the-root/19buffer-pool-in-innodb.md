@@ -155,3 +155,43 @@ SET GLOBAL innodb_old_blocks_pct = 40;
   后台线程也会定时从 `flush 链表`中刷新一部分页面到磁盘，刷新的速率取决于当时系统是不是很繁忙。这种刷新页面的方式被称之为 `BUF_FLUSH_LIST`。
 
 有时候后台线程刷新脏页的进度比较慢，导致用户线程在准备加载一个磁盘页到 `Buffer Pool` 时没有可用的缓存页，这时就会尝试看看 `LRU 链表`尾部有没有可以直接释放掉的未修改页面，如果没有的话会不得不将 `LRU 链表`尾部的一个脏页同步刷新到磁盘（和磁盘交互是很慢的，这会降低处理用户请求的速度）。这种刷新单个页面到磁盘中的刷新方式被称之为 `BUF_FLUSH_SINGLE_PAGE`。
+
+#### 多个 Buffer Pool 实例
+
+`Buffer Pool` 本质是 `InnoDB` 向操作系统申请的一块连续的内存空间，在多线程环境下，访问 `Buffer Pool` 中的各种链表都需要加锁处理，在 `Buffer Pool` 特别大而且多线程并发访问特别高的情况下，单一的 `Buffer Pool` 可能会影响请求的处理速度。所以在 `Buffer Pool` 特别大的时候，我们可以把它们拆分成若干个小的 `Buffer Pool`，每个 `Buffer Pool` 都称为一个`实例`，它们都是独立的，在多线程并发访问时并不会相互影响，从而提高并发处理能力。
+
+可以在服务器启动的时候进行设置：
+
+```mysql
+[server]
+innodb_buffer_pool_instances = 2
+```
+
+> 表示要创建 2 个 `Buffer Pool` 实例
+
+示意图如下：
+
+![](images/1693e86e2abd79c1.png)
+
+每个 `Buffer Pool` 实例占用的大小，可以通过公式计算得出：
+
+```mysql
+innodb_buffer_pool_size/innodb_buffer_pool_instances
+```
+
+`Buffer Pool `实例并不是创建的越多越好，分别管理各个 `Buffer Pool` 也需要性能开销。`InnoDB` 规定：**当 innodb_buffer_pool_size 的值小于 1G 的时候设置多个实例是无效的，InnoDB 会默认把 innodb_buffer_pool_instances 的值修改为 1。**
+
+#### innodb_buffer_pool_chunk_size
+
+在 `MySQL 5.7.5` 之前，`Buffer Pool` 的大小只能在服务器启动时通过配置 `innodb_buffer_pool_size` 启动参数来调整大小，在服务器运行过程中是不允许调整该值的。在之后的版本中支持了在服务器运行过程中调整 `Buffer Pool` 大小的功能。
+
+不过不再一次性为某个 `Buffer Pool` 实例向操作系统申请一大片连续的内存空间，而是以一个所谓的 `chunk` 为单位向操作系统申请空间。也就是说一个 `Buffer Pool` 实例其实是由若干个 `chunk` 组成的，一个 `chunk` 就代表一片连续的内存空间，里边儿包含了若干缓存页与其对应的控制块。示意图如下：
+
+![](images/1693e86e2a5de8f2.png)
+
+在服务器运行期间调整 `Buffer Pool` 的大小时就是以 `chunk` 为单位增加或者删除内存空间，而不需要重新向操作系统申请一片大的内存，然后进行缓存页的复制。
+
+`chunk` 的大小是我们在启动操作 MySQL 服务器时通过 `innodb_buffer_pool_chunk_size` 启动参数指定的，它的默认值是 `134217728`，也就是 `128M`。
+
+> innodb_buffer_pool_chunk_size 的值只能在服务器启动时指定，在服务器运行过程中是不可以修改的
+
