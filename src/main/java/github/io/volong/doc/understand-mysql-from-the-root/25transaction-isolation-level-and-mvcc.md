@@ -80,7 +80,7 @@ level 的取值为 : `REPEATABLE READ` | `READ COMMITTED` | `READ UNCOMMITTED` |
 
 每次对记录进行改动，都会记录一条 `undo 日志`，每条 `undo 日志`也都有一个 `roll_pointer` 属性 (`INSERT` 操作对应的 `undo 日志`没有该属性，因为该记录并没有更早的版本)，可以将这些 `undo 日志`都连起来，串成一个链表，像下图一样：
 
-![](images/16a33e277a98dbec.jpg)
+![](images/16a33e277a98dbec.png)
 
 对该记录每次更新后，都会将旧值放到一条 `undo 日志`中，就算是该记录的一个旧版本，随着更新次数的增多，所有的版本都会被 `roll_pointer` 属性连接成一个链表，我们把这个链表称之为`版本链`，版本链的头节点就是当前记录最新的值。另外，每个版本中还包含生成该版本时对应的`事务 id`。
 
