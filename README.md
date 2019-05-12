@@ -50,7 +50,7 @@
 
 ### MySQL
 [字符集和比较规则](https://github.com/Volong/javademo/blob/master/src/main/java/github/io/volong/doc/understand-mysql-from-the-root/04character-and-collation.md)  
-[B+树索引](https://github.com/Volong/javademo/blob/master/src/main/java/github/io/volong/doc/understand-mysql-from-the-root/07B%2B-tree-index.md)
+[B+树索引](https://github.com/Volong/javademo/blob/master/src/main/java/github/io/volong/doc/understand-mysql-from-the-root/07B%2B-tree-index.md)  
 [InnoDB 的 Buffer Pool](https://github.com/Volong/javademo/blob/master/src/main/java/github/io/volong/doc/understand-mysql-from-the-root/19buffer-pool-in-innodb.md)  
 [事务隔离级别和 MVCC](https://github.com/Volong/javademo/blob/master/src/main/java/github/io/volong/doc/understand-mysql-from-the-root/25transaction-isolation-level-and-mvcc.md)  
 
