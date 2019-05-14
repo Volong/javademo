@@ -164,3 +164,12 @@ SELECT name, birthday, phone_number, COUNT(*) FROM person_info GROUP BY name, bi
 
 ### 回表的代价
 
+```mysql
+SELECT * FROM person_info WHERE name > 'Asa' AND name < 'Barlow';
+```
+
+在使用 `idx_name_birthday_phone_number` 索引进行查询时步骤大致如下：
+
+1. 从联合索引的 `B+` 树中取出 `name` 值在 `Asa ~ Barlow` 之间的记录
+2. 由于联合索引的对应的记录中只包含 `name`、`birthday`、`phone_number`、`id` 这 4 个字段，而查询列表是 `*`，也就是需要查询表中所有的字段。这时需要把从上一步中获取到的每一条记录的 `id` 字段都到聚簇索引对应的 `B+` 树中找到完整的用户记录，即`回表`，然后把完整的记录返回给用户
+
