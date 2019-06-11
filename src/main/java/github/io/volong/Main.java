@@ -1,19 +1,37 @@
 package github.io.volong;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.ListIterator;
+import java.util.concurrent.Executors;
+
 public class Main {
 
 	public static void main(String[] args) {
-	    
-	    Integer[][] i = new Integer[3][2];
-	    
-	    i[0] = new Integer[] {1};
-	    
-	    for (int j = 0; j < i.length; j++) {
-	        for (int j2 = 0; j2 < i[j].length; j2++) {
-                System.out.print(i[j][j2] + "\t");
-            }
-	        
-	        System.out.println();
-	    }
+
+		ArrayList<String> list = new ArrayList<>();
+		list.add("a");
+
+		for (String s : list) {
+			list.remove(s);
+		}
+		// Iterator<Integer> iterator = list.iterator();
+		// while(iterator.hasNext()){
+		// 	Integer integer = iterator.next();
+		// 	if(integer==2) {
+		// 		iterator.remove();
+		// 	}
+		// }
+
+		ArrayList var1 = new ArrayList();
+		var1.add("a");
+		Iterator var2 = var1.iterator();
+
+		while(var2.hasNext()) {
+			String var3 = (String)var2.next();
+			var1.remove(var3);
+		}
+
+		Executors.newSingleThreadExecutor();
 	}
 }
