@@ -46,3 +46,5 @@ recently changes (最近更改过的文件): `⬆️ + command + E`
 
 代码块注释: `command + shift + /`
 
+跳到错误处：`F2 / Shift + F2`
+
