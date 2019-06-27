@@ -7,31 +7,23 @@ import java.util.concurrent.Executors;
 
 public class Main {
 
-	public static void main(String[] args) {
+    static class Singleton {
+        private volatile static Singleton instance;
 
-		ArrayList<String> list = new ArrayList<>();
-		list.add("a");
+        public static Singleton getInstance() {
+            if (instance == null) {
+                synchronized (Singleton.class) {
+                    if (instance == null) {
+                        instance = new Singleton();
+                    }
+                }
+            }
+            return instance;
+        }
 
-		for (String s : list) {
-			list.remove(s);
-		}
-		// Iterator<Integer> iterator = list.iterator();
-		// while(iterator.hasNext()){
-		// 	Integer integer = iterator.next();
-		// 	if(integer==2) {
-		// 		iterator.remove();
-		// 	}
-		// }
-
-		ArrayList var1 = new ArrayList();
-		var1.add("a");
-		Iterator var2 = var1.iterator();
-
-		while(var2.hasNext()) {
-			String var3 = (String)var2.next();
-			var1.remove(var3);
-		}
-
-		Executors.newSingleThreadExecutor();
-	}
+        public static void main(String[] args) {
+            Singleton instance = Singleton.getInstance();
+            System.out.println(instance);
+        }
+    }
 }
