@@ -1,4 +1,4 @@
-package github.io.volong.liblinear;
+package github.io.volong.ltr.liblinear;
 
 import de.bwaldvogel.liblinear.*;
 
