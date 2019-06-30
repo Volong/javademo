@@ -174,7 +174,6 @@ Redis 将链表和 `ziplist` 结合起来组成了 `quicklist`。也就是将多
 Redis 的字典相当于 Java 语言里面的 HashMap，它是无序字典。内部实现结构上同 Java 的 HashMap 也是一致的，同样的数组 + 链表二维结构。第一维 hash 的数组位置碰撞时，就会将碰撞的元素使用链表串接起来。
 
 <div align="center"><img src="images/hash.png"></div>
-
 不同的是，Redis 的字典的值只能是字符串，另外它们 rehash 的方式不一样，因为 Java 的 HashMap 在字典很大时，rehash 是个耗时的操作，需要一次性全部 rehash。Redis 为了高性能，不能堵塞服务，所以采用了渐进式 rehash 策略。
 
 渐进式 rehash 会在 rehash 的同时，保留新旧两个 hash 结构，查询时会同时查询两个 hash 结构，然后在后续的定时任务中以及 hash 操作指令中，循序渐进地将旧 hash 的内容一点点迁移到新的 hash 结构中。当搬迁完成了，就会使用新的hash结构取而代之。
@@ -301,3 +300,47 @@ Redis 所有的数据结构都可以设置过期时间，时间到了，Redis �
 
 **注意**：如果一个字符串已经设置了过期时间，然后你调用了 set 方法修改了它，它的过期时间会消失。
 
+## 应用 1：分布式锁
+
+分布式锁一般使用 setnx（set if not exists）指令，只允许被一个客户端占坑。先来先占， 用完了，再调用 del 指令进行释放。
+
+```bash
+// 这里的冒号:就是一个普通的字符，没特别含义，它可以是任意其它字符，不要误解
+> setnx lock:codehole true
+OK
+... do something
+> del lock:codehole
+(integer) 1
+```
+
+但是有个问题，如果逻辑执行到中间出现异常了，可能会导致 del 指令没有被调用，这样就会陷入死锁，锁永远得不到释放。
+
+可以在拿到锁之后，再给锁加上一个过期时间，比如 5s，这样即使中间出现异常也可以保证 5 秒之后锁会自动释放。
+
+```bash
+> setnx lock:codehole true
+OK
+> expire lock:codehole 5
+... do something
+> del lock:codehole
+(integer) 1
+```
+
+但是还有问题，如果在 setnx 和 expire 之间服务器进程突然挂掉了，可能是因为机器掉电或者是被人为杀掉的，就会导致 expire 得不到执行，也会造成死锁。
+
+这是因为 setnx 和 expire 是两条指令而不是原子指令。而且 expire 是依赖于 setnx 的执行结果的，如果 setnx 没抢到锁，expire 是不应该执行的。如果这两条指令可以一起执行就不会出现问题。
+
+在 Redis 2.8 版本中作者加入了 set 指令的扩展参数，使得 setnx 和 expire 指令可以一起执行。
+
+```bash
+# ex seconds 将键的过期时间设置为seconds秒
+# nx 只在键不存在时， 才对键进行设置操作
+> set lock:codehole true ex 5 nx
+OK
+... do something
+> del lock:codehole
+```
+
+但是如果在加锁和释放锁之间的逻辑执行的太长，以至于超出了锁的超时限制，就会出现问题。因为这时候第一个线程持有的锁过期了，业务逻辑还没有执行完，这个时候第二个线程就提前重新持有了这把锁，导致临界区代码不能得到严格的串行执行。
+
+为了避免这个问题，Redis 分布式锁不要用于较长时间的任务。如果真的偶尔出现了
