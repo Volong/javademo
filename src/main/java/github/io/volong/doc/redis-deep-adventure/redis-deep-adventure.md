@@ -347,3 +347,146 @@ OK
 
 为了避免这个问题，Redis 分布式锁不要用于较长时间的任务。
 
+## 应用 2：延时队列
+
+### 异步消息队列
+
+Redis 的 list(列表) 数据结构常用来作为异步消息队列使用，使用`rpush/lpush`操作入队列，使用`lpop/rpop`来出队列。
+
+```bash
+> rpush notify-queue apple banana pear
+(integer) 3
+> llen notify-queue
+(integer) 3
+> lpop notify-queue
+"apple"
+> llen notify-queue
+(integer) 2
+> lpop notify-queue
+"banana"
+> llen notify-queue
+(integer) 1
+> lpop notify-queue
+"pear"
+> llen notify-queue
+(integer) 0
+> lpop notify-queue
+(nil)
+```
+
+客户端是通过队列的 pop 操作来获取消息，然后进行处理。处理完了再接着获取消息，再进行处理。
+
+可是如果队列空了，客户端就会陷入 pop 的死循环，这就是空轮询。空轮询不但拉高了客户端的 CPU，redis 的 QPS 也会被拉高。
+
+可以通过睡眠的办法来解决这个问题。
+
+更好的解决办法是通过使用`blpop/brpop`。
+
+阻塞队列没有数据的时候，会立即进入休眠状态，一旦数据到来，则立刻醒过来。消息的延迟几乎为零。
+
+但是有个问题是，如果线程一直阻塞在哪里，Redis 的客户端连接就成了闲置连接，闲置过久，服务器一般会主动断开连接，减少闲置资源占用。这时blpop/brpop`就会抛出异常。所以客户端需要捕获异常，并且重试。
+
+## 应用 3：位图
+
+位图不是特殊的数据结构，它的内容其实就是普通的字符串，也就是 byte 数组。我们可以使用普通的 get/set 直接获取和设置整个位图的内容，也可以使用位图操作 getbit/setbit 等将 byte 数组看成「位数组」来处理。
+
+```bash
+# 字符串h对应的二进制为：01101000
+127.0.0.1:6379> setbit s 1 1
+(integer) 0
+127.0.0.1:6379> setbit s 2 1
+(integer) 0
+127.0.0.1:6379> setbit s 4 1
+(integer) 0
+# 字符串e对应的二进制为：01100101
+127.0.0.1:6379> setbit s 9 1
+(integer) 0
+127.0.0.1:6379> setbit s 10 1
+(integer) 0
+127.0.0.1:6379> setbit s 13 1
+(integer) 0
+127.0.0.1:6379> setbit s 15 1
+(integer) 0
+127.0.0.1:6379> get s
+"he"
+```
+
+> **注意**：位数组的顺序和字符的位顺序是相反的
+
+**零存零取**
+
+就是是使用 setbit 对位值进行逐个设置，逐个读取。
+
+```bash
+127.0.0.1:6379> setbit w 1 1
+(integer) 0
+127.0.0.1:6379> setbit w 2 1
+(integer) 0
+127.0.0.1:6379> setbit w 4 1
+(integer) 0
+127.0.0.1:6379> getbit w 1  # 获取某个具体位置的值
+(integer) 1
+127.0.0.1:6379> getbit w 2
+(integer) 1
+127.0.0.1:6379> getbit w 4
+(integer) 1
+127.0.0.1:6379> getbit w 5
+(integer) 0
+```
+
+**整存零取**
+
+就是使用字符串一次性填充所有位数组，覆盖掉旧值。
+
+```bash
+127.0.0.1:6379> set w h  # 整存
+(integer) 0
+127.0.0.1:6379> getbit w 1
+(integer) 1
+127.0.0.1:6379> getbit w 2
+(integer) 1
+127.0.0.1:6379> getbit w 4
+(integer) 1
+127.0.0.1:6379> getbit w 5
+(integer) 0
+```
+
+如果对应位的字节是不可打印字符，Redis 会显示该字符的 16 进制形式。
+
+```bash
+127.0.0.1:6379> setbit x 0 1
+(integer) 0
+127.0.0.1:6379> setbit x 1 1
+(integer) 0
+127.0.0.1:6379> get x
+"\xc0"
+```
+
+**统计和查找**
+
+Redis 提供了位图统计指令 bitcount 和位图查找指令 bitpos。bitcount 用来统计指定位置范围内 1 的个数，bitpos 用来查找指定范围内出现的第一个 0 或 1。并且都可以指定范围参数`[start, end]`。
+
+> start、end表示的是第几个字节，并不能任意指定哪个位的位置。从0开始计数
+>
+> bitpos返回的是第几个位的位置，从0开始计数
+
+```bash
+# 01101000 01100101 01101100 01101100 01101111
+127.0.0.1:6379> set w hello
+OK
+127.0.0.1:6379> bitcount w
+(integer) 21
+127.0.0.1:6379> bitcount w 0 0  # 第一个字符中 1 的位数
+(integer) 3
+127.0.0.1:6379> bitcount w 0 1  # 前两个字符中 1 的位数
+(integer) 7
+127.0.0.1:6379> bitpos w 0  # 第一个字节中0的位置
+(integer) 0
+127.0.0.1:6379> bitpos w 1  # 第一个字节中1的位置
+(integer) 1
+127.0.0.1:6379> bitpos w 1 1 1  # 第二个字符中，第一个1的位置
+(integer) 9
+127.0.0.1:6379> bitpos w 1 2 2  # 第三个字符中，第一个1的位置
+(integer) 17
+```
+
