@@ -183,6 +183,46 @@ for value in set(alien.values()):
   print(value)
 ```
 
+`input()`：获取用户的文本输入
+
+`int()`：获取数值输入
+
+定义函数：
+
+```python
+def function_name():
+  do something...
+```
+
+关键字实参：
+
+```python
+def function_name(a, b):
+  do something...
+  
+#函数调用
+function_name(b='bbb', a='aaa')
+```
+
+形参默认值：
+
+```python
+def function_name(a, b='ccc'):
+  do something...
+```
+
+定义任意形参的函数：
+
+```python
+def function_name(*a):
+  do something...
+ 
+# 如果要让函数接受不同类型的实参，必须在函数定义中将接纳任意数量实参的形参放在最后。
+# 先匹配位置实参和关键字实参，再将余下的实参都收集到最后一个形参中。
+def function_name(a, *b):
+  do something...
+```
+
 
 
 
