@@ -223,6 +223,101 @@ def function_name(a, *b):
   do something...
 ```
 
+定义任意数量的关键字形参：
+
+```python
+def function_name(first, second, **a):
+    print(first)
+    print(second)
+    for key, value in a.items():
+        print(key)
+        print(value)
+```
+
+创建模块：模块是扩展名为`.py`的文件，包含要导入到程序中的代码。
+
+导入模块：
+
+```python
+import module_name
+```
+
+使用模块中的函数：
+
+```python
+module_name.function_name()
+```
+
+导入模块中特定的函数：
+
+```python
+from module_name import function_name
+```
+
+导入模块中任意数量的函数：
+
+```python
+# 使用逗号分割函数名
+from module_name import function_name_0, function_name_1, function_name_2...
+```
+
+> 导入特定的函数之后，则可以直接通过函数名来进行调用
+
+给函数指定别名：
+
+```python
+from module_name import function_name as another_name
+```
+
+给模块指定别名：
+
+```python
+import module_name as another_name
+```
+
+导入模块中的所有函数：
+
+```python
+from module_name import *
+```
+
+> 由于是导入了所有的函数，所以可以直接通过函数名来进行调用
+>
+> 但是会造成的问题是，如果有多个相同名称的函数，会进行函数覆盖
+
+创建类：
+
+```python
+# 类型一般是首字母大写
+class ClassName():
+    # 相当于Java中的构造方法，并且self必须存在，且位于其它形参的前面
+    def __init(self, first_argument, second_argument):
+        self.first = first_argument
+        self.second = second_argument
+       
+    def function_name():
+        print()
+```
+
+创建实例：
+
+```python
+instance_name = ClassName('a', 'b')
+print(instance_name.first) # 访问属性
+print(instance_name.second)
+print(instance_name.function_name()) # 访问方法
+```
+
+继承：创建子类时，父类必须包含在当前文件中，且位于子类前面。
+
+```python
+class ChileClassName(SuperClassNam):
+    def __init__(self, first_argument, second_argument):
+        super.__init__(first_argument, second_argument)
+```
+
+
+
 
 
 
