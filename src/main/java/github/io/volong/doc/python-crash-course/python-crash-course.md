@@ -357,6 +357,72 @@ from module_name import *
 
 > 不推荐使用，因为会导致名称冲突
 
+从文件中读取数据：
+
+```python
+with open('file_path') as file_object:
+  content = file_object.read()
+  print(content)
+```
+
+从文件逐行读取数据：
+
+```python
+with open('file_path') as file_object:
+  for line in file_object:
+    print(line)
+```
+
+> 因为每行的末尾都有一个看不见的换行符，而print语句也会加上一个换行符，因此每行末尾都有两个换行符。可以使用`rstrip()`去掉多余的空白行
+
+写入文件：
+
+```python
+with open('file_path', 'w') as file_object:
+  file_object.write("some text")
+```
+
+> `r`：读取模式。默认是该模式
+>
+> `w`：写入模式，会先清除文件中的内容。如果文件不存在，则新建
+>
+> `a`：附加模式
+>
+> `r+`：读取与写入
+
+处理异常：
+
+```python
+try:
+  print('do something ...')
+except ErrorName:
+  print('do something ...') # 发生异常是才会执行
+else:
+  print('do something ...') # try里面的代码块执行成功了才会执行
+finally:
+  print('do something ...') # 无论如何都会执行
+```
+
+存储/读取数据：
+
+```python
+import json # 导入模块
+
+data = [2, 3, 5, 7, 11, 13]
+
+# 存储数据
+with open('file_path', 'w') as file_object:
+  json.dump(data, file_object)
+  
+# 读取数据
+with open('file_path') as file_object:
+  data = json.load(file_object)
+```
+
+
+
+
+
 
 
 
