@@ -316,6 +316,47 @@ class ChileClassName(SuperClassNam):
         super.__init__(first_argument, second_argument)
 ```
 
+导入单个类：
+
+```python
+from module_name import ClassName
+```
+
+在一个模块中定义多个类：
+
+```python
+class ClassName_0():
+	print("do something...")
+  
+class ClassName_1():
+	print("do something...")
+  
+class ClassName_2():
+	print("do something...")
+```
+
+从一个模块中导入多个类：
+
+```python
+from module_name from ClassName_0, ClassName_1
+```
+
+导入整个模块：
+
+```python
+import module_name
+```
+
+> 使用 `module_name.class_name` 访问需要的类
+
+导入模块中的所有类：
+
+```python
+from module_name import *
+```
+
+> 不推荐使用，因为会导致名称冲突
+
 
 
 
