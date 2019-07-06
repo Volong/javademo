@@ -1,3 +1,9 @@
+|                |          Mac           |  windows   |
+| -------------- | :--------------------: | :--------: |
+| 查找类         |     `Command + O`      | `Ctrl + N` |
+| 查找类中的方法 | `Command + Option + O` | `Ctrl+F12` |
+|                |                        |            |
+
 Optimize Imports (去除掉无用的包导入): `Ctrl + Alt + O`
 
 Recent files (最近查看过的文件): `command + E`
@@ -21,8 +27,6 @@ recently changes (最近更改过的文件): `⬆️ + command + E`
 跳转到数字或者字母标记的书签: `control + 对应的字母或者数字`
 
 添加到收藏: `option + ⬆️ + F`
-
-查找类: `command + O`
 
 查找文件: `command + ⬆️ + O`
 
