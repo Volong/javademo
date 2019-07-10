@@ -6,6 +6,7 @@ import java.util.ListIterator;
 import java.util.Random;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.concurrent.atomic.LongAdder;
 
 public class Main {
 
@@ -25,33 +26,14 @@ public class Main {
 
         public static void main(String[] args) {
 
-            ThreadLocalRandom mainCurrent = ThreadLocalRandom.current();
-            int i = mainCurrent.nextInt(5);
-            System.out.println("i:" + i);
-            int i1 = mainCurrent.nextInt(5);
-            System.out.println("i1:" + i1);
+            Integer[] integers = new Integer[2];
+            Integer[] copy = integers;
+            integers[0] = 1;
+            System.out.println(integers == copy);
 
-            new Thread(new Runnable() {
-
-                @Override
-                public void run() {
-                    ThreadLocalRandom i2Current = ThreadLocalRandom.current();
-                    int i2 = i2Current.nextInt(5);
-                    System.out.println("i2:" + i2);
-                    System.out.println(i2Current == mainCurrent);
-                }
-            }).start();
-
-            new Thread(new Runnable() {
-
-                @Override
-                public void run() {
-                    ThreadLocalRandom i3Current = ThreadLocalRandom.current();
-                    int i3 = mainCurrent.nextInt(5);
-                    System.out.println("i3:" + i3);
-                    System.out.println(i3Current == mainCurrent);
-                }
-            }).start();
+            Integer[] integers1 = new Integer[3];
+            integers = integers1;
+            System.out.println(integers == copy);
         }
     }
 }
