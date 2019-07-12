@@ -154,7 +154,7 @@ public class SearchFiles {
     TopDocs results = searcher.search(query, 5 * hitsPerPage);
     ScoreDoc[] hits = results.scoreDocs;
     
-    int numTotalHits = results.totalHits;
+    int numTotalHits = (int) results.totalHits;
     System.out.println(numTotalHits + " total matching documents");
 
     int start = 0;
