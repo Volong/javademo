@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.*;
 
 /**
  * @since 2019-07-23 09:25
@@ -79,7 +80,7 @@ public class Example {
             }
         };
 
-        just.map(String::length).filter(i -> i >= 5).subscribe(myObserver);
+        just.map(String::length).filter(i -> i == 1).subscribe(myObserver);
     }
 
     /**
@@ -121,5 +122,80 @@ public class Example {
     @Test
     public void range() {
         Observable.range(3, 10).subscribe(System.out::println);
+    }
+
+    @Test
+    public void interval01() throws InterruptedException {
+
+        Observable.interval(1, TimeUnit.SECONDS).subscribe(System.out::println);
+        Observable.interval(1, TimeUnit.SECONDS).subscribe(System.out::println);
+
+        Thread.sleep(5000);
+    }
+
+    @Test
+    public void interval02() throws InterruptedException {
+
+        ConnectableObservable<Long> observable = Observable.interval(1, TimeUnit.SECONDS).publish();
+
+        observable.subscribe(System.out::println);
+
+        observable.connect();
+
+        Thread.sleep(5000);
+
+        System.out.println();
+
+        observable.subscribe(System.out::println);
+
+        Thread.sleep(5000);
+    }
+
+    @Test
+    public void future() {
+
+        ExecutorService executorService = Executors.newCachedThreadPool();
+
+        Future<String> future = executorService.submit(() -> "a");
+
+        Observable.fromFuture(future).map(String::length).subscribe(System.out::println);
+
+    }
+
+    /**
+     * 会直接调用onComplete方法。
+     * 代表了一个空的数据集，在RxJava中表示一个null的概念
+     *
+     * ** 主要用于测试
+     */
+    @Test
+    public void empty() {
+
+        Observable.empty().subscribe(System.out::println,
+                                     Throwable::printStackTrace,
+                                     () -> System.out.println("done"));
+    }
+
+    /**
+     * 与empty方法相反，该方法永远都不会调用onComplete方法，也不会有任何的输出
+     */
+
+    @Test
+    public void never() throws InterruptedException {
+
+        Observable.never().subscribe(System.out::println,
+                                     Throwable::printStackTrace,
+                                     () -> System.out.println("done"));
+
+        Thread.sleep(5000);
+    }
+
+    /**
+     * 在创建Observable会立即抛出异常，主要用于测试
+     */
+    @Test
+    public void error() {
+        Observable.error(new Exception("crash and run"))
+                .subscribe(System.out::println, Throwable::printStackTrace, () -> System.out.println("done"));
     }
 }
