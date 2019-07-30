@@ -22,9 +22,9 @@
 
 ## 自然语言处理
 
-[数学之美第二版](https://volong.github.io/2018/10/13/de887055f2a2350d39572333ea99179a/)
+[数学之美第二版](https://volong.github.io/2018/10/13/the-beauty-of-math.html)
 
-[新词发现](https://volong.github.io/2018/10/13/e207fd12e67d934b6a9aed1e1f02bc47/)
+[新词发现](https://volong.github.io/2018/10/13/new-word-discover.html)
 
 ## 正则表达式
 
