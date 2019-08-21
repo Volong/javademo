@@ -4,7 +4,7 @@
 
 从3.1版本开始，Lucene以及Solr使用在64位的Windows以及Solaris系统上默认使用`MMapDirectory`。从3.3版本开始，对Linux系统也进行了支持。这种更改给Lucene以及Solr用户造成了一定的困惑，因为他们的系统与之前的版本比较起来，突然变得有点奇怪。在Lucene与Solr邮件列表中，有大量的用户来询问为什么他们的Java安装突然消耗掉了三倍的物理内存，或者系统管理员抱怨太耗资源了。然后，顾问们会告诉他们不要去使用`MMapDirectory`，在`solrconfig.xml`中用`SimpleFSDirectory`（较慢）以及`NIOFSDirectory`（由于JVM的bug[#6265734](http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=6265734)导致在Windows平台上更慢）去替代。从Lucene提交者的视角来看，他们认为使用`MMapDirectory`对这些平台来说是最好的。这就有点烦人了，因为他们知道，Lucene/Solr可以比之前有更好的性能。对于这次更改的背景的常见误解，导致这个伟大的搜索引擎在任何地方都没有得到最优的安装。
 
-在这篇博客中，我将尝试去解释操作系统的基本事实，关于虚拟内存在内核中的处理。以及为什么这个可以显著的提升Lucene的性能（“虚拟的虚拟内存”）。我也会澄清为什么许多人发的博客以及邮件列表中的帖子都是错误的，并且是与`MMapDirectory`的目的相违背的。在第二部分，我将会展示一些配置的细节与设置，以及你应该小心避免造成类似“mmap failed”这种错误，还有由于愚蠢的Java堆内存分配导致性能问题。
+在这篇博客中，我将尝试去解释操作系统的基本事实，关于虚拟内存在内核中的处理。以及为什么这个可以显著的提升Lucene的性能（“虚拟的虚拟内存”）。我也会澄清为什么许多人发的博客以及邮件列表中的帖子都是错误的，并且是与`MMapDirectory`的目的相违背的。在第二部分，我将会展示一些配置的细节与设置，以及你应该小心避免造成类似“mmap failed”这种错误，还有由于Java堆内存分配导致的性能问题。
 
 ### 虚拟内存
 
@@ -58,13 +58,21 @@
 - **`MMapDirectory`不会将全部索引加载到物理内存中。**它为什么要这么做？为了方便获取，我们仅仅要求操作系统映射文件到地址空间中，而没有要求更多。Java以及操作系统提供了将整个文件加载到RAM（如果它够用的话）中的选择，但是Lucene并不会这样去做（我们可能会在后续的版本中这样做）。
 - **当“top“命令报告内存使用很多时，`MMapDirectory`不会使服务器过载。**“top”（Linux）有三列跟内存相关：“VIRT”，“RES”，以及“SHR”。第一个（VIRT，virtual）表示虚拟地址空间的分配（在64位平台上是免费使用的）。当`IndexWriter`进行合并时，这个数字会是你索引大小或者物理内存的数倍。如果你仅仅只打开了一个`IndexReader`，它大约等于分配的堆内存（`-Xmx`）加上索引大小。它不会显示进程使用的物理内存。第二个（RES，resident）表示分配给进程可操作的（物理）内存，它应该是你Java堆空间的大小。最后一个（SHR，shared）表示已经分配的虚拟地址空间有多少可以给其它进程共享。如果你有几个Java应用使用`MMapDirectory`去获取同一个索引，你会看到这个数字变大。通常，你会看到共享系统库，JAR文件，以及进程可执行本身（也会被映射）所需要的空间。
 
+### 怎么配置我的操作系统以及Java虚拟机让MMapDirectory得到最佳的使用？
 
+首先，Linux以及Solaris/Windows上的默认设置就非常好了。但是有些固执的系统管理员想要去控制一切（因为缺乏理解）。虚拟地址空间的最大数量可以由应用来分配。所以检查“`ulimit -v`”与“`ulimit -m`“是否都显示“`unlimited`”，否则的话在使用`MMapDirectory`打开索引的时候可能会出现“mmap failed“的错误。如果这个错误在有大量的大索引，每个索引都有许多段的系统仍然会发生时，你需要去调整`/etc/sysctl.conf`中的内核参数：`vm.max_map_cout`的默认值为65530，你需要增加这个值的大小。我认为在Windows以及Solaris系统上也有类似的设置，但是这个就需要读者自己去找一下如何使用了。
 
+对于Java虚拟机的配置，你需要重新思考内存的使用情况：只给真正需要的堆空间大小，留给操作系统尽可能多的内存。根据经验：不要给Lucene/Solr分配超过物理内存$1/4$的堆内存，让剩下的内存给操作系统缓存使用。如果你的服务器上有多个应用在运行，按需进行调整。通常来说，物理内存越多越好，但是不需要让物理内存跟你的索引大小一样大。内核在从索引中频繁使用的页面进行分页这方面做的非常好。
 
+一个好的可能是你已经通过“top“（正确解读，见上）与类似的”[iotop](http://guichaz.free.fr/iotop/)“（可以安装，例如：在Ubuntu Linux上童通过`apt-get install iotop`）命令进行了检查，并配置了最优的系统。如果你的系统因为Lucene进程在做大量的置换操作（swap in/out），那么减少你的堆大小，因为你可能使用的太多了。如果你看到了大量的磁盘I/O，买更多的RUM（[Simon Willnauer](http://mail-archives.apache.org/mod_mbox/lucene-java-user/201207.mbox/)）<sup><a href="#note5">[5]</a></sup>，那么被映射的文件就不需要一直页进页出了，最后：[买SSD](http://www.youtube.com/watch?v=H7PJ1oeEyGg).
 
+*Happy mmapping!*
 
+### 参考
 
 1. <a name="note1"></a>[http://en.wikipedia.org/wiki/Virtual_memory](http://en.wikipedia.org/wiki/Virtual_memory)
 2. <a name="note2"></a>[https://www.varnish-cache.org/trac/wiki/ArchitectNotes](https://www.varnish-cache.org/trac/wiki/ArchitectNotes)
 3. <a name="note3"></a>[http://en.wikipedia.org/wiki/Memory-mapped_file](http://en.wikipedia.org/wiki/Memory-mapped_file)
 4. <a name="note4"></a>[http://en.wikipedia.org/wiki/X86-64#Virtual_address_space_details](http://en.wikipedia.org/wiki/X86-64#Virtual_address_space_details)
+5. 我注：这个不知道是不是作者在调侃别人写错了单词，我觉得这个地方应该是RAM。因为需要将索引加载到文件系统的缓存中，如果内存不够用了，那么就需要丢弃掉一些数据，然后需要时再去磁盘上获取。
+
