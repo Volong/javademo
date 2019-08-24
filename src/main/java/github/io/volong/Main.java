@@ -2,71 +2,47 @@ package github.io.volong;
 
 import github.io.volong.demo01.Source;
 import org.apdplat.word.dictionary.DictionaryFactory;
+import org.springframework.util.CollectionUtils;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.ListIterator;
-import java.util.Random;
+import java.util.*;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.atomic.LongAdder;
 
 public class Main {
 
-    private static int count = 0;
+    public static void main(String[] args) {
 
-        public static void main(String[] args) {
+        int[] nums = {0, 1, 2};
+        List<List<Integer>> permute = permute(nums);
 
-            DictionaryFactory.getDictionary().clear();
-            DictionaryFactory.getDictionary().addAll(null);
-        }
-
-    public static boolean isPalindrome(String s) {
-
-        for (int i = 0, j = s.length() -1; i < j; )  {
-
-            char a = s.charAt(i);
-            char b = s.charAt(j);
-
-            if (!isNumAndLetter(a)) {
-                i++;
-                continue;
-            }
-
-
-
-            if (!isNumAndLetter(b)) {
-                j--;
-                continue;
-            }
-
-
-
-            if (!ignoreLetterEqual(a, b)) {
-                return false;
-            }
-
-            i++;
-            j--;
-        }
-
-        return true;
+        Object[] objects = permute.toArray();
+        System.out.println(Arrays.toString(objects));
     }
 
-    public static boolean isNumAndLetter(char c) {
-        return (c >= 'a'  && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <='9');
+    private static void permuteRec(List<Integer> nums, int start, List<List<Integer>> result) {
+        if (start == nums.size()) {
+            result.add(new ArrayList<>(nums));
+        } else {
+            for (int i = start; i < nums.size(); ++i) {
+                Collections.swap(nums, i, start);
+                permuteRec(nums, start + 1, result);
+                Collections.swap(nums, i, start);
+            }
+        }
     }
 
-    public static boolean ignoreLetterEqual(char a, char b) {
-        if (a >= 'A' && a <= 'Z') {
-            a += 32;
-        }
+    // Time: O(n*n!), Space: O(n)
+    private static List<List<Integer>> permute(int[] nums) {
+        if (nums == null || nums.length == 0) return new ArrayList<>();
+        List<List<Integer>> result = new ArrayList<>();
 
-        if (b >= 'A' && b <= 'Z') {
-            b += 32;
-        }
+        List<Integer> list = new ArrayList<>();
+        for (int num : nums) list.add(num);
 
-        return a == b;
-
+        permuteRec(list, 0, result);
+        return result;
     }
+
+
 }
