@@ -315,7 +315,7 @@ Java中不同的引用类型：
 >
 > JDK 1.6的默人值为`92%`
 
-如果在`CMS`垃圾回收期间，要进入老年代的对象大于可用内存，会发生`Concurrent Mode Faulure`异常。这时会用`Serial Old`垃圾回收器代替`CMS`，直接强制系统进入`Stop the World`状态，重新进行`GC Roots`追踪，标记全部垃圾对象，然后再回收，再恢复应用运行。
+如果在`CMS`垃圾回收期间，要进入老年代的对象大于可用内存，会发生`Concurrent Mode Failure`异常。这时会用`Serial Old`垃圾回收器代替`CMS`，直接强制系统进入`Stop the World`状态，重新进行`GC Roots`追踪，标记全部垃圾对象，然后再回收，再恢复应用运行。
 
 `CMS`通过如下两个参数来控制内存的整理：
 
@@ -357,7 +357,7 @@ JVM最多有`2048`个`Region`，每个`Region`的大小必须是`2`的倍数。�
 
 还是通过`-XX:SurvivorRatio`来区分`Eden`和`Survivor`的比例。
 
-一旦新生代在堆内存中的占比达到最大大小，会触发垃圾回收，回收算法为复制算法。通过`-XX:MaxGCPauseMillis`来设置GC的停顿时间，默认为`200ms`。
+一旦新生代在堆内存中的占比达到最大大小，会触发`G1`新生代垃圾回收，回收算法为复制算法。通过`-XX:MaxGCPauseMillis`来设置GC的停顿时间，默认为`200ms`。
 
 对象从新生代进入老年代的条件：
 
@@ -400,7 +400,7 @@ JVM最多有`2048`个`Region`，每个`Region`的大小必须是`2`的倍数。�
   
   这个阶段可以执行多次。这样是为了不让应用停顿时间过长。可以通过参数`-XX:G1MixedGCCountTarget`来控制回收次数，默认值为`8`
 
-`-XX:G1HeapWastePercent`用来控制在垃圾回收的过程中，当空间出来的`Region`数量占堆内存一定比例时，就会停止混合回收。默认值为`5%`。
+`-XX:G1HeapWastePercent`用来控制在垃圾回收阶段中，当空闲出来的`Region`数量占堆内存一定比例时，就会停止混合回收。默认值为`5%`。
 
 `-XX:G1MixedGCLiveThresholdPercent`用来控制`Region`中存活对象达到一定比例才进行回收。默认值为`85%`。
 
