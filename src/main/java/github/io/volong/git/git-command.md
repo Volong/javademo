@@ -311,5 +311,7 @@
 
     >   `-v` 显示仓库对应的 URL
 
-54. 
+54. 第一次commit之后想撤销
+
+    `git update-ref -d HEAD`
 
