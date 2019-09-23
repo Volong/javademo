@@ -321,7 +321,7 @@ Java中不同的引用类型：
 
 `CMS`通过如下两个参数来控制内存的整理：
 
-- `-XX:+Us CMSCompactAtFullCollection`：表示`Full GC`之后进入`Stop the World`，停止工作线程，进行碎片整理，把存活对象移到一起。
+- `-XX:+CMSCompactAtFullCollection`：表示`Full GC`之后进入`Stop the World`，停止工作线程，进行碎片整理，把存活对象移到一起。
 
   默认打开。
 
@@ -407,6 +407,75 @@ JVM最多有`2048`个`Region`，每个`Region`的大小必须是`2`的倍数。�
 `-XX:G1MixedGCLiveThresholdPercent`用来控制`Region`中存活对象达到一定比例才进行回收。默认值为`85%`。
 
 在进行`Mixed GC`时，无论是年轻代还是老年代都基于复制算法进行回收，需要把各个`Region`的存活对象拷贝到别的`Region`中去。如果没有空闲的`Region`，则会导致GC失败，立即停止应用运行，然后采用`Serial Old`对老年代进行标记、清理、整理，空闲出来一批`Region`。
+
+
+
+---
+
+
+
+#### 044 查看Young GC日志
+
+```java
+CommandLine flags: -XX:InitialHeapSize=... -XX:MaxHeapSize=... ...
+```
+
+表示程序运行时的JVM参数。
+
+```java
+0.313: [GC (Allocation Failure) 0.313: [ParNew: 4096K->511K(4608K), 0.0048371 secs] 4096K->1472K(9728K), 0.0051507 secs] [Times: user=0.00 sys=0.00, real=0.01 secs]
+```
+
+- `0.313`：表示系统运行多少秒后发生了本次GC
+- `GC (Allocation Failure)`：表示`Eden`区内存不够了，对象分配失败，所以触发了一次`Young GC`
+- `ParNew: 4096K->511K(4608K), 0.0048371 secs`：
+  - `ParNew`：表示使用的是`ParNew`垃圾回收器
+  - `4096K`：表示年轻代已使用的空间
+  - `511K`：表示GC之后存活下来的对象
+  - `4608K`：表示年轻代可用空间，`Eden`区 + `1个Survivor`区
+  - `0.0048371 secs`：表示本次GC的耗时
+- `4096K->1472K(9728K), 0.0051507 secs`：
+  - `4096K`：表示GC之前堆内存的已占用空间
+  - `1472K`：表示GC之后堆内存中存活下来的对象
+  - `9728K`：堆内存的可用空间
+- `Times: user=0.00 sys=0.00, real=0.01 secs`：表示本次GC的耗时
+
+```java
+Heap
+ par new generation   total 4608K, used 2101K ...
+  eden space 4096K,  51% used ...
+  from space 512K,   0% used ...
+  to   space 512K,   0% used ...
+ concurrent mark-sweep generation total 5120K, used 1577K ...
+ Metaspace       used 3523K, capacity 4498K, committed 4864K, reserved 1056768K
+  class space    used 387K, capacity 390K, committed 512K, reserved 1048576K
+```
+
+JVM在退出时打印的堆内存的使用情况。
+
+- `par new generation total 4608K, used 2101K`：表示`ParNew`垃圾回收器负责的年轻代总共为`4608K`，目前使用了`2101K`
+
+  - `eden space 4096K,  51% used`：表示`Eden`区的内存占用
+
+  - `from space 512K,   0% used`、`to   space 512K,   0% used`：表示两个`Survivor`区为空
+
+  - `concurrent mark-sweep generation total 5120K, used 1577K`：表示`CMS`垃圾回收器负责的老年代总共为`5120K`，已经使用了`1577K`
+
+  - `Metaspace`、`class space`：表示`MetaSpace`元数据空间和`Class`空间存放的类信息、常量池等，他们的总容量、使用内存等
+
+    > JDK 1.8取消了`PermGen Space`，取而代之的是`MetaSpace`，方法区移至`MetaSpace`
+    >
+    > JDK 1.8把类的元数据放入本地内存（native heap），称之为`MetaSpace`
+    >
+    > `MetaSpace`由一个或多个虚拟空间组成。虚拟空间是操作系统的连续存储空间，按需分配。分配时，虚拟空间会向操作系统预留（reserve）空间，但还没有被提交（committed）
+    >
+    > `MetaSpace`是预留空间是全部虚拟空间的大小。虚拟空间的最小分配单位是`MeatChunk`（也可以说是`Chunk`）。当新的`Chunk`被分配到虚拟空间时，与`Chunk`相关的内存空间就被提交了。
+    >
+    > `MetaSpace`的`committed`指的是所有`Chunk`的大小。当类加载器被回收时，所有与之相关的`Chunk`都会被释放，被放入一个全局的列表中进行维护。`capacity`表示所有被分配过，但是没有被释放过`Chunk`的大小
+
+
+
+
 
 
 
