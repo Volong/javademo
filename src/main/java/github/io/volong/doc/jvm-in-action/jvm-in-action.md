@@ -485,7 +485,33 @@ JVM在退出时打印的堆内存的使用情况。
 
 
 
+---
 
+
+
+#### 050 jstat
+
+`jstat -gc PID` 查看Java进程的内存和GC情况
+
+> `jps`可以看到Java进程的PID
+
+|      |                                                |
+| :--: | :--------------------------------------------- |
+| S0C  | From Surviror区的大小                          |
+| S1C  | To Survivor区的大小                            |
+| S0U  | From Survivor区当前已使用的内存大小            |
+| S1U  | To Survivor区当前已使用的内存大小              |
+|  EC  | Eden区的大小                                   |
+|  EU  | Eden区当前已使用的内存大小                     |
+|  OC  | 老年代的大小                                   |
+|  OU  | 老年代当前已使用的内存大小                     |
+|  MC  | 方法区（永久代、元数据区）的大小               |
+|  MU  | 方法区（永久代、元数据区）当前已使用的内存大小 |
+| YGC  | 系统运行到现在的Young GC次数                   |
+| YGCT | Young GC的耗时                                 |
+| FGC  | 系统运行到现在的Full GC次数                    |
+| FGCT | Full GC的耗时                                  |
+| GCT  | 所有GC的总耗时                                 |
 
 
 
