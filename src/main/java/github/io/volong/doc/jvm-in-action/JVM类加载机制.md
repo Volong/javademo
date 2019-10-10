@@ -1,3 +1,13 @@
+#### 051 使用jmap
+
+- `jmap -histo PID`
+
+  打印各种对象占用内存空间的大小，按照降序排序
+
+- `jmap -dump:live,format=b,file=fileName.hprof PID`
+
+  在当前目录下生成一个`fileName.hprof`的内存快照
+
 #### 058 优化FullGC的性能
 
 `-XX:+CMSParallelInitialMarkEnabled`在`CMS`垃圾回收器的`初始标记`阶段开启对线程并发执行。
@@ -31,7 +41,18 @@ GC时判断`SoftReference`对象是否需要回收通过如下公式进行判断
 
 
 
-#### 060 
+#### 064 内存泄漏分析
+
+频繁导致`Full GC`的可能性如下：
+
+- 内存分配不合理，导致对象频繁进入老年代，进而引发`Full GC`
+- 存在内存泄漏。也就是内存里面驻留了大量的对象塞满了老年代，导致稍微有一些对象进入老年代就会触发`Full GC`
+- 大量使用发射导致永久代里面的类太多，触发了`Full GC`
+- 代码中调用`System.gc()`
+
+通过`jmap`导出内存快照，再使用`MAT`进行分析内存是否泄漏
+
+
 
 
 
