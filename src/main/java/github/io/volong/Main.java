@@ -17,16 +17,51 @@ import java.util.concurrent.atomic.LongAdder;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
+
+        InheritableThreadLocal<Object> inheritableThreadLocal = new InheritableThreadLocal<>();
+
+        inheritableThreadLocal.set("1111");
+
+        System.out.println(Thread.currentThread().getName());
 
 
-        byte[] array1 = new byte[2 * 1024 * 1024];
-        array1 = new byte[2 * 1024 * 1024];
-        array1 = new byte[2 * 1024 * 1024];
-        array1 = null;
+        new Thread(() -> {
+            System.out.println(Thread.currentThread().getName());
+            Object o = inheritableThreadLocal.get();
+            System.out.println(o);
 
-        byte[] array2 = new byte[128 * 1024];
-        byte[] array3 = new byte[2 * 1024 * 1024];
+            inheritableThreadLocal.set("3333");
+
+        }).start();
+
+        System.out.println(inheritableThreadLocal.get());
+
+        new Thread(() -> {
+            System.out.println(Thread.currentThread().getName());
+            Object o = inheritableThreadLocal.get();
+            System.out.println(o);
+        }).start();
+
+        System.out.println(inheritableThreadLocal.get());
+
     }
 
+
+    public static void loadData() throws InterruptedException {
+        byte[] data = null;
+        for (int i = 0; i < 4; i++) {
+            data = new byte[10 * 1024 * 1024];
+        }
+        data = null;
+
+        byte[] data1 = new byte[10 * 1024 * 1024];
+        byte[] data2 = new byte[10 * 1024 * 1024];
+        byte[] data3 = new byte[10 * 1024 * 1024];
+        data3 = new byte[10 * 1024 * 1024];
+
+        Thread.sleep(1000);
+
+
+    }
 }
