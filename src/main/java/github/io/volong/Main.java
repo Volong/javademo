@@ -1,26 +1,23 @@
 package github.io.volong;
 
-import org.apdplat.word.dictionary.DictionaryFactory;
-import org.springframework.util.CollectionUtils;
-
-import java.util.*;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.ListIterator;
-import java.util.Random;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadLocalRandom;
-import java.util.concurrent.atomic.LongAdder;
+import java.util.List;
 
 public class Main {
 
     public static void main(String[] args) throws InterruptedException {
 
-        new Array
+        List<Data> datas = new ArrayList<>();
 
+        for (int i = 0; i < 10000;i++) {
+            datas.add(new Data());
+        }
+
+
+        Thread.sleep(60 * 60 * 1000);
     }
 
+    private static class Data{
+
+    }
 }
