@@ -551,7 +551,7 @@ JVM在退出时打印的堆内存的使用情况。
 
 #### 059 频繁Full GC的不合理参数
 
-`-XX:SoftRefLRUPolicyMSPerMB`表示每1 MB的空闲内存空间允许`SoftReference`对象存活多久，默认为`1000`毫秒
+`-XX:SoftRefLRUPolicyMSPerMB`表示每1MB的空闲内存空间允许`SoftReference`对象存活多久，默认为`1000`毫秒
 
 > JVM在反射过程中动态生成的类`Class`对象都是通过`SoftReference`修饰的软引用对象
 
@@ -574,7 +574,7 @@ GC时判断`SoftReference`对象是否需要回收通过如下公式进行判断
 
 - 内存分配不合理，导致对象频繁进入老年代，进而引发`Full GC`
 - 存在内存泄漏。也就是内存里面驻留了大量的对象塞满了老年代，导致稍微有一些对象进入老年代就会触发`Full GC`
-- 大量使用发射导致永久代里面的类太多，触发了`Full GC`
+- 大量使用反射导致永久代里面的类太多，触发了`Full GC`
 - 代码中调用`System.gc()`
 
 通过`jmap`导出内存快照，再使用`MAT`进行分析内存是否泄漏
