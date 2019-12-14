@@ -1,23 +1,28 @@
 package github.io.volong;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class Main {
 
     public static void main(String[] args) throws InterruptedException {
 
-        List<Data> datas = new ArrayList<>();
+        Map<Integer, String> map = new LinkedHashMap<Integer, String>(16, .75f, false) {
+            @Override
+            protected boolean removeEldestEntry(Map.Entry eldest) {
+                return super.removeEldestEntry(eldest);
+            }
+        };
 
-        for (int i = 0; i < 10000;i++) {
-            datas.add(new Data());
+        map.put(1, "a");
+        map.put(2, "a");
+        map.put(3, "a");
+
+        System.out.println(map.get(1));
+
+        for (Map.Entry<Integer, String> entry : map.entrySet()) {
+            System.out.println(entry);
         }
-
-
-        Thread.sleep(60 * 60 * 1000);
+        Thread.currentThread().join();
     }
 
-    private static class Data{
-
-    }
 }
