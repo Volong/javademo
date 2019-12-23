@@ -59,8 +59,6 @@ Kafka一般用在用户行为日志的采集和传输上，因为日志适当丢
 
   RocketMQ的Master-Slave模式采取的是Slave Broker不停的发送请求到Master Broker去拉取消息，也就是通过**Pull模式**拉取消息
 
-
-
 - 消费者的系统在获取消息的时候，是从Master Broker获取的？还是从Slave Broker获取的？
 
   有可能从Master Broker获取消息，也有可能从Slave Broker获取消息
@@ -111,11 +109,11 @@ os内核参数
 
   控制linux上的最大文件链接数的，默认值是1024
 
-JVM参数
+JVM G1垃圾回收器参数
 
 - `-XX:G1ReservePercent`
 
-  在G1管理的老年代里预留25%的空闲内存，保证新生代对象晋升到老年代的时候有足够空间，避免老年代内存都满了，新生代有对象要进入老年代没有充足内存
+  在G1管理的老年代里预留指定的空闲内存，保证新生代对象晋升到老年代的时候有足够空间，避免老年代内存都满了，新生代有对象要进入老年代没有充足内存
 
 - `-XX:-OmitStackTraceInFastThrow`
 
