@@ -137,6 +137,8 @@ JVM G1垃圾回收器参数
 
   禁用偏向锁
 
+---
+
 ##### 39 MQ使用方式
 
 生产者发送消息的方式：
@@ -162,6 +164,8 @@ JVM G1垃圾回收器参数
 - pull模式
 
   消费者主动发送请求到`Broker`拉取消息
+
+---
 
 ##### 45 基于MQ实现秒杀订单系统的异步化架构
 
@@ -189,6 +193,8 @@ JVM G1垃圾回收器参数
 
   秒杀成功了需要生成订单，此时就直接发送一个消息到RocketMQ中，然后让普通订单系统从RocketMQ中消费秒杀成功的消息进行常规性的流程处理即可。
 
+---
+
 ##### 49 生产者是如何发送消息的
 
 - **Topic、MessageQueue以及Broker之间到底是什么关系**
@@ -208,3 +214,59 @@ JVM G1垃圾回收器参数
   通过在Producer中通过参数`sendLatencyFaultEnable`来开启自动容错机制：在一个Broker故障之后，自动回避一段时间不访问这个Broker，过段时间再去访问他。
 
   过一段时间之后，可能这个Master Broker就已经恢复好了，比如它的Slave Broker切换为了Master。
+
+---
+
+##### 51 Broker是如何持久化存储消息的
+
+- 当生产者的消息发送到一个Broker上的时候，会对消息做什么？
+
+  把消息直接顺序写入磁盘上的一个日志文件，叫做CommitLog。
+
+  CommitLog有很多磁盘文件，每个文件限定最多1GB，Broker收到消息之后就直接追加写入这个文件的末尾。如果一个CommitLog写满了1GB，就会创建一个新的CommitLog文件。
+
+- MessageQueue是怎么存储数据的
+
+  在Broker中，对Topic下的每个MessageQueue都会有一系列的ConsumeQueue文件。
+
+  每个ConsumeQueue文件里存储的是一条消息对应在CommitLog文件中的offset偏移量。
+
+  所以Topic的每个MessageQueue都对应了Broker机器上的多个ConsumeQueue文件，保存了这个MessageQueue的所有消息在CommitLog文件中的物理位置，也就是offset偏移量。
+
+  在ConsumeQueue中存储的每条数据不只是消息在CommitLog中的offset偏移量，还包含了消息的长度，以及tag hashcode等等。
+
+- Broker是通过什么方法来提高写入CommitLog文件的性能的
+
+  - 首先Broker是以顺序的方式将消息写入CommitLog磁盘文件。
+
+    也就是每次写入就是在文件末尾追加一条数据就可以了，对文件进行顺序写的性能要比对文件随机写的性能提升很多
+
+  - 数据写入CommitLog文件的时候，不是直接写入底层的物理磁盘文件的，而是先进入OS的PageCache内存缓存中，然后后续由OS的后台线程选一个时间，异步化的将OS PageCache内存缓冲中的数据刷入底层的磁盘文件
+
+---
+
+##### 53 基于DLedger技术的Broker主从同步原理
+
+- DLedger技术可以干什么
+
+  使用DLedger来管理CommitLog，然后Broker还是可以基于DLedger管理的CommitLog去构建出来机器上的各个ConsumeQueue磁盘文件。
+
+- DLedger是如何基于Raft协议选举Leader Broker的
+
+  他确保有人可以成为Leader的核心机制就是一轮选举不出来Leader的话，就让大家随机休眠一下，先苏醒过来的人会投票给自己，其他人苏醒过后发现自己收到选票了，就会直接投票给那个人。
+
+  只有Leader可以接收数据写入，Follower只能接收Leader同步过来的数据。
+
+- DLedger是如何基于Raft协议进行多副本同步的
+
+  数据同步会分为两个阶段，一个是uncommitted阶段，一个是commited阶段
+
+  首先Leader Broker上的DLedger收到一条数据之后，会标记为uncommitted状态，然后他会通过自己的DLedgerServer组件把这个uncommitted数据发送给Follower Broker的DLedgerServer。
+
+  接着Follower Broker的DLedgerServer收到uncommitted消息之后，必须返回一个ack给Leader Broker的DLedgerServer，然后如果Leader Broker收到超过半数的Follower Broker返回ack之后，就会将消息标记为committed状态。
+
+  然后Leader Broker上的DLedgerServer就会发送commited消息给Follower Broker机器的DLedgerServer，让他们也把消息标记为comitted状态。
+
+  这个就是基于Raft协议实现的两阶段完成的数据同步机制。
+
+  
