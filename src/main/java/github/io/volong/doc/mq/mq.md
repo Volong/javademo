@@ -313,9 +313,67 @@ JVM G1垃圾回收器参数
 
 - Broker是如何将消息读取出来返回给消费机器的
 
-  
+  根据要消费的MessageQueue以及开始消费的位置，去找到对应的ConsumeQueue读取里面对应位置的消息在CommitLog中的物理offset偏移量，然后到CommitLog中根据offset读取消息数据，返回给消费者机器。
 
-- 
+- 消费者机器如何处理消息进行ACK以及提交消费进度
 
+  当我们处理完一批消息之后，消费者机器就会提交我们目前的一个消费进度到Broker上去，然后Broker就会存储我们的消费进度，将一个名为ConsumeOffset的东西记录到ConsumeQueue中。
   
+  下次这个消费组只要再次拉取这个ConsumeQueue的消息，就可以从Broker记录的消费位置开始继续拉取，不用重头开始拉取了。
+  
+- 如果消费组中出现机器宕机或者扩容加机器，会怎么处理
+
+  会进入一个rabalance的环节，也就是说重新给各个消费机器分配他们要处理的MessageQueue
+
+---
+
+##### 57 消费者是根据什么策略从Master或Slave上拉取消息
+
+os有一个优化机制：读取一个磁盘文件的时候，会自动把磁盘文件的一些数据缓存到os cache中。
+
+ConsumeQueue文件主要是存放消息的offset，所以每个文件很小，30万条消息的offset就只有5.72MB。所以实际上ConsumeQueue文件们是不占用多少磁盘空间的，他们整体数据量很小，几乎可以完全被os缓存在内存cache里。
+
+在进行消息拉取的时候，先读os cache里的少量ConsumeQueue的数据，这个性能是极高的，然后第二步就是要根据读取到的offset去CommitLog里读取消息的完整数据了。
+
+os cache对于CommitLog而言，主要是提升文件写入性能，当你不停的写入的时候，很多最新写入的数据都会先停留在os cache里。
+
+之后os会自动把cache里的比较旧的一些数据刷入磁盘里，腾出来空间给更新写入的数据放在os cache里，所以大部分的数据都是在磁盘上。
+
+如果Broker发现你很大概率会从磁盘里加载消息出来！他会认为，出现这种情况，很可能是因为自己作为master broker负载太高了，导致没法及时的把消息给你，所以你落后的进度比较多。
+
+这个时候，他就会告诉你，我这次给你从磁盘里读取消息，但是下次你还是从slave broker去拉取吧！
+
+---
+
+##### 58 RocketMQ基于Netty的架构
+
+![](images/0.jpg)
+
+- Reactor主线程在端口上监听Producer建立连接的请求，建立长连接
+
+- Producer和Broker之间通过SocketChannel建立长连接
+
+- Reactor线程池并发的监听多个连接的请求是否到达
+
+- Worker请求并发的对多个请求进行预处理
+
+  例如SSL加密验证、编码解码、连接空闲检查、网络连接管理，等等
+
+- 业务线程池（SendMessage）并发的对多个请求进行磁盘读写业务操作
+
+  将消息写入CommitLog文件，以及处理ConsumeQueue之类的操作
+
+---
+
+##### 61 基于mmap内存映射实现磁盘文件的高性能读写
+
+- 传统文件IO操作的多次数据拷贝问题
+
+  <div align="center">
+    <img src="images/传统IO数据拷贝问题.png" height="300px" />
+  </div>
+
+  在写入数据时，必须先把数据写入到用户进程私有空间里去，然后从这里再进入内核IO缓冲区，最后进入磁盘文件里去。
+
+  读取数据过程则相反。
 
