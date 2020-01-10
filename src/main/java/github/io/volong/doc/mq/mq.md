@@ -377,3 +377,76 @@ os cache对于CommitLog而言，主要是提升文件写入性能，当你不停
 
   读取数据过程则相反。
 
+---
+
+##### 68 RocketMQ事务消息的实现流程
+
+<div align="center">
+  <img src="images/发送half.png" width="400px"/>
+</div>
+
+在基于RocketMQ的事务消息机制中，先让订单系统发送一条half消息到MQ去，这个half消息本质就是一个订单支付成功的消息，只不过这个消息的状态是half状态，这个时候其他系统是看不见这个half消息的。
+
+- 如果发送half消息到MQ失败了，订单系统需要进行一系列的回滚操作
+
+  如果更新订单的状态，通知支付系统进行退款等操作。
+
+  - 如果发送half消息MQ成功了，但是接收响应失败了
+
+    订单系统需要进行一系列的回滚操作。
+
+    MQ回去扫描half消息，如果超过一定时间没有对half消息进行任何操作，则会回调订单系统的接口，询问这条消息的状态，然后订单系统发现这个订单是失败的，就会发送一条rollback请求给MQ。
+
+- half消息成功之后，订单系统就可以更新订单的状态了
+
+  - 如果订单系统更新自己的数据库失败了，会发送rollback请求给MQ，让MQ删除之前的half消息
+  
+- 订单系统更新完订单状态之后，会发送一条commit请求给MQ，让MQ对之前的half消息执行commit操作，这样其他系统就可以看到这条消息了
+  
+- 如果rollback或者commit请求发送失败了
+  
+
+因为MQ里这条消息的状态一直是half状态，所以过段时间会自动回调订单系统的接口。然后订单系统判断这条订单的状态，再对MQ执行rollback或者commit操作
+
+---
+
+##### 69 事务消息机制的底层实现原理
+
+- half消息是如何对消费者不可见的
+
+  MQ会把half消息写入到自己内部的“RMQ_SYS_TRANS_HALF_TOPIC”这个Topic对应的一个ConsumeQueue里去。
+
+  所以对于事务消息机制之下的half消息，RocketMQ是写入内部Topic的ConsumeQueue的，不是写入消费者指定的Topic下的ConsumeQueue中，所以消费者就不会看到这条half消息。
+
+- 如果因为各种问题，没有执行rollback或者commit会怎么样？
+
+  MQ在后台有定时任务，定时任务会去扫描RMQ_SYS_TRANS_HALF_TOPIC中的half消息，如果超过一定时间还是half消息，它会回调消费者系统的接口，让你判断这个half消息是要rollback还是commit
+
+- 执行rollback操作时，如何对消息回滚
+
+  执行rollback时，本质就是用一个OP操作来标记half消息的状态。
+
+  MQ内部有一个OP_TOPIC，此时可以写一条rollback OP记录到这个Topic里，标记某条half消息需要回滚。
+
+  如果一直没有执行commit/rollback，RocketMQ会回调消费者系统的接口去判断half消息的状态，但是他最多就是回调15次，如果15次之后你都没法告知他half消息的状态，就自动把消息标记为rollback。
+
+- 执行commit操作，如何让消息对消费者系统可见
+
+  执行commit操作后，RocketMQ就会在OP_TOPIC里写入一条记录，标记half消息为commit状态。然后把放在RMQ_SYS_TRANS_HALF_TOPIC中的half消息给写入到指定Topic的ConsumeQueue里去，这样消费者就可以看到这条消息了。
+
+---
+
+##### 72 同步刷盘 + Raft协议主从同步
+
+- 怎么确保消息写入MQ之后，不会丢失数据
+
+  - 修改broker的配置文件，调整MQ的刷盘策略，将其中的flushDiskType配置设置为：SYNC_FLUSH（同步刷盘），默认他的值是ASYNC_FLUSH，即默认是异步刷盘的。
+
+    同步刷盘之后，写入MQ的每条消息，只要MQ告诉我们写入成功了，那么消息就是已经进入磁盘文件了。
+
+  - 对Broker使用主从架构的模式
+
+    必须让一个Master Broker有一个Slave Broker去同步他的数据，而且你一条消息写入成功，必须是让Slave Broker也写入成功，保证数据有多个副本的冗余。
+
+  
+
