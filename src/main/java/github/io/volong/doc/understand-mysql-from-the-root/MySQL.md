@@ -101,19 +101,19 @@
 
   - 后边紧跟着该比较规则主要作用于哪种语言
 
-    比如`utf8_polish_ci`表示以波兰语的规则比较
+    比如：`utf8_polish_ci`表示以波兰语的规则比较
 
     `utf8_general_ci`是一种通用的比较规则
 
-- 名称后缀意味着该比较规则是否区分语言中的重音、大小写等
+  - 名称后缀意味着该比较规则是否区分语言中的重音、大小写等
 
-  |  后缀  |       英文释义       |       描述       |
-  | :----: | :------------------: | :--------------: |
-  | `_ai`  | `accent insensitive` |    不区分重音    |
-  | `_as`  |  `accent sensitive`  |     区分重音     |
-  | `_ci`  |  `case insensitive`  |   不区分大小写   |
-  | `_cs`  |   `case sensitive`   |    区分大小写    |
-  | `_bin` |       `binary`       | 以二进制方式比较 |
+    |  后缀  |       英文释义       |       描述       |
+    | :----: | :------------------: | :--------------: |
+    | `_ai`  | `accent insensitive` |    不区分重音    |
+    | `_as`  |  `accent sensitive`  |     区分重音     |
+    | `_ci`  |  `case insensitive`  |   不区分大小写   |
+    | `_cs`  |   `case sensitive`   |    区分大小写    |
+    | `_bin` |       `binary`       | 以二进制方式比较 |
 
 - 4个级别的字符集和比较规则分别是
 
@@ -129,16 +129,126 @@
 
 - 创建数据库时指定数据库的字符集和比较规则
 
-  `create database 数据库名 character set 字符集名称 collate 比较规则名称`
+  `create database 数据库名 character set 字符集名称 collate 比较规则名称;`
 
 - 修改数据库字符集和比较规则
 
-  `alter database 数据库名 character set 字符集名称 collate 比较规则名称`
+  `alter database 数据库名 character set 字符集名称 collate 比较规则名称;`
 
 - 当前数据库使用的字符集和比较规则的系统变量分别是
 
   - `character_set_database` - 当前数据库的字符集
   - `collation_database` - 当前数据库的比较规则
 
-- 
+  >  ***character_set_database*** 和 ***collation_database*** 这两个系统变量是只读的，不能通过修改这两个变量的值而改变当前数据库的字符集和比较规则。
 
+- 创建表时指定字符集和比较规则
+
+  ```mysql
+  CREATE TABLE 表名 (列的信息)
+      [CHARACTER SET 字符集名称]
+      [COLLATE 比较规则名称]
+  ```
+
+- 修改表的字符集和比较规则
+
+  ```mysql
+  ALTER TABLE 表名
+      [CHARACTER SET 字符集名称]
+      [COLLATE 比较规则名称]
+  ```
+
+- 创建表的时候指定列的字符集和比较规则
+
+  ```mysql
+  CREATE TABLE 表名(
+      列名 字符串类型 [CHARACTER SET 字符集名称] [COLLATE 比较规则名称],
+      其他列...
+  );
+  ```
+
+- 修改列的时候指定列的字符集和比较规则
+
+  ```mysql
+  ALTER TABLE 表名 MODIFY 列名 字符串类型 [CHARACTER SET 字符集名称] [COLLATE 比较规则名称];
+  ```
+
+- 仅修改字符集或仅修改比较规则时的变化规则
+
+  - 只修改字符集，则比较规则将变为修改后的字符集默认的比较规则
+
+  - 只修改比较规则，则字符集将变为修改后的比较规则对应的字符集
+
+- 客户端与服务端通信时字符集的转换
+
+  |          系统变量          |                             描述                             |
+  | :------------------------: | :----------------------------------------------------------: |
+  |   `character_set_client`   |                 服务器解码请求时使用的字符集                 |
+  | `character_set_connection` | 服务器处理请求时会把请求字符串从`character_set_client`转为`character_set_connection` |
+  |  `character_set_results`   |             服务器向客户端返回数据时使用的字符集             |
+
+  客户端一般情况下使用的字符集与操作系统一致。
+
+  通过`set names 字符集名`语句可以将这三个系统变量的值设置成和客户端一样。
+
+---
+
+##### 05 InnoDB记录存储结构
+
+- 什么是InnoDB页
+
+  InnoDB将数据划分为若干个页，以页作为磁盘和内存之间交互的基本单位，InnoDB中页的大小一般为 ***16*** KB。也就是说从磁盘中读取16KB的内容到内存中，一次最少把内存中的16KB内容刷新到磁盘中。
+
+- InnoDB行格式的类型
+
+  - Compact
+
+  - Redundant
+
+    `MySQL5.0`之前用的一种行格式
+
+  - Dynamic
+
+  - Compressed
+
+- 怎么指定行格式
+
+  - 创建表时指定
+
+    ```mysql
+    CREATE TABLE 表名 (
+      列的信息
+    ) ROW_FORMAT=行格式名称
+    ```
+
+  - 修改表时指定
+
+    ```mysql
+    ALTER TABLE 表名 ROW_FORMAT=行格式名称
+    ```
+
+- COMPACT行格式
+
+  <div align="center">
+    <img src="images/compact行格式.png"
+  </div>
+
+- Dynamic/Compressed行格式
+
+  - Dynamic行格式Compact行格式相似，只不过在处理`行溢出`数据时不会在记录的真实数据处存储字段真实数据的前`768`个字节，而是把所有的字节都存储到其他页面中，只在记录的真实数据处存储其他页面的地址。
+
+  <div align="center">
+    <img src="images/dynamic行格式.png"
+  </div>
+
+  - `Compressed`行格式和`Dynamic`不同的一点是，`Compressed`行格式会采用压缩算法对页面进行压缩，以节省空间。
+
+- 行溢出
+
+  如果某一列中的数据非常多的话，在本记录的真实数据处只会存储该列的前`768`个字节的数据和一个指向其他页的地址，然后把剩下的数据存放到其他页中，这个过程也叫做`行溢出`，存储超出`768`字节的那些页面也被称为`溢出页`。
+
+  <div align="center">
+    <img src="images/行溢出.png"
+  </div>
+
+  
