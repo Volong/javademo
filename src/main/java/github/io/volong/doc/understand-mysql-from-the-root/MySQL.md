@@ -1,3 +1,5 @@
+> 神作：[MySQL 是怎样运行的：从根儿上理解 MySQL](https://juejin.im/book/5bffcbc9f265da614b11b731)  
+
 ##### 02 初识MySQL
 
 - 查看当前服务器程序支持的存储引擎
@@ -139,7 +141,6 @@
 
   - `character_set_database` - 当前数据库的字符集
   - `collation_database` - 当前数据库的比较规则
-
   >  ***character_set_database*** 和 ***collation_database*** 这两个系统变量是只读的，不能通过修改这两个变量的值而改变当前数据库的字符集和比较规则。
 
 - 创建表时指定字符集和比较规则
