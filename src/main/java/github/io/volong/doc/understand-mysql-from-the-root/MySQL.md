@@ -1390,7 +1390,131 @@ InnnoDB为了缓存磁盘中的页，在`MySQL`服务器启动的时候就向操
 
 - 开启事物
 
-  
+  - `BEGIN [WORK]`
+
+    > `WORK`可有可无
+
+  - `START TRANSACTION`
+
+    - 设置访问模式
+
+      - `READ ONLY`
+
+        标识当前事物是一个只读事物
+
+      - `READ WRITE`
+
+        标识当前事物是一个读写事物
+
+      - `WITH CONSISTENT SNAPSHOT`
+
+        启动一致性读
+
+    可以使用`逗号`分割来指定多个访问模式，但是`只读`与`读写`只能存其一。
+
+    如果不显式指定事物的访问模式，则默认为`读写`模式。
+
+  只有`InnoDB`和`NDB`存储引擎支持事务功能
+
+- 提交事物
+
+  `COMMIT [WORK]`
+
+- 手动中止并回滚一个事物
+
+  `ROLLBACK [WORK]`
+
+- 自动提交
+
+  - 查看自动提交是否开启
+
+    `show variables like 'autocommit'`
+
+    默认值为`ON`。即每一条语句都是一个独立的事物
+
+  - 关闭自动提交
+
+    - 显式的使用`start transaction`或`begin`语句开启一个事物，那么在本次事物提交或者回滚前会暂时关闭自动提交功能
+
+    - 将系统变量`autocommit`的值设置为`OFF`
+
+- 隐式提交
+
+  在关闭了自动提交后，执行某些特殊的语句会导致事物提交的情况时
+
+  - 定义或修改数据库对象的数据定义语言（Data definition language，DDL）
+
+    数据库对象指的是数据库、表、视图、存储过程等。
+
+    当使用`create`、`alter`、`drop`等语句去修改数据库对象时，会隐式提交已经输入语句的事物
+
+  - 修改`MySQL`数据库中的表
+
+    当使用`alter user`、`create user`、`drop user`、`grant`、`rename user`、`revoke`、`set password`等语句时会进行隐式提交
+
+  - 事务控制或锁定相关的语句
+
+    - 当一个事务还没提交或者回滚时，又使用了`start transaction`或`begin`语句开启了另一个事务时，会提交上一个事务
+    - 当前`autocommit`系统变量的值为`OFF`，手动设置为`ON`时，会提交上一个事务
+    - 使用`lock tables`、`unlock tables`等锁定相关的语句时，会提交上一个事务
+
+  - 加载数据的语句
+
+    使用`load data`语句批量往数据库导入数据时，会提交上一个事务
+
+  - 关于`MySQL`复制的语句
+
+    使用`start slave`、`stop slave`、`reset slave`、`change master to`等语句时，会提交上一个事务
+
+  - 其他语句
+
+    使用`ANALYZE TABLE`、`CACHE INDEX`、`CHECK TABLE`、`FLUSH`、 `LOAD INDEX INTO CACHE`、`OPTIMIZE TABLE`、`REPAIR TABLE`、`RESET`等语句时会提交上一个事务
+
+- 保存点
+
+  在事务对应的数据库语句中打点，在调用`rollback`语句时可以指定回滚到哪个点，而不是回到最初的原点
+
+  - 定义保存点
+
+    ```mysql
+    savepoint 保存点名称;
+    ```
+
+  - 回滚到指定保存点
+
+    ```mysql
+    rollback [work] to [savepoint] 保存点名称;
+    ```
+
+  - 删除保存点
+
+    ```mysql
+    release savepoint 保存点名称;
+    ```
+
+---
+
+##### 21 redo日志
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
