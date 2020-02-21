@@ -10,7 +10,7 @@
 		</encoder>
 	</appender>
 
-    <logger name="github.io.volong" level="INFO">
+    <logger name="github.io.longo" level="INFO">
         <appender-ref ref="console" />
     </logger>
 	<root level="INFO" />
