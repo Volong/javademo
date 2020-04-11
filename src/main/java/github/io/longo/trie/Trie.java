@@ -1,10 +1,11 @@
 package github.io.longo.trie;
 
+import org.apache.commons.lang.StringUtils;
+
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
-import github.io.longo.util.StringUs;
 
 /**
  * Trie 树的实现 <br>
@@ -58,7 +59,7 @@ public class Trie {
     }
     
     private boolean deleteTrie(String word, int id) {
-        if (StringUs.isBlank(word)) {
+        if (StringUtils.isBlank(word)) {
             return false;
         }
         return deleteTrie(this, word, id);
