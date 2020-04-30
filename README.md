@@ -61,3 +61,8 @@
 [IDEA 快捷键](https://github.com/Volong/javademo/blob/master/src/main/java/github/io/volong/doc/IDEA-%E5%BF%AB%E6%8D%B7%E9%94%AE.md)  
 [Linux 基础命令](https://github.com/Volong/javademo/blob/master/src/main/java/github/io/volong/doc/basic-linux-commands.md)  
 [Python编程 从入门到实践](https://github.com/Volong/javademo/blob/master/src/main/java/github/io/volong/doc/python-crash-course/python-crash-course.md)
+
+
+
+> 如果IDEA莫名其名报编译错误，直接`mvn idea:idea`
+
