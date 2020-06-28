@@ -2,5 +2,9 @@
 ! See https://adblockplus.org/en/filter-cheatsheet
 ||github.com^
 ||githubusercontent.com^
+||searchcode.com^
+||github.io^
+||apache.org^
+||microsofttranslator.com^
 ||gitbooks.io^
 ||jetbrains.com^
