@@ -11,3 +11,8 @@
 ||discourse-cdn.com^
 ||amazonaws.com^
 ||googleapis.com^
+||gerritcodereview.com^
+||oracle.com^
+||mybatis.org^
+||wikiwand.com^
+||ankiweb.net^
