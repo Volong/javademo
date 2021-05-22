@@ -1,5 +1,0 @@
-
-
-
-1. 重置	INFO 命令中的某些统计信息
-	config resetstat

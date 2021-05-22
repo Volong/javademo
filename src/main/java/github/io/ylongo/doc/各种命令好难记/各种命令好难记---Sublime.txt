@@ -1,0 +1,9 @@
+
+
+
+--SublimeText比较文件插件Diffy用法
+	--开启对比: CTRL+K, CTRL+D
+	--取消对比: CTRL+K, CTRL+C
+
+--整个project中查找文件
+	--Ctrl+p

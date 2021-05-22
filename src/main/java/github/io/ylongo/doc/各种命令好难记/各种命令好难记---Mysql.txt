@@ -1,0 +1,12 @@
+
+
+
+1.创建用户
+-- localhost改为%:意思为任意ip都可以访问
+GRANT USAGE ON *.* TO 'root'@'%' IDENTIFIED BY 'root' WITH GRANT OPTION;
+
+2.为用户授权
+GRANT SELECT,INSERT,UPDATE,DELETE,CREATE,DROP ON databaseName.*  TO 'root'@'%' IDENTIFIED BY 'root';
+
+3.授权生效
+FLUSH PRIVILEGES;
